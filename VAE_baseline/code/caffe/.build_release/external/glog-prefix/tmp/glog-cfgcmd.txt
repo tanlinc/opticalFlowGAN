@@ -1,0 +1,1 @@
+cmd='env;CFLAGS=-fPIC;CXXFLAGS=-fPIC;/home/linkermann/Desktop/MA/VAE_baseline/code/caffe/build/external/glog-prefix/src/glog/configure;--prefix=/home/linkermann/Desktop/MA/VAE_baseline/code/caffe/build/external/glog-install;--enable-shared=no;--enable-static=yes;--with-gflags=/home/linkermann/Desktop/MA/VAE_baseline/code/caffe/build/external/gflags-install/lib/..'
