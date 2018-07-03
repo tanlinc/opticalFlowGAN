@@ -1,0 +1,3 @@
+data/
+tflib/__pycache__
+tflib/ops/__pycache__
