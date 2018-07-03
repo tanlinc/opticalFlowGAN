@@ -1,3 +1,4 @@
 data/
 tflib/__pycache__
 tflib/ops/__pycache__
+VAE_baseline/
