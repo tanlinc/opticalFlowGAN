@@ -3,9 +3,9 @@ import numpy as np
 import os
 import urllib
 import gzip
-import pickle
+import cPickle as pickle
 from keras.preprocessing.image import ImageDataGenerator
-from tflib.UCFdata import DataSet
+from UCFdata import DataSet
 
 data = DataSet()
 
@@ -87,32 +87,37 @@ def generator(train, batch_size=32, seq_length = 40, class_limit=None, image_sha
     # Multiply by 0.7 to attempt to guess how much of data.data is the train set.
     steps_per_epoch = (len(data.data) * 0.7) // batch_size
 
-    #if load_to_memory:
+    if load_to_memory:
         # Get data.
-    X, y = data.get_all_sequences_in_memory(batch_size, 'train', 'images')
-    X_test, y_test = data.get_all_sequences_in_memory(batch_size, 'test', 'images')
-    #else:
-        # Get generators.
-       # generator = data.frame_generator(batch_size, 'train', 'images')
-        #val_generator = data.frame_generator(batch_size, 'test', 'images')
+        if train:
+            X, y = data.get_all_sequences_in_memory(batch_size, 'train', 'images')
 
-    def get_epoch(data_type):
-        if(train):
-            rng_state = np.random.get_state()
-            np.random.shuffle(X)
-            np.random.set_state(rng_state)
-            np.random.shuffle(y)
-            for i in xrange(len(images) / batch_size):
-                yield (X[i*batch_size:(i+1)*batch_size], y[i*batch_size:(i+1)*batch_size])
+            def get_epoch():
+                rng_state = np.random.get_state()
+                np.random.shuffle(X)
+                np.random.set_state(rng_state)
+                np.random.shuffle(y)
+                for i in xrange(len(images) / batch_size):
+                    yield (X[i*batch_size:(i+1)*batch_size], y[i*batch_size:(i+1)*batch_size])
+            return get_epoch()
         else:
-            rng_state = np.random.get_state()
-            np.random.shuffle(X_test)
-            np.random.set_state(rng_state)
-            np.random.shuffle(y_test)
-            for i in xrange(len(images) / batch_size):
-                yield (X_test[i*batch_size:(i+1)*batch_size], y_test[i*batch_size:(i+1)*batch_size])
+            X_test, y_test = data.get_all_sequences_in_memory(batch_size, 'test', 'images')
 
-    return get_epoch(train)
+            def get_epoch():
+                rng_state = np.random.get_state()
+                np.random.shuffle(X_test)
+                np.random.set_state(rng_state)
+                np.random.shuffle(y_test)
+                for i in xrange(len(images) / batch_size):
+                    yield (X_test[i*batch_size:(i+1)*batch_size], y_test[i*batch_size:(i+1)*batch_size])
+            return get_epoch()
+    else:
+        # Get generators.
+        if train:
+            generator = data.frame_generator(batch_size, 'train', 'images')
+        else:
+            generator = data.frame_generator(batch_size, 'test', 'images')
+        return generator
 
 def ucf101_generator(filenames, batch_size, data_dir):
     all_data = []
@@ -139,6 +144,6 @@ def ucf101_generator(filenames, batch_size, data_dir):
 
 def load(batch_size):
     return (
-        generator(True, batch_size), 
-        generator(False, batch_size)
+        generator(True, batch_size),    # train
+        generator(False, batch_size)	# test
     )
