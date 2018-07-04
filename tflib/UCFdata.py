@@ -137,10 +137,10 @@ class DataSet():
         data = train if train_test == 'train' else test
 
         print("Creating %s generator with %d samples." % (train_test, len(data)))
+      
+        while True:
+            X, y = [], []
 
-        X, y = [], []
-
-        def get_epoch():
             # Generate batch_size samples.
             for _ in range(batch_size):
                 # Reset to be safe.
@@ -173,9 +173,7 @@ class DataSet():
                 X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
 
-            return (np.array(X), np.array(y))
-
-        yield get_epoch
+            yield (np.array(X), np.array(y))
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
