@@ -19,17 +19,17 @@ import tflib.plot
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
 # extracted files here!
-DATA_DIR = '/home/linkermann/datasets/UCF101'
+DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/data'
 if len(DATA_DIR) == 0:
-    raise Exception('Please specify path to data directory in gan_cifar.py!')
+    raise Exception('Please specify path to data directory in gan_ucf101.py!')
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 128 # This overfits substantially; you're probably better off with 64
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
-BATCH_SIZE = 64 # Batch size
-ITERS = 200000 # How many generator iterations to train for
-OUTPUT_DIM = 3072 # Number of pixels in UCF101 ()
+BATCH_SIZE = 40 # Batch size
+ITERS = 300000 # How many generator iterations to train for
+OUTPUT_DIM = 76800 # Number of pixels in UCF101 ()
 
 lib.print_model_settings(locals().copy())
 
@@ -68,7 +68,7 @@ def Generator(n_samples, noise=None):
     return tf.reshape(output, [-1, OUTPUT_DIM])
 
 def Discriminator(inputs):
-    output = tf.reshape(inputs, [-1, 3, 32, 32])
+    output = tf.reshape(inputs, [-1, 3, 320, 240])
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
     output = LeakyReLU(output)
@@ -154,10 +154,10 @@ fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
     samples = ((samples+1.)*(255./2)).astype('int32')
-    lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
+    lib.save_images.save_images(samples.reshape((128, 3, 320, 240)), 'samples_{}.jpg'.format(frame))
 
 # For calculating inception score
-samples_100 = Generator(100)
+# samples_100 = Generator(100)
 def get_inception_score():
     all_samples = []
     for i in xrange(10):
@@ -199,9 +199,9 @@ with tf.Session() as session:
         lib.plot.plot('time', time.time() - start_time)
 
         # Calculate inception score every 1K iters
-        if iteration % 1000 == 999:
-            inception_score = get_inception_score()
-            lib.plot.plot('inception score', inception_score[0])
+        #if iteration % 1000 == 999:
+        #    inception_score = get_inception_score()
+        #    lib.plot.plot('inception score', inception_score[0])
 
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
