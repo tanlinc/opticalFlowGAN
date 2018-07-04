@@ -99,7 +99,7 @@ def generator(train, batch_size=32, seq_length = 40, class_limit=None, image_sha
                 np.random.shuffle(y)
                 for i in xrange(len(images) / batch_size):
                     yield (X[i*batch_size:(i+1)*batch_size], y[i*batch_size:(i+1)*batch_size])
-            return get_epoch()
+            return get_epoch
         else:
             X_test, y_test = data.get_all_sequences_in_memory(batch_size, 'test', 'images')
 
@@ -110,7 +110,7 @@ def generator(train, batch_size=32, seq_length = 40, class_limit=None, image_sha
                 np.random.shuffle(y_test)
                 for i in xrange(len(images) / batch_size):
                     yield (X_test[i*batch_size:(i+1)*batch_size], y_test[i*batch_size:(i+1)*batch_size])
-            return get_epoch()
+            return get_epoch
     else:
         # Get generators.
         if train:
