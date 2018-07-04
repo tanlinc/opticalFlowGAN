@@ -3,9 +3,9 @@ import numpy as np
 import os
 import urllib
 import gzip
-import cPickle as pickle
+import pickle
 from keras.preprocessing.image import ImageDataGenerator
-from UCFdata import DataSet
+from tflib.UCFdata import DataSet
 
 data = DataSet()
 
@@ -89,8 +89,8 @@ def generator(train, batch_size=32, seq_length = 40, class_limit=None, image_sha
 
     #if load_to_memory:
         # Get data.
-    X, y = data.get_all_sequences_in_memory('train', 'images')
-    X_test, y_test = data.get_all_sequences_in_memory('test', 'images')
+    X, y = data.get_all_sequences_in_memory(batch_size, 'train', 'images')
+    X_test, y_test = data.get_all_sequences_in_memory(batch_size, 'test', 'images')
     #else:
         # Get generators.
        # generator = data.frame_generator(batch_size, 'train', 'images')

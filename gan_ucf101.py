@@ -13,23 +13,23 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.ucf101
-import tflib.inception_score
+# import tflib.inception_score
 import tflib.plot
+import tflib.processor
+import tflib.ucf101
+import tflib.UCFdata
 
-# Download CIFAR-10 (Python version) at
-# https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
-# extracted files here!
-DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/data'
-if len(DATA_DIR) == 0:
-    raise Exception('Please specify path to data directory in gan_ucf101.py!')
+# DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/data'
+#if len(DATA_DIR) == 0:
+#    raise Exception('Please specify path to data directory in gan_ucf101.py!')
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
-DIM = 128 # This overfits substantially; you're probably better off with 64
+DIM = 64 # This overfits substantially; you're probably better off with 64
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
-BATCH_SIZE = 40 # Batch size
+BATCH_SIZE = 30 # Batch size
 ITERS = 300000 # How many generator iterations to train for
-OUTPUT_DIM = 76800 # Number of pixels in UCF101 ()
+OUTPUT_DIM = 230400 # Number of pixels in UCF101 (3*320*240)
 
 lib.print_model_settings(locals().copy())
 
@@ -48,17 +48,21 @@ def Generator(n_samples, noise=None):
     if noise is None:
         noise = tf.random_normal([n_samples, 128])
 
-    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise)
+    output = lib.ops.linear.Linear('Generator.Input', 128, 8*20*15*DIM, noise)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
-    output = tf.reshape(output, [-1, 4*DIM, 4, 4])
+    output = tf.reshape(output, [-1, 8*DIM, 20, 15])
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.2', 4*DIM, 2*DIM, 5, output)
+    output = lib.ops.deconv2d.Deconv2D('Generator.2', 8*DIM, 4*DIM, 5, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN2', [0,2,3], output)
     output = tf.nn.relu(output)
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.3', 2*DIM, DIM, 5, output)
+    output = lib.ops.deconv2d.Deconv2D('Generator.3', 4*DIM, 2*DIM, 5, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN3', [0,2,3], output)
+    output = tf.nn.relu(output)
+
+    output = lib.ops.deconv2d.Deconv2D('Generator.4', 2*DIM, DIM, 5, output)
+    output = lib.ops.batchnorm.Batchnorm('Generator.BN4', [0,2,3], output)
     output = tf.nn.relu(output)
 
     output = lib.ops.deconv2d.Deconv2D('Generator.5', DIM, 3, 5, output)
@@ -158,17 +162,17 @@ def generate_image(frame, true_dist):
 
 # For calculating inception score
 # samples_100 = Generator(100)
-def get_inception_score():
-    all_samples = []
-    for i in xrange(10):
-        all_samples.append(session.run(samples_100))
-    all_samples = np.concatenate(all_samples, axis=0)
-    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
-    all_samples = all_samples.reshape((-1, 3, 32, 32)).transpose(0,2,3,1)
-    return lib.inception_score.get_inception_score(list(all_samples))
+#def get_inception_score():
+#    all_samples = []
+#    for i in xrange(10):
+#        all_samples.append(session.run(samples_100))
+#    all_samples = np.concatenate(all_samples, axis=0)
+#    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
+#    all_samples = all_samples.reshape((-1, 3, 320, 240)).transpose(0,2,3,1)
+#    return lib.inception_score.get_inception_score(list(all_samples))
 
 # Dataset iterators
-train_gen, dev_gen = lib.ucf101.load(BATCH_SIZE, data_dir=DATA_DIR)
+train_gen, dev_gen = lib.ucf101.load(BATCH_SIZE)
 def inf_train_gen():
     while True:
         for images,_ in train_gen():

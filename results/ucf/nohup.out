@@ -1,0 +1,21 @@
+Using TensorFlow backend.
+Uppercase local vars:
+	BATCH_SIZE: 30
+	CRITIC_ITERS: 5
+	DIM: 64
+	ITERS: 300000
+	LAMBDA: 10
+	MODE: wgan-gp
+	OUTPUT_DIM: 230400
+Getting train data with 8596 samples.
+Can't find sequence. Did you generate them?
+Traceback (most recent call last):
+  File "../../gan_ucf101.py", line 175, in <module>
+    train_gen, dev_gen = lib.ucf101.load(BATCH_SIZE)
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/ucf101.py", line 142, in load
+    generator(True, batch_size), 
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/ucf101.py", line 92, in generator
+    X, y = data.get_all_sequences_in_memory(batch_size, 'train', 'images')
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/UCFdata.py", line 117, in get_all_sequences_in_memory
+    raise
+RuntimeError: No active exception to reraise

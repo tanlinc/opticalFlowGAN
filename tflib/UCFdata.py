@@ -9,12 +9,12 @@ import os.path
 import pandas as pd
 import sys
 import operator
-from processor import process_image
+from tflib.processor import process_image
 from keras.utils import np_utils
 
 class DataSet():
 
-    def __init__(self, seq_length=40, class_limit=None, image_shape=(224, 224, 3)):
+    def __init__(self, seq_length=30, class_limit=None, image_shape=(320, 240, 3)):
         """Constructor.
         seq_length = (int) the number of frames to consider
         class_limit = (int) number of classes to limit the data to.
@@ -39,7 +39,7 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data from file."""
-        with open('./data/data_file.csv', 'r') as fin:
+        with open('/home/linkermann/opticalFlow/opticalFlowGAN/data/data_file.csv', 'r') as fin:
             reader = csv.reader(fin)
             data = list(reader)
 
