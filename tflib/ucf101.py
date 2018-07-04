@@ -147,3 +147,6 @@ def load(batch_size):
         generator(True, batch_size),    # train
         generator(False, batch_size)	# test
     )
+
+def load_train_gen(batch_size):
+    return data.frame_generator(batch_size, 'train', 'images')

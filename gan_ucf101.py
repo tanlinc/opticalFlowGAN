@@ -172,7 +172,7 @@ def generate_image(frame, true_dist):
 #    return lib.inception_score.get_inception_score(list(all_samples))
 
 # Dataset iterators
-train_gen, dev_gen = lib.ucf101.load(BATCH_SIZE)
+train_gen = lib.ucf101.load_train_gen(BATCH_SIZE)
 def inf_train_gen():
     while True:
         for images,_ in train_gen():
