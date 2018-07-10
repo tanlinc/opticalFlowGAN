@@ -14,7 +14,7 @@ from keras.utils import np_utils
 
 class DataSet():
 
-    def __init__(self, seq_length=30, class_limit=None, image_shape=(320, 240, 3)):
+    def __init__(self, seq_length=1, class_limit=None, image_shape=(320, 240, 3)): # change seq_length here to get more than 1 frame as input
         """Constructor.
         seq_length = (int) the number of frames to consider
         class_limit = (int) number of classes to limit the data to.
@@ -148,13 +148,12 @@ class DataSet():
 
                 # Get a random sample.
                 sample = random.choice(data)
-                print(sample)
+                # print(sample)
 
                 # Check to see if we've already saved this sequence.
                 if data_type is "images":
                     # Get and resample frames.
                     frames = self.get_frames_for_sample(sample)
-                    print(len(frames))
                     frames = self.rescale_list(frames, self.seq_length)
 
                     # Build the image sequence
@@ -208,7 +207,7 @@ class DataSet():
         return parts[-1].replace('.jpg', '')
 
     @staticmethod
-    def rescale_list(input_list, size):
+    def rescale_list(input_list, size):		# this skips more frames in between if larger number of frames for clip :/ 
         """Given a list and a size, return a rescaled/samples list. For example,
         if we want a list of size 5 and we have a list of size 25, return a new
         list of size five which is every 5th element of the origina list."""
@@ -222,4 +221,9 @@ class DataSet():
 
         # Cut off the last one if needed.
         return output[:size]
+
+
+def load_train_gen(batch_size):
+    data = DataSet()
+    return data.frame_generator(batch_size, 'train', 'images', concat=True)
 

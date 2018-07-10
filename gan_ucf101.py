@@ -16,7 +16,7 @@ import tflib.ucf101
 # import tflib.inception_score
 import tflib.plot
 import tflib.processor
-import tflib.ucf101
+#import tflib.ucf101
 import tflib.UCFdata
 
 # DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/data'
@@ -181,7 +181,7 @@ def inf_train_gen():
 # Train loop
 with tf.Session() as session:
     session.run(tf.global_variables_initializer())
-    gen = lib.ucf101.load_train_gen(BATCH_SIZE)
+    gen = lib.UCFdata.load_train_gen(BATCH_SIZE)
 
     for iteration in range(ITERS):
         start_time = time.time()
