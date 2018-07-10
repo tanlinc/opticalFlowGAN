@@ -28,14 +28,14 @@ def get_generators():
     test_datagen = ImageDataGenerator(rescale=1./255)
 
     train_generator = train_datagen.flow_from_directory(
-        './data/train/',
+        '../data/train/',
         target_size=(320, 240),
         batch_size=30,
         classes=data.classes,
         class_mode='categorical')
 
     validation_generator = test_datagen.flow_from_directory(
-        './data/test/',
+        '../data/test/',
         target_size=(320, 240),
         batch_size=30,
         classes=data.classes,
@@ -114,7 +114,7 @@ def load(batch_size):
     )
 
 def load_train_gen(batch_size):
-    return data.frame_generator(batch_size, 'train', 'images')
+    return data.frame_generator(batch_size, 'train', 'images', concat=True)
 
 def load_keras_gen(batch_size):
     train_generator, validation_generator = get_generators()
