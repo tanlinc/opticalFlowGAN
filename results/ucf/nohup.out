@@ -1,21 +1,21 @@
-2018-07-10 10:36:43.143155: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
-2018-07-10 10:36:44.324912: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2018-07-10 10:36:44.325814: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
+2018-07-10 13:47:42.614800: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
+2018-07-10 13:47:43.806796: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-10 13:47:43.807702: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
 name: GeForce GTX TITAN X major: 5 minor: 2 memoryClockRate(GHz): 1.076
 pciBusID: 0000:05:00.0
 totalMemory: 11.93GiB freeMemory: 11.81GiB
-2018-07-10 10:36:44.500564: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2018-07-10 10:36:44.501308: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
+2018-07-10 13:47:43.978747: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-10 13:47:43.979493: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
 name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
 pciBusID: 0000:07:00.0
 totalMemory: 5.93GiB freeMemory: 5.83GiB
-2018-07-10 10:36:44.501622: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
-2018-07-10 10:36:45.076694: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
-2018-07-10 10:36:45.076750: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
-2018-07-10 10:36:45.076768: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
-2018-07-10 10:36:45.076779: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
-2018-07-10 10:36:45.077215: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11436 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
-2018-07-10 10:36:45.245596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 5609 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
+2018-07-10 13:47:43.979823: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
+2018-07-10 13:47:44.554332: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-07-10 13:47:44.554390: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
+2018-07-10 13:47:44.554410: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
+2018-07-10 13:47:44.554427: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
+2018-07-10 13:47:44.554879: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11436 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
+2018-07-10 13:47:44.727946: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 5609 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
 Using TensorFlow backend.
 Uppercase local vars:
 	BATCH_SIZE: 30
@@ -25,15 +25,72 @@ Uppercase local vars:
 	LAMBDA: 10
 	MODE: wgan-gp
 	OUTPUT_DIM: 230400
+Creating train generator with 8598 samples.
+['train', 'HandstandWalking', 'v_HandstandWalking_g13_c02', '69']
+69
+['train', 'Surfing', 'v_Surfing_g19_c04', '266']
+266
+['train', 'HorseRace', 'v_HorseRace_g17_c01', '216']
+216
+['train', 'HandstandPushups', 'v_HandStandPushups_g18_c05', '98']
+98
+['train', 'Fencing', 'v_Fencing_g23_c01', '138']
+138
+['train', 'BodyWeightSquats', 'v_BodyWeightSquats_g16_c02', '75']
+75
+['train', 'PushUps', 'v_PushUps_g17_c04', '79']
+79
+['train', 'BasketballDunk', 'v_BasketballDunk_g12_c04', '58']
+58
+['train', 'CleanAndJerk', 'v_CleanAndJerk_g24_c03', '235']
+235
+['train', 'StillRings', 'v_StillRings_g12_c04', '138']
+138
+['train', 'MilitaryParade', 'v_MilitaryParade_g19_c03', '126']
+126
+['train', 'PushUps', 'v_PushUps_g13_c01', '72']
+72
+['train', 'Drumming', 'v_Drumming_g15_c01', '300']
+300
+['train', 'MilitaryParade', 'v_MilitaryParade_g22_c03', '142']
+142
+['train', 'BandMarching', 'v_BandMarching_g22_c04', '249']
+249
+['train', 'PoleVault', 'v_PoleVault_g09_c04', '231']
+231
+['train', 'Haircut', 'v_Haircut_g16_c03', '145']
+145
+['train', 'BabyCrawling', 'v_BabyCrawling_g23_c02', '112']
+112
+['train', 'TrampolineJumping', 'v_TrampolineJumping_g12_c03', '180']
+180
+['train', 'HorseRace', 'v_HorseRace_g22_c01', '218']
+218
+['train', 'BoxingPunchingBag', 'v_BoxingPunchingBag_g12_c03', '160']
+160
+['train', 'WallPushups', 'v_WallPushups_g17_c07', '93']
+93
+['train', 'PoleVault', 'v_PoleVault_g25_c06', '103']
+103
+['train', 'Biking', 'v_Biking_g17_c04', '204']
+204
+['train', 'Swing', 'v_Swing_g14_c04', '151']
+151
+['train', 'PlayingGuitar', 'v_PlayingGuitar_g10_c06', '250']
+250
+['train', 'StillRings', 'v_StillRings_g10_c03', '122']
+122
+['train', 'Punch', 'v_Punch_g13_c07', '300']
+300
+['train', 'WallPushups', 'v_WallPushups_g21_c07', '54']
+54
+['train', 'BaseballPitch', 'v_BaseballPitch_g22_c02', '104']
+104
 Traceback (most recent call last):
-  File "../../gan_ucf101.py", line 185, in <module>
-    train_gen = lib.ucf101.load_keras_gen(BATCH_SIZE)
-  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/ucf101.py", line 119, in load_keras_gen
-    train_generator, validation_generator = get_generators()
-  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/ucf101.py", line 34, in get_generators
-    class_mode=None)
-  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/keras_preprocessing/image.py", line 935, in flow_from_directory
-    interpolation=interpolation)
-  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/keras_preprocessing/image.py", line 1681, in __init__
-    for subdir in sorted(os.listdir(directory)):
-FileNotFoundError: [Errno 2] No such file or directory: '../data/train/'
+  File "../../gan_ucf101.py", line 198, in <module>
+    _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data})
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 900, in run
+    run_metadata_ptr)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1111, in _run
+    str(subfeed_t.get_shape())))
+ValueError: Cannot feed value of shape (30, 6912000) for Tensor 'Placeholder:0', which has shape '(30, 230400)'

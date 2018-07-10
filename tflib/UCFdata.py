@@ -148,11 +148,13 @@ class DataSet():
 
                 # Get a random sample.
                 sample = random.choice(data)
+                print(sample)
 
                 # Check to see if we've already saved this sequence.
                 if data_type is "images":
                     # Get and resample frames.
                     frames = self.get_frames_for_sample(sample)
+                    print(len(frames))
                     frames = self.rescale_list(frames, self.seq_length)
 
                     # Build the image sequence
@@ -195,9 +197,9 @@ class DataSet():
     def get_frames_for_sample(sample):
         """Given a sample row from the data file, get all the corresponding frame
         filenames."""
-        path = './data/' + sample[0] + '/' + sample[1] + '/'
+        path = '/home/linkermann/opticalFlow/opticalFlowGAN/data/' + sample[0] + '/' + sample[1] + '/'
         filename = sample[2]
-        images = sorted(glob.glob(path + filename + '*jpg'))
+        images = sorted(glob.glob(path + filename + '*.jpg'))
         return images
 
     @staticmethod
