@@ -172,16 +172,17 @@ def generate_image(frame, true_dist):
 #    return lib.inception_score.get_inception_score(list(all_samples))
 
 # Dataset iterators
-train_gen = lib.ucf101.load_train_gen(BATCH_SIZE)
-def inf_train_gen():
-    while True:
-        for images,_ in train_gen():
-            yield images
+#train_gen = lib.ucf101.load_keras_gen(BATCH_SIZE)
+#def inf_train_gen():
+#    while True:
+#        for images,_ in train_gen():
+#            yield images
 
 # Train loop
 with tf.Session() as session:
     session.run(tf.global_variables_initializer())
-    gen = inf_train_gen()
+    # gen = inf_train_gen()
+    train_gen = lib.ucf101.load_keras_gen(BATCH_SIZE)
 
     for iteration in range(ITERS):
         start_time = time.time()
@@ -194,7 +195,7 @@ with tf.Session() as session:
         else:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
-            _data = gen.next()
+            _data = train_gen.next()
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data})
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)

@@ -9,12 +9,6 @@ from tflib.UCFdata import DataSet
 
 data = DataSet()
 
-def unpickle(file):
-    fo = open(file, 'rb')
-    dict = pickle.load(fo)
-    fo.close()
-    return dict['data'], dict['labels']
-
 """
 Train on images split into directories. This assumes we've split
 our videos into frames and moved them to their respective folders.
@@ -23,7 +17,7 @@ Based on:
 https://keras.io/preprocessing/image/
 """
 def get_generators():
-    train_datagen = ImageDataGenerator(
+    train_datagen = ImageDataGenerator(	# generates augmented data.
         rescale=1./255,
         shear_range=0.2,
         horizontal_flip=True,
@@ -35,29 +29,22 @@ def get_generators():
 
     train_generator = train_datagen.flow_from_directory(
         './data/train/',
-        target_size=(299, 299),
-        batch_size=32,
+        target_size=(320, 240),
+        batch_size=30,
         classes=data.classes,
         class_mode='categorical')
 
     validation_generator = test_datagen.flow_from_directory(
         './data/test/',
-        target_size=(299, 299),
-        batch_size=32,
+        target_size=(320, 240),
+        batch_size=30,
         classes=data.classes,
         class_mode='categorical')
 
     return train_generator, validation_generator
-# generators = get_generators()
-# def train_model(model, nb_epoch, generators, callbacks=[]):
-#    train_generator, validation_generator = generators
  #   model.fit_generator(
   #      train_generator,
-   #     steps_per_epoch=100,
-    #    validation_data=validation_generator,
-     #   validation_steps=10,
-      #  epochs=nb_epoch,
-       # callbacks=callbacks)
+    #    validation_data=validation_generator,)
     #return model
 
 
@@ -119,28 +106,6 @@ def generator(train, batch_size=32, seq_length = 40, class_limit=None, image_sha
             generator = data.frame_generator(batch_size, 'test', 'images')
         return generator
 
-def ucf101_generator(filenames, batch_size, data_dir):
-    all_data = []
-    all_labels = []
-    for filename in filenames:        
-        data, labels = unpickle(data_dir + '/' + filename)
-        all_data.append(data)
-        all_labels.append(labels)
-
-    images = np.concatenate(all_data, axis=0)
-    labels = np.concatenate(all_labels, axis=0)
-
-    def get_epoch():
-        rng_state = np.random.get_state()
-        np.random.shuffle(images)
-        np.random.set_state(rng_state)
-        np.random.shuffle(labels)
-
-        for i in xrange(len(images) / batch_size):
-            yield (images[i*batch_size:(i+1)*batch_size], labels[i*batch_size:(i+1)*batch_size])
-
-    return get_epoch
-
 
 def load(batch_size):
     return (
@@ -150,3 +115,7 @@ def load(batch_size):
 
 def load_train_gen(batch_size):
     return data.frame_generator(batch_size, 'train', 'images')
+
+def load_keras_gen(batch_size):
+    train_generator, validation_generator = get_generators()
+    return train_generator
