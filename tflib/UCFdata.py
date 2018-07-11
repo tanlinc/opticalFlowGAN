@@ -14,7 +14,7 @@ from keras.utils import np_utils
 
 class DataSet():
 
-    def __init__(self, seq_length=1, class_limit=None, image_shape=(320, 240, 3)): # change seq_length here to get more than 1 frame as input
+    def __init__(self, seq_length=1, class_limit=10, image_shape=(32, 24, 3)): # change seq_length here to get more than 1 frame as input
         """Constructor.
         seq_length = (int) the number of frames to consider
         class_limit = (int) number of classes to limit the data to.
@@ -22,7 +22,7 @@ class DataSet():
         """
         self.seq_length = seq_length
         self.class_limit = class_limit
-        self.sequence_path = './data/sequences/'
+        self.sequence_path = '/home/linkermann/opticalFlow/opticalFlowGAN/data/sequences/'
         self.max_frames = 300  # max number of frames a video can have for us to use it
 
         # Get the data.
@@ -154,7 +154,7 @@ class DataSet():
                 if data_type is "images":
                     # Get and resample frames.
                     frames = self.get_frames_for_sample(sample)
-                    frames = self.rescale_list(frames, self.seq_length)
+                    frames = self.rescale_list(frames, self.seq_length, False)
 
                     # Build the image sequence
                     sequence = self.build_image_sequence(frames)
@@ -207,17 +207,23 @@ class DataSet():
         return parts[-1].replace('.jpg', '')
 
     @staticmethod
-    def rescale_list(input_list, size):		# this skips more frames in between if larger number of frames for clip :/ 
+    def rescale_list(input_list, size, skipBool):		
         """Given a list and a size, return a rescaled/samples list. For example,
         if we want a list of size 5 and we have a list of size 25, return a new
         list of size five which is every 5th element of the origina list."""
         assert len(input_list) >= size
+      
+        ### this skips more frames in between if larger number of frames for clip   	 
+        if(skipBool):
+            # Get the number to skip between iterations.
+            skip = len(input_list) // size
+            # Build our new output.
+            output = [input_list[i] for i in range(0, len(input_list), skip)]
 
-        # Get the number to skip between iterations.
-        skip = len(input_list) // size
-
-        # Build our new output.
-        output = [input_list[i] for i in range(0, len(input_list), skip)]
+        ### this skips beginning or end of sequence, no frames in between
+        else:
+            random = (0, len(input_list) - size)
+            output = input_list[random:random+size]
 
         # Cut off the last one if needed.
         return output[:size]
