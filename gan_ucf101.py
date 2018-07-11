@@ -28,8 +28,8 @@ DIM = 64 # This overfits substantially; you're probably better off with 64
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
 BATCH_SIZE = 30 # Batch size
-ITERS = 300000 # How many generator iterations to train for
-OUTPUT_DIM = 230400 # Number of pixels in UCF101 (3*320*240)
+ITERS = 200000 # How many generator iterations to train for
+OUTPUT_DIM = 2304 # Number of pixels in UCF101 (3*32*24)
 
 lib.print_model_settings(locals().copy())
 
@@ -48,22 +48,22 @@ def Generator(n_samples, noise=None):
     if noise is None:
         noise = tf.random_normal([n_samples, 128])
 
-    output = lib.ops.linear.Linear('Generator.Input', 128, 8*20*15*DIM, noise)
+    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*3*DIM, noise)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
-    output = tf.reshape(output, [-1, 8*DIM, 20, 15])
+    output = tf.reshape(output, [-1, 4*DIM, 4, 3])
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.2', 8*DIM, 4*DIM, 5, output)
+    output = lib.ops.deconv2d.Deconv2D('Generator.2', 4*DIM, 2*DIM, 5, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN2', [0,2,3], output)
     output = tf.nn.relu(output)
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.3', 4*DIM, 2*DIM, 5, output)
+    output = lib.ops.deconv2d.Deconv2D('Generator.3', 2*DIM, DIM, 5, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN3', [0,2,3], output)
     output = tf.nn.relu(output)
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.4', 2*DIM, DIM, 5, output)
-    output = lib.ops.batchnorm.Batchnorm('Generator.BN4', [0,2,3], output)
-    output = tf.nn.relu(output)
+    #output = lib.ops.deconv2d.Deconv2D('Generator.4', 2*DIM, DIM, 5, output)
+    #output = lib.ops.batchnorm.Batchnorm('Generator.BN4', [0,2,3], output)
+    #output = tf.nn.relu(output)
 
     output = lib.ops.deconv2d.Deconv2D('Generator.5', DIM, 3, 5, output)
 
@@ -72,7 +72,7 @@ def Generator(n_samples, noise=None):
     return tf.reshape(output, [-1, OUTPUT_DIM])
 
 def Discriminator(inputs):
-    output = tf.reshape(inputs, [-1, 3, 320, 240])
+    output = tf.reshape(inputs, [-1, 3, 32, 24])
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
     output = LeakyReLU(output)
@@ -158,7 +158,7 @@ fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
     samples = ((samples+1.)*(255./2)).astype('int32')
-    lib.save_images.save_images(samples.reshape((128, 3, 320, 240)), 'samples_{}.jpg'.format(frame))
+    lib.save_images.save_images(samples.reshape((128, 3, 32, 24)), 'samples_{}.jpg'.format(frame))
 
 # For calculating inception score
 # samples_100 = Generator(100)
