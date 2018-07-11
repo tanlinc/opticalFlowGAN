@@ -1,0 +1,17 @@
+#
+<%page args="outdir, base_lr, momentum, fnm='network.prototxt', weight_decay=0.0"/>
+net: "${outdir}/${fnm}"
+base_lr: ${base_lr}
+lr_policy: "step"
+stepsize: 20000000
+gamma: .5
+max_iter: 90000
+momentum: ${momentum}
+weight_decay: ${weight_decay}
+snapshot: 1000
+snapshot_prefix: "${outdir}/model"
+solver_mode: CPU
+solver_type: ADAM
+display: 1
+
+
