@@ -87,8 +87,8 @@ def Discriminator(inputs):
         output = lib.ops.batchnorm.Batchnorm('Discriminator.BN3', [0,2,3], output)
     output = LeakyReLU(output)
 
-    output = tf.reshape(output, [-1, 4*4*4*DIM])
-    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*4*DIM, 1, output)
+    output = tf.reshape(output, [-1, 4*4*3*DIM])
+    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*3*DIM, 1, output)
 
     return tf.reshape(output, [-1])
 
@@ -182,6 +182,7 @@ def generate_image(frame, true_dist):
 with tf.Session() as session:
     session.run(tf.global_variables_initializer())
     gen = lib.UCFdata.load_train_gen(BATCH_SIZE)
+    dev_gen = lib.UCFdata.load_test_gen(BATCH_SIZE)
 
     for iteration in range(ITERS):
         start_time = time.time()
@@ -210,9 +211,10 @@ with tf.Session() as session:
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
             dev_disc_costs = []
-            for images,_ in dev_gen():
-                _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images}) 
-                dev_disc_costs.append(_dev_disc_cost)
+            # for images in next(dev_gen):
+            images, _ = next(dev_gen)
+            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images}) 
+            dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
 

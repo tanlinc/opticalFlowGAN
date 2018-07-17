@@ -222,8 +222,8 @@ class DataSet():
 
         ### this skips beginning or end of sequence, no frames in between
         else:
-            random = (0, len(input_list) - size)
-            output = input_list[random:random+size]
+            rdm = random.randint(0, len(input_list) - size)
+            output = input_list[rdm:rdm+size]
 
         # Cut off the last one if needed.
         return output[:size]
@@ -233,3 +233,6 @@ def load_train_gen(batch_size):
     data = DataSet()
     return data.frame_generator(batch_size, 'train', 'images', concat=True)
 
+def load_test_gen(batch_size):
+    data = DataSet()
+    return data.frame_generator(batch_size, 'test', 'images', concat = True)
