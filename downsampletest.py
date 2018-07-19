@@ -3,7 +3,7 @@ import os
 import os.path
 import PIL
 import numpy as np
-import UCFdata
+import tflib.UCFdata
 import tflib.save_images
 #import tensorflow as tf
 from keras.preprocessing.image import img_to_array, load_img
@@ -62,16 +62,16 @@ def main():
     #np.save(image)
     inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g25_c07-0146.jpg"
     outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c07-0146"
-    image1 = load_img(inpath, grayscale=False, target_size=(320,240), interpolation='nearest')
-    save_images(image1, outpath+"-1.jpg")
-    image2 = load_img(inpath, grayscale=False, target_size=(32,24), interpolation='nearest')
-    save_images(image2, outpath+"-2.jpg")
-    image3 = load_img(inpath, grayscale=False, target_size=(40,40), interpolation='nearest')
-    save_images(image3, outpath+"-3.jpg")
-    image4 = load_img(inpath, grayscale=False, target_size=(40,40), interpolation='lanczos')
-    save_images(image4, outpath+"-4.jpg")
-    image5 = load_img(inpath, grayscale=False, target_size=(40,40), interpolation='bicubic')
-    save_images(image5, outpath+"-5.jpg")
+    image1 = img_to_array(load_img(inpath, grayscale=False, target_size=(320,240), interpolation='nearest'))
+    tflib.save_images.save_images(image1, outpath+"-1.jpg")
+    image2 = img_to_array(load_img(inpath, grayscale=False, target_size=(32,24), interpolation='nearest'))
+    tflib.save_images.save_images(image2, outpath+"-2.jpg")
+    image3 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='nearest'))
+    tflib.save_images.save_images(image3, outpath+"-3.jpg")
+    image4 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='lanczos'))
+    tflib.save_images.save_images(image4, outpath+"-4.jpg")
+    image5 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='bicubic'))
+    tflib.save_images.save_images(image5, outpath+"-5.jpg")
 
     #down1(image)
     #down2(filename)
