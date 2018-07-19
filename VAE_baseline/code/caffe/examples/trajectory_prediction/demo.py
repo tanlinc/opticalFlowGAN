@@ -111,11 +111,11 @@ def makeAndSaveSamples(thesamples,outdir,im_name,num_clusters, im_sz):
 	ut.drawPixels(im,t,sampledir, curstep, True);
 	ut.drawArrows(im,t,sampledir, curstep, True);
 
-  np.save(sampledir + "/thesamples.py", thesamples);
-  np.save(sampledir + "/themask.py", themask);
+  np.save(sampledir + "/thesamples", thesamples);
+  np.save(sampledir + "/themask", themask);
   sortinds = -np.sort(-np.bincount(J));
-  np.save(sampledir + "/sortinds.py", sortinds);
-  pickle.dump(kmeans,open(sampledir + "/kmeans.py", "wb"))
+  np.save(sampledir + "/sortinds", sortinds);
+  pickle.dump(kmeans,open(sampledir + "/kmeans", "wb"))
 
 def samplezs(net):
   for i in range(0,16):
@@ -137,7 +137,7 @@ def prep_image(im,origsz):
   im2=im2
   return im2;
 
-outdir = "./";
+outdir = "/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/VAE_baseline/code/caffe/examples/trajectory_prediction/";
 im_sz = (256,320);
 
 num_samples = 50;

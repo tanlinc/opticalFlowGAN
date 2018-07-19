@@ -33,7 +33,7 @@ from scipy import ndimage;
 
 #outdir = "/nfs/hn48/jcwalker/quantitative_results/";
 #outdir = "/nfs/hn48/jcwalker/optical_flow/";
-outdir = "/nfs/ladoga_no_backups/users/jcwalker/doWork/";
+outdir = "/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/VAE_baseline/code/caffe/examples/trajectory_prediction";
 im_sz = (256,320);
 
 num_samples = 50;

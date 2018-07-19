@@ -14,7 +14,9 @@ from keras.utils import np_utils
 
 class DataSet():
 
-    def __init__(self, seq_length=1, class_limit=10, image_shape=(32, 24, 3)): # change seq_length here to get more than 1 frame as input
+    def __init__(self, seq_length=1, class_limit=1, image_shape=(32, 32, 3)): 
+	# change size of input image here..
+	# change seq_length here to get more than 1 frame as input
         """Constructor.
         seq_length = (int) the number of frames to consider
         class_limit = (int) number of classes to limit the data to.
@@ -178,7 +180,7 @@ class DataSet():
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
-        return [process_image(x, self.image_shape) for x in frames]
+        return [process_image(x, self.image_shape) for x in frames]		# here size of input image..
 
     def get_extracted_sequence(self, data_type, sample):
         """Get the saved extracted features."""

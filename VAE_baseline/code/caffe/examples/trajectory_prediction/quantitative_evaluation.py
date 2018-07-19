@@ -120,7 +120,7 @@ def prep_image(im,origsz):
   im2=im2
   return im2;
 
-outdir = "/nfs/ladoga_no_backups/users/jcwalker/doWork/";
+outdir = "/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/VAE_baseline/code/caffe/examples/trajectory_prediction";
 im_sz = (256,320);
 
 num_samples = 50;
