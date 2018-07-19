@@ -69,22 +69,16 @@ def main():
     # X.append(im), np.array(X)
 
     inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g25_c07-0146.jpg"
-    outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c07-0146"
+    outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c06-0146"
 
     image1 = proc.process_image(inpath, (320,240,3))
     tflib.save_images.save_images(image1.reshape((3,320,240)), outpath+"-1.jpg")
-    image1 = ((image1+1.)*(255./2)).astype('int32')
-    tflib.save_images.save_images(image1.reshape((3,320,240)), outpath+"-11.jpg")
 
     image2 = proc.process_image(inpath, (32,24,3))
     tflib.save_images.save_images(image2.reshape((3,32,24)), outpath+"-2.jpg")
-    image2 = ((image2+1.)*(255./2)).astype('int32')
-    tflib.save_images.save_images(image2.reshape((3,32,24)), outpath+"-22.jpg")
 
     image3 = proc.process_image(inpath, (40,40,3))
     tflib.save_images.save_images(image3.reshape((3,40,40)), outpath+"-3.jpg")
-    image3 = ((image3+1.)*(255./2)).astype('int32')
-    tflib.save_images.save_images(image3.reshape((3,40,40)), outpath+"-33.jpg")
 
     #down1(image)
     #down2(filename)
