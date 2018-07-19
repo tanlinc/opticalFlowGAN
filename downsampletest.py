@@ -72,13 +72,13 @@ def main():
     outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g08_c01-0008"
 
     image1 = proc.process_image(inpath, (320,240,3))
-    tflib.save_images.save_images(image1.reshape((320,240,3)), outpath+"-11.jpg")
+    tflib.save_images.save_images(image1.reshape((1,3,320,240)), outpath+"-11.jpg")
 
     image2 = proc.process_image(inpath, (32,24,3))
-    tflib.save_images.save_images(image2.reshape((3,32,24)), outpath+"-2.jpg")
+    tflib.save_images.save_images(image2.reshape((1,3,32,24)), outpath+"-2.jpg")
 
     image3 = proc.process_image(inpath, (40,40,3))
-    tflib.save_images.save_images(image3.reshape((3,40,40)), outpath+"-3.jpg")
+    tflib.save_images.save_images(image3.reshape((1,3,40,40)), outpath+"-3.jpg")
 
     #down1(image)
     #down2(filename)
