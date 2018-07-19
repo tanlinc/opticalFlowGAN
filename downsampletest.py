@@ -5,8 +5,9 @@ import PIL
 import numpy as np
 import tflib.UCFdata
 import tflib.save_images
+import tflib.processor as proc
 #import tensorflow as tf
-from keras.preprocessing.image import img_to_array, load_img
+# from keras.preprocessing.image import img_to_array, load_img
 from scipy import ndimage
 from PIL import Image
 from skimage.measure import block_reduce
@@ -58,26 +59,42 @@ def preprocess_image_crop(image_path, img_size):
     return img
 
 def main():
-    #image =  
-    #np.save(image)
+   
+    # like in gan_ucf: saving samples
+    # samples = ((samples+1.)*(255./2)).astype('int32')
+    # lib.save_images.save_images(samples.reshape((128, 3, 40, 40)), 'samples_{}.jpg'.format(frame))
+
+    # like in UCFdata: loading frames
+    # im = process_image(x, image_shape=(32, 32, 3))
+    # X.append(im), np.array(X)
+
     inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g25_c07-0146.jpg"
     outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c07-0146"
-    image0 = img_to_array(load_img(inpath, grayscale=False, target_size=None, interpolation='nearest'))
+
+    image0 = process_image(inpath, image_shape = None)
     tflib.save_images.save_images(image0, outpath+"-0.jpg")
-    image1 = img_to_array(load_img(inpath, grayscale=False, target_size=(240,320), interpolation='nearest'))
+    image0 = ((image0+1.)*(255./2)).astype('int32')
+    tflib.save_images.save_images(image0.reshape((128,3,320,240)), outpath+"-00.jpg")
+
+    image1 = process_image(inpath, image_shape=(240,320))
     tflib.save_images.save_images(image1, outpath+"-1.jpg")
-    image2 = img_to_array(load_img(inpath, grayscale=False, target_size=(32,24), interpolation='nearest'))
+    image1 = ((image1+1.)*(255./2)).astype('int32')
+    tflib.save_images.save_images(image1.reshape((128,3,240,320)), outpath+"-11.jpg")
+
+    image2 = process_image(inpath, image_shape=(32,24))
     tflib.save_images.save_images(image2, outpath+"-2.jpg")
-    image3 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='nearest'))
+    image2 = ((image2+1.)*(255./2)).astype('int32')
+    tflib.save_images.save_images(image2.reshape((128,3,32,24)), outpath+"-22.jpg")
+
+    image3 = process_image(inpath, image_shape=(40,40))
     tflib.save_images.save_images(image3, outpath+"-3.jpg")
-    image4 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='lanczos'))
-    tflib.save_images.save_images(image4, outpath+"-4.jpg")
-    image5 = img_to_array(load_img(inpath, grayscale=False, target_size=(40,40), interpolation='bicubic'))
-    tflib.save_images.save_images(image5, outpath+"-5.jpg")
+    image3 = ((image3+1.)*(255./2)).astype('int32')
+    tflib.save_images.save_images(image3.reshape((128,3,40,40)), outpath+"-33.jpg")
 
     #down1(image)
     #down2(filename)
     #block_mean(ar, 5)
+    #np.save(image)
 
 if __name__ == '__main__':
     main()
