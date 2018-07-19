@@ -68,8 +68,8 @@ def main():
     # im = process_image(x, image_shape=(32, 32, 3))
     # X.append(im), np.array(X)
 
-    inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g25_c07-0146.jpg"
-    outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c06-0146"
+    inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g08_c01-0008.jpg"
+    outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g08_c01-0008"
 
     image1 = proc.process_image(inpath, (320,240,3))
     tflib.save_images.save_images(image1.reshape((3,320,240)), outpath+"-1.jpg")
