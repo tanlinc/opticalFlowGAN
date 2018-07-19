@@ -62,7 +62,9 @@ def main():
     #np.save(image)
     inpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/train/ApplyEyeMakeup/v_ApplyEyeMakeup_g25_c07-0146.jpg"
     outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/downsampletest/v_ApplyEyeMakeup_g25_c07-0146"
-    image1 = img_to_array(load_img(inpath, grayscale=False, target_size=(320,240), interpolation='nearest'))
+    image0 = img_to_array(load_img(inpath, grayscale=False, target_size=None, interpolation='nearest'))
+    tflib.save_images.save_images(image0, outpath+"-0.jpg")
+    image1 = img_to_array(load_img(inpath, grayscale=False, target_size=(240,320), interpolation='nearest'))
     tflib.save_images.save_images(image1, outpath+"-1.jpg")
     image2 = img_to_array(load_img(inpath, grayscale=False, target_size=(32,24), interpolation='nearest'))
     tflib.save_images.save_images(image2, outpath+"-2.jpg")
