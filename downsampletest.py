@@ -13,12 +13,12 @@ from skimage.measure import block_reduce
 
 
 
-def down1(image)
+def down1(image):
     resized_im = block_reduce(image, block_size=(3, 24, 32), func=np.mean)
     np.save(resized_im)
 
 
-def down2(filename)
+def down2(filename):
     basewidth = 300
     img = Image.open(filename)
     wpercent = (basewidth / float(img.size[0]))
