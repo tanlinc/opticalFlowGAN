@@ -16,6 +16,7 @@ import tflib.plot
 import tflib.ucf101
 import tflib.processor as proc
 import tflib.UCFdata
+from keras.preprocessing.image import img_to_array
 
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
@@ -198,6 +199,8 @@ with tf.Session() as session:
             
             image1 = _data[0]
             print(image1.shape)
+            img_arr = img_to_array(image)
+            x = (img_arr / 255.).astype(np.float32)
             # image1 = proc.process_image(_data[0])
             # image1  = np.transpose(image1, [2,0,1])
             outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
