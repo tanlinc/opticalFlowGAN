@@ -1,5 +1,6 @@
 data/sequences
 data/train
 data/test
+cifardata
 tflib/__pycache__
 tflib/ops/__pycache__
