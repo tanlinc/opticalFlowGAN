@@ -6,16 +6,18 @@ import gzip
 import pickle
 
 def unpickle(file):
-    fo = open(file, 'rb')
-    dict = pickle.load(fo,  encoding='bytes')
-    fo.close()
-    return dict['data'], dict['labels']
+    with open(file, 'rb') as fo:
+        dict = pickle.load(fo,  encoding='bytes')
+    return dict[b'data'], dict[b'labels']
+    #return dict
 
 def cifar_generator(filenames, batch_size, data_dir):
     all_data = []
     all_labels = []
     for filename in filenames:        
         data, labels = unpickle(data_dir + '/' + filename)
+        #data = unpickle(data_dir + '/' + filename)
+        #print(data)
         all_data.append(data)
         all_labels.append(labels)
 
@@ -28,7 +30,7 @@ def cifar_generator(filenames, batch_size, data_dir):
         np.random.set_state(rng_state)
         np.random.shuffle(labels)
 
-        for i in xrange(len(images) / batch_size):
+        for i in range(int(len(images) / batch_size)):
             yield (images[i*batch_size:(i+1)*batch_size], labels[i*batch_size:(i+1)*batch_size])
 
     return get_epoch
