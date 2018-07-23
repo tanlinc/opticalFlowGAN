@@ -157,10 +157,10 @@ def generate_image(frame, true_dist):
     print("samples")
     samples = session.run(fixed_noise_samples_128)
     print(samples.shape)
-    print((np.minimum(samples), np.maximum(samples)))
+    print(min(samples[0]), max(samples[0]))
     samples = ((samples+1.)*(255./2)).astype('int32')
     print(samples.shape)
-    print((np.minimum(samples), np.maximum(samples)))
+    print(min(samples[0]), max(samples[0]))
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame)) # 128 samples next to each other!
 
 #image1 = image1.reshape(32,32,3)
