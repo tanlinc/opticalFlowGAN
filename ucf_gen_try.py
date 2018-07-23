@@ -12,11 +12,9 @@ import tflib.ops.conv2d
 import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
-import tflib.cifar10
-import tflib.inception_score
 import tflib.plot
 import tflib.ucf101
-import tflib.processor
+import tflib.processor as proc
 import tflib.UCFdata
 
 # Download CIFAR-10 (Python version) at
@@ -179,7 +177,7 @@ def generate_image(frame, true_dist):
 
 # Train loop
 with tf.Session() as session:
-    session.run(tf.initialize_all_variables())
+    session.run(tf.global_variables_initializer())
     #gen = inf_train_gen()
     gen = lib.UCFdata.load_train_gen(BATCH_SIZE)
     dev_gen = lib.UCFdata.load_test_gen(BATCH_SIZE)
@@ -198,10 +196,12 @@ with tf.Session() as session:
            # _data = gen.next()
             _data, _ = next(gen)
             
-            image1 = process_image(_data[0])
-            image1  = np.transpose(image1, [2,0,1])
+            image1 = _data[0]
+            print(image1.shape)
+            # image1 = proc.process_image(_data[0])
+            # image1  = np.transpose(image1, [2,0,1])
             outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
-            tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+iteration+".jpg")
+            tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+str(iteration)+".jpg")
 
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data})
             if MODE == 'wgan':

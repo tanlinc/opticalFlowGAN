@@ -200,7 +200,7 @@ class DataSet():
         filenames."""
         path = '/home/linkermann/opticalFlow/opticalFlowGAN/data/' + sample[0] + '/' + sample[1] + '/'
         filename = sample[2]
-        print(filename)
+        # print(filename) # to see which class is taken
         images = sorted(glob.glob(path + filename + '*.jpg'))
         return images
 
