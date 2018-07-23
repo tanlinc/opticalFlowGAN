@@ -189,9 +189,7 @@ elif MODE == 'dcgan':
 
 # For saving samples
 fixed_noise = tf.constant(np.random.normal(size=(128, 128)).astype('float32'))
-fixed_noise_samples = Generator(128, noise=fixed_noise)
-print("fixed noise samples")
-print(fixed_noise_samples.shape)
+fixed_noise_samples = Generator(128, noise=fixed_noise) # shape: (?,784)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples) # shape (128,784)
     lib.save_images.save_images(
@@ -228,10 +226,10 @@ with tf.Session() as session:
             # shape: data batch (50,784) -- first image (784,)
 
             # save first image of each batch
-            image1 = _data[0]
-            image1 = image1.reshape(28,28)
-            outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/mnistsample"
-            tflib.save_images.save_images(image1.reshape((1,28,28)), outpath+str(iteration)+".jpg")
+            #image1 = _data[0]
+            #image1 = image1.reshape(28,28)
+            #outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/mnistsample"
+            #tflib.save_images.save_images(image1.reshape((1,28,28)), outpath+str(iteration)+".jpg")
 
             _disc_cost, _ = session.run(
                 [disc_cost, disc_train_op],
