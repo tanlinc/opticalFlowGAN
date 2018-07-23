@@ -177,6 +177,10 @@ for roundid in range(0,2):
 			pp[i,j,:,:] = ndimage.interpolation.zoom(np.reshape(p[i,j,:,:],(16,20)), 4.0, order=0)
         #                u[i,j,:,:] = ndimage.interpolation.zoom(np.reshape(t[i,j,:,:],(16,20)), 4.0, order=0)
 
+			#print("min-max: %.2f %.2f\n" % (np.min(pp[i,j,:,:]), np.max(pp[i,j,:,:]) ) )
+			#print("min-max: %.2f %.2f\n" % (np.min(u[i,j,:,:]), np.max(u[i,j,:,:]) ) )
+			#print(u.shape)
+
 	thesamples.append(np.multiply(u,pp));
   print time.time()-start
 
