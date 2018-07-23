@@ -3,11 +3,11 @@ import numpy as np
 import os
 import urllib
 import gzip
-import cPickle as pickle
+import pickle
 
 def unpickle(file):
     fo = open(file, 'rb')
-    dict = pickle.load(fo)
+    dict = pickle.load(fo,  encoding='bytes')
     fo.close()
     return dict['data'], dict['labels']
 

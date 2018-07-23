@@ -19,6 +19,7 @@ import tflib.plot
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
 # extracted files here!
+# https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
 DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/cifardata'
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
