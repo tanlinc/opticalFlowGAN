@@ -193,9 +193,7 @@ fixed_noise_samples = Generator(128, noise=fixed_noise)
 print("fixed noise samples")
 print(fixed_noise_samples.shape)
 def generate_image(frame, true_dist):
-    samples = session.run(fixed_noise_samples)
-    print("samples")
-    print(samples.shape)
+    samples = session.run(fixed_noise_samples) # shape (128,784)
     lib.save_images.save_images(
         samples.reshape((128, 28, 28)), 	# 28x28 pixels images, 128 color value?
         'samples_{}.png'.format(frame)
@@ -227,12 +225,10 @@ with tf.Session() as session:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
             _data = next(gen)		# next batch from training data
-            print("data batch")
-            print(_data.shape)
+            # shape: data batch (50,784) -- first image (784,)
 
             # save first image of each batch
             image1 = _data[0]
-            print(image1.shape)
             image1 = image1.reshape(28,28)
             outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/mnistsample"
             tflib.save_images.save_images(image1.reshape((1,28,28)), outpath+str(iteration)+".jpg")
