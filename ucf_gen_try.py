@@ -153,21 +153,20 @@ elif MODE == 'dcgan':
 # For generating samples
 fixed_noise_128 = tf.constant(np.random.normal(size=(128, 128)).astype('float32'))
 fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128)
+print("fixed noise")
+print(fixed_noise_samples_128.shape)
 def generate_image(frame, true_dist):
+    print("samples")
     samples = session.run(fixed_noise_samples_128)
+    print(samples.shape)
     samples = ((samples+1.)*(255./2)).astype('int32')
+    print(samples.shape)
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
 
-# For calculating inception score
-#samples_100 = Generator(100)
-#def get_inception_score():
-#    all_samples = []
-#    for i in range(10):
-#        all_samples.append(session.run(samples_100))
-#    all_samples = np.concatenate(all_samples, axis=0)
-#    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
-#    all_samples = all_samples.reshape((-1, 3, 32, 32)).transpose(0,2,3,1)
-#    return lib.inception_score.get_inception_score(list(all_samples))
+#image1 = image1.reshape(32,32,3)
+#image1  = np.transpose(image1, [2,0,1])
+#tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath)
+
 
 # Dataset iterators
 #train_gen, dev_gen = lib.cifar10.load(BATCH_SIZE, data_dir=DATA_DIR)
@@ -197,12 +196,9 @@ with tf.Session() as session:
            # _data = gen.next()
             _data, _ = next(gen)
             
-            image1 = _data[0]
-            print(image1.shape)
-            img_arr = img_to_array(image)
-            x = (img_arr / 255.).astype(np.float32)
-            # image1 = proc.process_image(_data[0])
-            # image1  = np.transpose(image1, [2,0,1])
+            # save first image of each batch
+            image1 = _data[0].reshape(32,32,3)
+            image1  = np.transpose(image1, [2,0,1])
             outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
             tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+str(iteration)+".jpg")
 
