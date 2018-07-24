@@ -13,13 +13,14 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.cifar10
-import tflib.inception_score
+# import tflib.inception_score
 import tflib.plot
 
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
 # extracted files here!
-DATA_DIR = ''
+# https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz
+DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/cifardata/cifar-10-batches-py'
 if len(DATA_DIR) == 0:
     raise Exception('Please specify path to data directory in gan_cifar.py!')
 
@@ -157,15 +158,15 @@ def generate_image(frame, true_dist):
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
 
 # For calculating inception score
-samples_100 = Generator(100)
-def get_inception_score():
-    all_samples = []
-    for i in xrange(10):
-        all_samples.append(session.run(samples_100))
-    all_samples = np.concatenate(all_samples, axis=0)
-    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
-    all_samples = all_samples.reshape((-1, 3, 32, 32)).transpose(0,2,3,1)
-    return lib.inception_score.get_inception_score(list(all_samples))
+#samples_100 = Generator(100)
+#def get_inception_score():
+#    all_samples = []
+#    for i in range(10):
+#        all_samples.append(session.run(samples_100))
+#    all_samples = np.concatenate(all_samples, axis=0)
+#    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
+#    all_samples = all_samples.reshape((-1, 3, 32, 32)).transpose(0,2,3,1)
+#    return lib.inception_score.get_inception_score(list(all_samples))
 
 # Dataset iterators
 train_gen, dev_gen = lib.cifar10.load(BATCH_SIZE, data_dir=DATA_DIR)
@@ -176,10 +177,10 @@ def inf_train_gen():
 
 # Train loop
 with tf.Session() as session:
-    session.run(tf.initialize_all_variables())
+    session.run(tf.global_variables_initializer())
     gen = inf_train_gen()
 
-    for iteration in xrange(ITERS):
+    for iteration in range(ITERS):
         start_time = time.time()
         # Train generator
         if iteration > 0:
@@ -189,8 +190,8 @@ with tf.Session() as session:
             disc_iters = 1
         else:
             disc_iters = CRITIC_ITERS
-        for i in xrange(disc_iters):
-            _data = gen.next()
+        for i in range(disc_iters):
+            _data = next(gen)
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data})
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)

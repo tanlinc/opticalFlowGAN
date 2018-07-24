@@ -1,0 +1,80 @@
+2018-07-23 17:53:50.571675: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
+2018-07-23 17:53:51.748992: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-23 17:53:51.749893: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
+name: GeForce GTX TITAN X major: 5 minor: 2 memoryClockRate(GHz): 1.076
+pciBusID: 0000:05:00.0
+totalMemory: 11.93GiB freeMemory: 11.81GiB
+2018-07-23 17:53:51.921888: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-23 17:53:51.922633: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
+name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
+pciBusID: 0000:07:00.0
+totalMemory: 5.93GiB freeMemory: 5.83GiB
+2018-07-23 17:53:51.922957: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
+2018-07-23 17:53:52.476852: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-07-23 17:53:52.476909: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
+2018-07-23 17:53:52.476927: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
+2018-07-23 17:53:52.476938: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
+2018-07-23 17:53:52.477379: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11436 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
+2018-07-23 17:53:52.644560: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 5609 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
+Uppercase local vars:
+	BATCH_SIZE: 64
+	CRITIC_ITERS: 5
+	DATA_DIR: /home/linkermann/opticalFlow/opticalFlowGAN/cifardata/cifar-10-batches-py
+	DIM: 128
+	ITERS: 200000
+	LAMBDA: 10
+	MODE: wgan-gp
+	OUTPUT_DIM: 3072
+Traceback (most recent call last):
+  File "../../../gan_cifar.py", line 194, in <module>
+    _data = next(gen)
+  File "../../../gan_cifar.py", line 175, in inf_train_gen
+    for images,_ in train_gen():
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/cifar10.py", line 33, in get_epoch
+    for i in range(len(images) / batch_size):
+TypeError: 'float' object cannot be interpreted as an integer
+2018-07-23 17:55:53.027854: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
+2018-07-23 17:55:54.219508: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-23 17:55:54.220427: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
+name: GeForce GTX TITAN X major: 5 minor: 2 memoryClockRate(GHz): 1.076
+pciBusID: 0000:05:00.0
+totalMemory: 11.93GiB freeMemory: 11.81GiB
+2018-07-23 17:55:54.390012: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-07-23 17:55:54.390774: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
+name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
+pciBusID: 0000:07:00.0
+totalMemory: 5.93GiB freeMemory: 5.83GiB
+2018-07-23 17:55:54.391109: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
+2018-07-23 17:55:54.947355: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-07-23 17:55:54.947412: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
+2018-07-23 17:55:54.947430: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
+2018-07-23 17:55:54.947441: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
+2018-07-23 17:55:54.947893: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11436 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
+2018-07-23 17:55:55.115209: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 5609 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
+Uppercase local vars:
+	BATCH_SIZE: 64
+	CRITIC_ITERS: 5
+	DATA_DIR: /home/linkermann/opticalFlow/opticalFlowGAN/cifardata/cifar-10-batches-py
+	DIM: 128
+	ITERS: 200000
+	LAMBDA: 10
+	MODE: wgan-gp
+	OUTPUT_DIM: 3072
+iter 0	train disc cost	-9.040193557739258	time	1.8075268268585205
+iter 1	train disc cost	-21.152685165405273	time	0.6504578590393066
+iter 2	train disc cost	-26.057292938232422	time	0.3489704132080078
+iter 3	train disc cost	-32.77581787109375	time	0.35350894927978516
+iter 4	train disc cost	-36.35693359375	time	0.34779906272888184
+iter 99	train disc cost	-30.02988052368164	time	0.36674801173963045	dev disc cost	-16.32162857055664
+iter 199	train disc cost	-13.505579948425293	time	0.40356738567352296	dev disc cost	-11.716999053955078
+iter 299	train disc cost	-8.815422058105469	time	0.4024356436729431	dev disc cost	-6.758049011230469
+iter 399	train disc cost	-6.527233123779297	time	0.4026531386375427	dev disc cost	-6.557335376739502
+iter 499	train disc cost	-6.548253059387207	time	0.4028029036521912	dev disc cost	-7.177732944488525
+iter 599	train disc cost	-6.939919471740723	time	0.40165182113647463	dev disc cost	-7.071616172790527
+iter 699	train disc cost	-7.090579986572266	time	0.40262264013290405	dev disc cost	-7.005237102508545
+iter 799	train disc cost	-7.028914928436279	time	0.40271233320236205	dev disc cost	-6.77345085144043
+iter 899	train disc cost	-6.928400993347168	time	0.4016061639785767	dev disc cost	-7.161021709442139
+Traceback (most recent call last):
+  File "../../../gan_cifar.py", line 204, in <module>
+    inception_score = get_inception_score()
+NameError: name 'get_inception_score' is not defined
