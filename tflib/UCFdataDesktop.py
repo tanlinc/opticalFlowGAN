@@ -15,8 +15,6 @@ from keras.utils import np_utils
 class DataSet():
 
     def __init__(self, seq_length=1, class_limit=1, image_shape=(32, 32, 3)): 
-	# change size of input image here..
-	# change seq_length here to get more than 1 frame as input
         """Constructor.
         seq_length = (int) the number of frames to consider
         class_limit = (int) number of classes to limit the data to.
@@ -41,7 +39,7 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data from file."""
-        with open('/home/linkermann/Desktop/MA/data/data_file.csv', 'r') as fin:
+        with open('/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/data/data_file_selected.csv', 'r') as fin:  # changed file to selected
             reader = csv.reader(fin)
             data = list(reader)
 
@@ -180,7 +178,7 @@ class DataSet():
 
     def build_image_sequence(self, frames):
         """Given a set of frames (filenames), build our sequence."""
-        return [process_image(x, self.image_shape) for x in frames]		# here size of input image..
+        return [process_image(x, self.image_shape) for x in frames]		
 
     def get_extracted_sequence(self, data_type, sample):
         """Get the saved extracted features."""
@@ -232,10 +230,13 @@ class DataSet():
         return output[:size]
 
 
-def load_train_gen(batch_size):
-    data = DataSet()
+# change size of input image here..
+# change seq_length here to get more than 1 frame as input
+# (seq_length=1, class_limit=1, image_shape=(32, 32, 3))
+def load_train_gen(batch_size, seqLength, classLimit, imageShape):
+    data = DataSet(seq_length=seqLength, class_limit=classLimit, image_shape=imageShape)
     return data.frame_generator(batch_size, 'train', 'images', concat=True)
 
-def load_test_gen(batch_size):
-    data = DataSet()
+def load_test_gen(batch_size, seqLength, classLimit, imageShape):
+    data = DataSet(seq_length=seqLength, class_limit=classLimit, image_shape=imageShape)
     return data.frame_generator(batch_size, 'test', 'images', concat = True)
