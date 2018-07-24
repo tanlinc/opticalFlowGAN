@@ -154,7 +154,12 @@ fixed_noise_128 = tf.constant(np.random.normal(size=(128, 128)).astype('float32'
 fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
+    print(samples.shape)
+    #print(min(samples))
+    #print(max(samples))
     samples = ((samples+1.)*(255./2)).astype('int32')
+    #print(min(samples))
+    #print(max(samples))
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
 
 # For calculating inception score
@@ -192,6 +197,7 @@ with tf.Session() as session:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
             _data = next(gen)
+            # print(_data.shape)
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data})
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)
@@ -200,9 +206,9 @@ with tf.Session() as session:
         lib.plot.plot('time', time.time() - start_time)
 
         # Calculate inception score every 1K iters
-        if iteration % 1000 == 999:
-            inception_score = get_inception_score()
-            lib.plot.plot('inception score', inception_score[0])
+        #if iteration % 1000 == 999:
+        #    inception_score = get_inception_score()
+        #    lib.plot.plot('inception score', inception_score[0])
 
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
