@@ -153,12 +153,12 @@ elif MODE == 'dcgan':
 fixed_noise_128 = tf.constant(np.random.normal(size=(128, 128)).astype('float32'))
 fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128) # Generator(n_samples, noise):
 def generate_image(frame, true_dist):
-    print("samples")
+    #print("samples")
     samples = session.run(fixed_noise_samples_128)
-    print(samples.shape)
+    #print(samples.shape)
     #print(min(samples), max(samples))
     samples = ((samples+1.)*(255./2)).astype('int32')
-    print(samples.shape)
+    # print(samples.shape)
     #print(min(samples), max(samples))
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame)) # 128 samples next to each other!
 
@@ -193,7 +193,7 @@ with tf.Session() as session:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
             _data, _ = next(gen)  # shape: (batchsize, 3072)
-            print(_data.shape)
+            #print(_data.shape)
             
             # save first image of each batch
             #image1 = _data[0,:] # shape: (3072,)

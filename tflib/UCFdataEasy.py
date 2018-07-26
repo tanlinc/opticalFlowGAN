@@ -196,7 +196,7 @@ class DataSet():
     def get_frames_for_sample(sample):
         """Given a sample row from the data file, get all the corresponding frame
         filenames."""
-        path = '/home/linkermann/Desktop/MA/data/' + sample[0] + '/' + sample[1] + '/'
+        path = '/home/linkermann/opticalFlow/opticalFlowGAN/data/' + sample[0] + '/' + sample[1] + '/'
         filename = sample[2]
         # print(filename) # to see which class is taken
         images = sorted(glob.glob(path + filename + '*.jpg'))
@@ -239,4 +239,4 @@ def load_train_gen(batch_size, seqLength, classLimit, imageShape):
 
 def load_test_gen(batch_size, seqLength, classLimit, imageShape):
     data = DataSet(seq_length=seqLength, class_limit=classLimit, image_shape=imageShape)
-    return data.frame_generator(batch_size, 'test', 'images', concat = True)
+    return data.frame_generator(batch_size, 'train', 'images', concat = True)
