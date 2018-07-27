@@ -1,5 +1,7 @@
 from keras.preprocessing.image import img_to_array, load_img
 import numpy as np
+import sys
+sys.path.append('/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN')
 import tflib.save_images
 
 def process_image(image, target_shape):
@@ -10,8 +12,7 @@ def process_image(image, target_shape):
 
     # Turn it into numpy, normalize and return.
     img_arr = img_to_array(image)
-    x = (img_arr / 255.).astype(np.float32)
-
+    x = img_arr.astype(np.uint8)
     return x
 
 

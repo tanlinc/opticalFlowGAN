@@ -156,16 +156,12 @@ def generate_image(frame, true_dist):
     #print("samples")
     samples = session.run(fixed_noise_samples_128)
     #print(samples.shape)
-    #print(min(samples), max(samples))
+    #print((samples.min(), samples.max()))
     samples = ((samples+1.)*(255./2)).astype('int32')
-    # print(samples.shape)
-    #print(min(samples), max(samples))
+    #print((samples.min(), samples.max()))
+    # image1 = image1.reshape(32,32,3)
+    # image1  = np.transpose(image1, [2,0,1])
     lib.save_images.save_images(samples.reshape((128, 3, 32, 32)), 'samples_{}.jpg'.format(frame)) # 128 samples next to each other!
-
-#image1 = image1.reshape(32,32,3)
-#image1  = np.transpose(image1, [2,0,1])
-#tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath)
-
 
 # Dataset iterators
 #train_gen, dev_gen = lib.cifar10.load(BATCH_SIZE, data_dir=DATA_DIR)
