@@ -13,6 +13,6 @@ def process_image(image, target_shape):
 
     # Turn it into numpy, normalize and return.
     img_arr = img_to_array(image)
-    #x = (img_arr / 255.).astype(np.float32)
-    x = img_arr.astype(np.uint8)	# cifar returns uint8... # already 0-255?
+    #x = (img_arr / 255.).astype(np.float32) # this was the evil line of code..
+    x = img_arr.astype(np.uint8)	# cifar returns uint8, is already 0-255 but just to be sure
     return x
