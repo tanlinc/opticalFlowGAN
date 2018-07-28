@@ -39,7 +39,7 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data from file."""
-        with open('/home/linkermann/opticalFlow/opticalFlowGAN/data/data_file_skiing.csv', 'r') as fin:  # changed file to selected
+        with open('/home/linkermann/opticalFlow/opticalFlowGAN/data/data_file_selected.csv', 'r') as fin:  # changed file to selected
             reader = csv.reader(fin)
             data = list(reader)
 
@@ -239,4 +239,4 @@ def load_train_gen(batch_size, seqLength, classLimit, imageShape):
 
 def load_test_gen(batch_size, seqLength, classLimit, imageShape):
     data = DataSet(seq_length=seqLength, class_limit=classLimit, image_shape=imageShape)
-    return data.frame_generator(batch_size, 'train', 'images', concat = True)
+    return data.frame_generator(batch_size, 'test', 'images', concat = True)
