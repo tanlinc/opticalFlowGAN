@@ -30,7 +30,7 @@ LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
 BATCH_SIZE = 64 # Batch size
 ITERS = 200000 # How many generator iterations to train for
-OUTPUT_DIM = 3072 # Number of pixels in CIFAR10 (3*32*32)
+OUTPUT_DIM = 3072 # Number of pixels in UCF101 (3*32*32)
 
 lib.print_model_settings(locals().copy())
 
@@ -90,7 +90,7 @@ def Discriminator(inputs):
     return tf.reshape(output, [-1])
 
 real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM])
-real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5)
+real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized [0,1]
 fake_data = Generator(BATCH_SIZE)
 
 disc_real = Discriminator(real_data)
@@ -157,7 +157,7 @@ def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
     #print(samples.shape)
     #print((samples.min(), samples.max()))
-    samples = ((samples+1.)*(255./2)).astype('int32')
+    samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     #print((samples.min(), samples.max()))
     # image1 = image1.reshape(32,32,3)
     # image1  = np.transpose(image1, [2,0,1])
@@ -174,7 +174,7 @@ def generate_image(frame, true_dist):
 with tf.Session() as session:
     session.run(tf.global_variables_initializer())
     #gen = inf_train_gen()
-    gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 1, (32,32,3)) # batch size, sey len, #classes, im size
+    gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 1, (32,32,3)) # batch size, seq len, #classes, im size
     dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 1, (32,32,3))
 
     for iteration in range(ITERS):
