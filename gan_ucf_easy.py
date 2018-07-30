@@ -174,8 +174,8 @@ def generate_image(frame, true_dist):
 with tf.Session() as session:
     session.run(tf.global_variables_initializer())
     #gen = inf_train_gen()
-    gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 1, (32,32,3)) # batch size, seq len, #classes, im size
-    dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 1, (32,32,3))
+    gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 3, (32,32,3)) # batch size, seq len, #classes, im size
+    dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 3, (32,32,3))
 
     for iteration in range(ITERS):
         start_time = time.time()
