@@ -472,8 +472,12 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
     for device_index, (device, real_data_conv) in enumerate(zip(DEVICES, split_real_data_conv)):
         with tf.device(device):
 
-            real_data = tf.reshape(2*((tf.cast(real_data_conv, tf.float32)/255.)-.5), [BATCH_SIZE/len(DEVICES), OUTPUT_DIM])
-            fake_data = Generator(BATCH_SIZE/len(DEVICES))
+            real_data = tf.reshape(2*((tf.cast(real_data_conv, tf.float32)/255.)-.5), [int(BATCH_SIZE/len(DEVICES)), OUTPUT_DIM])
+            print("real data")
+            print(real_data.shape)            
+            fake_data = Generator(int(BATCH_SIZE/len(DEVICES)))
+            print("fake data")
+            print(fake_data.shape)
 
             disc_real = Discriminator(real_data)
             disc_fake = Discriminator(fake_data)
@@ -487,7 +491,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
                 disc_cost = tf.reduce_mean(disc_fake) - tf.reduce_mean(disc_real)
 
                 alpha = tf.random_uniform(
-                    shape=[BATCH_SIZE/len(DEVICES),1], 
+                    shape=[int(BATCH_SIZE/len(DEVICES)),1], 
                     minval=0.,
                     maxval=1.
                 )
@@ -562,7 +566,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
     fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 128)).astype('float32'))
     all_fixed_noise_samples = []
     for device_index, device in enumerate(DEVICES):
-        n_samples = BATCH_SIZE / len(DEVICES)
+        n_samples = int(BATCH_SIZE / len(DEVICES))
         all_fixed_noise_samples.append(Generator(n_samples, noise=fixed_noise[device_index*n_samples:(device_index+1)*n_samples]))
     if tf.__version__.startswith('1.'):
         all_fixed_noise_samples = tf.concat(all_fixed_noise_samples, axis=0)
@@ -576,8 +580,8 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
 
     # Dataset iterator
     #train_gen, dev_gen = lib.small_imagenet.load(BATCH_SIZE, data_dir=DATA_DIR)
-    train_gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 3, (64,64,3)) # batch size, seq len, #classes, im size
-    dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 3, (64,64,3))
+    train_gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 1, (64,64,3)) # batch size, seq len, #classes, im size
+    dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 1, (64,64,3))
 
     #def inf_train_gen():
     #    while True:
@@ -586,9 +590,16 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
 
     # Save a batch of ground-truth samples
     _x, _ = next(train_gen)
-    _x_r = session.run(real_data, feed_dict={real_data_conv: _x[:BATCH_SIZE/N_GPUS]})
+    print(_x.shape)
+    print(real_data.shape)
+    print("conv")
+    x_conv = _x[:int(BATCH_SIZE/N_GPUS)]
+    print(x_conv.shape)
+    x_reshape = tf.reshape(x_conv, [int(BATCH_SIZE/N_GPUS),3,64,64])
+    print(x_reshape.shape)
+    _x_r = session.run(real_data, feed_dict={real_data_conv: _x[:int(BATCH_SIZE/N_GPUS)]})
     _x_r = ((_x_r+1.)*(255.99/2)).astype('int32')
-    lib.save_images.save_images(_x_r.reshape((BATCH_SIZE/N_GPUS, 3, 64, 64)), 'samples_groundtruth.png')
+    lib.save_images.save_images(_x_r.reshape((int(BATCH_SIZE/N_GPUS), 3, 64, 64)), 'samples_groundtruth.png')
 
 
     # Train loop

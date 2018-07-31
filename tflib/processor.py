@@ -17,5 +17,5 @@ def process_image(image, target_shape):
     x = img_arr.astype(np.uint8)	# cifar returns uint8, is already 0-255 but just to be sure
     x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
     x = np.transpose(x, [2,0,1]) #e.g.(3,32,32)
-    x = x.reshape(h*w*c,)
+    x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
     return x
