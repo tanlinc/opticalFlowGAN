@@ -58,16 +58,19 @@ import math
 import colorsys;
 from scipy import ndimage;
 
-def makeAndSaveSamples(thesamples,outdir,im_name,num_clusters, im_sz):
+def makeAndSaveSamples(thesamples,outdir,im_name,num_clusters, im_sz):  #makeAndSaveSamples(thesamples,outdir,im_name,5,im_sz);
   im=misc.imread(im_name);
   im = misc.imresize(im, im_sz);
   (blah1, name) = os.path.split(im_name);
-  sampledir = outdir + "/" + name + "_samples/";
+  print(blah1)
+  print(name)
+  print(im_name)
+  sampledir = outdir + name + "_samples/";
   print sampledir
   try:
 	os.mkdir(sampledir);
   except:
-	print "oops sampledir"
+	print "sampledir already exists"
 
 
   thesamples = np.array(thesamples);
@@ -108,14 +111,15 @@ def makeAndSaveSamples(thesamples,outdir,im_name,num_clusters, im_sz):
 	t = np.reshape(t, (1,10,64,80));
 	for i in range(0,10):
 		t[0,i,:,:] = np.multiply(t[0,i,:,:], themask)
+       # print(im)
 	ut.drawPixels(im,t,sampledir, curstep, True);
 	ut.drawArrows(im,t,sampledir, curstep, True);
 
-  np.save(sampledir + "/thesamples", thesamples);
-  np.save(sampledir + "/themask", themask);
+  np.save(sampledir + "thesamples", thesamples);
+  np.save(sampledir + "themask", themask);
   sortinds = -np.sort(-np.bincount(J));
-  np.save(sampledir + "/sortinds", sortinds);
-  pickle.dump(kmeans,open(sampledir + "/kmeans", "wb"))
+  np.save(sampledir + "sortinds", sortinds);
+  pickle.dump(kmeans,open(sampledir + "kmeans", "wb"))
 
 def samplezs(net):
   for i in range(0,16):
@@ -144,8 +148,8 @@ num_samples = 50;
 try:
 	os.mkdir(outdir);
 except:
-	print "oops outdir"
-f = open(outdir + "/imagelist.txt", "r");
+	print "outdir already exists"
+f = open(outdir + "imagelist.txt", "r");
 
 caffe.set_mode_cpu();
 #caffe.set_device(0);

@@ -56,6 +56,8 @@ Usefull links
 # todo: This module should be part of imageio (or at least based on)
 
 import os, time
+import IPython.core.display
+import PIL
 
 def encode(x):
   if False:
@@ -457,7 +459,7 @@ class GifWriter:
 ## Exposed functions
 
 def writeGif(filename, images, duration=0.1, repeat=True, dither=False,
-                nq=0, subRectangles=True, dispose=None):
+                nq=0, subRectangles=False, dispose=None):
     """ writeGif(filename, images, duration=0.1, repeat=True, dither=False,
                     nq=0, subRectangles=True, dispose=None)
     Write an animated gif from the specified images.

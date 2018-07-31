@@ -413,4 +413,4 @@ def drawPixels(im,dcttraj,sampledir, curstep, isFine=False):
 		I = Image.fromarray(np.uint8(ims[i]*1.00 + secondI*0.));
 		theFrames.append(np.uint8(ims[i]*1.00 + secondI*0.));
 
-	writeGif(sampledir + "/thefig_pixel_" + str(curstep) + ".gif", theFrames, duration=.07);
+	writeGif(sampledir + "thefig_pixel_" + str(curstep) + ".gif", theFrames, duration=.07);
