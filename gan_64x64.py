@@ -14,24 +14,23 @@ import tflib.ops.conv2d
 import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
-import tflib.small_imagenet
 import tflib.ops.layernorm
 import tflib.plot
+import tflib.UCFdataEasy as UCFdata
 
-# Download 64x64 ImageNet at http://image-net.org/small/download.php and
 # fill in the path to the extracted files here!
-DATA_DIR = ''
-if len(DATA_DIR) == 0:
-    raise Exception('Please specify path to data directory in gan_64x64.py!')
+#DATA_DIR = ''
+#if len(DATA_DIR) == 0:
+#    raise Exception('Please specify path to data directory in gan_64x64.py!')
 
 MODE = 'wgan-gp' # dcgan, wgan, wgan-gp, lsgan
 DIM = 64 # Model dimensionality
 CRITIC_ITERS = 5 # How many iterations to train the critic for
-N_GPUS = 1 # Number of GPUs
+N_GPUS = 2 # Number of GPUs
 BATCH_SIZE = 64 # Batch size. Must be a multiple of N_GPUS
 ITERS = 200000 # How many iterations to train for
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
-OUTPUT_DIM = 64*64*3 # Number of pixels in each iamge
+OUTPUT_DIM = 64*64*3 # Number of pixels in each image
 
 lib.print_model_settings(locals().copy())
 
@@ -68,7 +67,7 @@ def GeneratorAndDiscriminator():
 
     raise Exception('You must choose an architecture!')
 
-DEVICES = ['/gpu:{}'.format(i) for i in xrange(N_GPUS)]
+DEVICES = ['/gpu:{}'.format(i) for i in range(N_GPUS)]
 
 def LeakyReLU(x, alpha=0.2):
     return tf.maximum(alpha*x, x)
@@ -576,24 +575,25 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
 
 
     # Dataset iterator
-    train_gen, dev_gen = lib.small_imagenet.load(BATCH_SIZE, data_dir=DATA_DIR)
+    #train_gen, dev_gen = lib.small_imagenet.load(BATCH_SIZE, data_dir=DATA_DIR)
+    train_gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 3, (64,64,3)) # batch size, seq len, #classes, im size
+    dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 3, (64,64,3))
 
-    def inf_train_gen():
-        while True:
-            for (images,) in train_gen():
-                yield images
+    #def inf_train_gen():
+    #    while True:
+    #        for (images,) in train_gen():
+    #            yield images
 
     # Save a batch of ground-truth samples
-    _x = next(inf_train_gen())
+    _x, _ = next(train_gen)
     _x_r = session.run(real_data, feed_dict={real_data_conv: _x[:BATCH_SIZE/N_GPUS]})
     _x_r = ((_x_r+1.)*(255.99/2)).astype('int32')
     lib.save_images.save_images(_x_r.reshape((BATCH_SIZE/N_GPUS, 3, 64, 64)), 'samples_groundtruth.png')
 
 
     # Train loop
-    session.run(tf.initialize_all_variables())
-    gen = inf_train_gen()
-    for iteration in xrange(ITERS):
+    session.run(tf.global_variables_initializer())
+    for iteration in range(ITERS):
 
         start_time = time.time()
 
@@ -606,8 +606,8 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
             disc_iters = 1
         else:
             disc_iters = CRITIC_ITERS
-        for i in xrange(disc_iters):
-            _data = next(gen)
+        for i in range(disc_iters):
+            _data, _ = next(train_gen)
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={all_real_data_conv: _data})
             if MODE == 'wgan':
                 _ = session.run([clip_disc_weights])
@@ -618,9 +618,10 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
         if iteration % 200 == 199:
             t = time.time()
             dev_disc_costs = []
-            for (images,) in dev_gen():
-                _dev_disc_cost = session.run(disc_cost, feed_dict={all_real_data_conv: images}) 
-                dev_disc_costs.append(_dev_disc_cost)
+            images, _ = next(dev_gen)
+            #for (images,) in dev_gen():
+            _dev_disc_cost = session.run(disc_cost, feed_dict={all_real_data_conv: images}) 
+            dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
 
             generate_image(iteration)

@@ -13,9 +13,7 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.processor as proc
 import tflib.UCFdataEasy as UCFdata
-from keras.preprocessing.image import img_to_array
 
 # Download CIFAR-10 (Python version) at
 # https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
