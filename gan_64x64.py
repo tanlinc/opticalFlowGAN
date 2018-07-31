@@ -590,14 +590,9 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
 
     # Save a batch of ground-truth samples
     _x, _ = next(train_gen)
-    print(_x.shape)
-    print(real_data.shape)
-    print("conv")
-    x_conv = _x[:int(BATCH_SIZE/N_GPUS)]
-    print(x_conv.shape)
-    x_reshape = tf.reshape(x_conv, [int(BATCH_SIZE/N_GPUS),3,64,64])
-    print(x_reshape.shape)
-    _x_r = session.run(real_data, feed_dict={real_data_conv: _x[:int(BATCH_SIZE/N_GPUS)]})
+    _x_conv = _x[:int(BATCH_SIZE/N_GPUS)]
+    _x_reshape = np.reshape(_x_conv, (int(BATCH_SIZE/N_GPUS),3,64,64))
+    _x_r = session.run(real_data, feed_dict={real_data_conv: _x_reshape})
     _x_r = ((_x_r+1.)*(255.99/2)).astype('int32')
     lib.save_images.save_images(_x_r.reshape((int(BATCH_SIZE/N_GPUS), 3, 64, 64)), 'samples_groundtruth.png')
 
@@ -619,6 +614,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
             _data, _ = next(train_gen)
+            _data = np.reshape(_data, (BATCH_SIZE,3,64,64))
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={all_real_data_conv: _data})
             if MODE == 'wgan':
                 _ = session.run([clip_disc_weights])
@@ -630,6 +626,7 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
             t = time.time()
             dev_disc_costs = []
             images, _ = next(dev_gen)
+            images = np.reshape(images, (BATCH_SIZE,3,64,64))
             #for (images,) in dev_gen():
             _dev_disc_cost = session.run(disc_cost, feed_dict={all_real_data_conv: images}) 
             dev_disc_costs.append(_dev_disc_cost)
