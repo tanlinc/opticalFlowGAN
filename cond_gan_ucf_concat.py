@@ -45,9 +45,9 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
 
 def Generator(n_samples, noise=None):
     if noise is None:
-        noise = tf.random_normal([n_samples, 128])
+        noise = tf.random_normal([n_samples, BATCH_SIZE])
 
-    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise)
+    output = lib.ops.linear.Linear('Generator.Input', BATCH_SIZE, 4*4*4*DIM, noise)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
@@ -68,8 +68,8 @@ def Generator(n_samples, noise=None):
 
 def Discriminator(inputs, conditions):
     output = tf.reshape(inputs, [-1, 3, 32, 32])
-    conds = tf.reshape(conditions, [-1, 3, 32, 32])
-    output = tf.concat(inputs, conditions)
+    conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
+    output = tf.concat(inputs, conditions) # for now just concat the inputs
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
     output = LeakyReLU(output)
@@ -89,7 +89,7 @@ def Discriminator(inputs, conditions):
    #     output = lib.ops.batchnorm.Batchnorm('Discriminator.BN4', [0,2,3], output)
    # output = LeakyReLU(output)
 
-    output = tf.reshape(output, [-1, 4*4*8*DIM])
+    output = tf.reshape(output, [-1, 4*4*8*DIM]) # adjusted outcome
     output = lib.ops.linear.Linear('Discriminator.Output', 4*4*8*DIM, 1, output)
 
     return tf.reshape(output, [-1])
@@ -171,7 +171,7 @@ def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_samples})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
-    # batchsize(64) samples next to each other!
+    # batch size samples next to each other!
 
 # Train loop
 with tf.Session() as session:
@@ -198,7 +198,7 @@ with tf.Session() as session:
             #outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
             #tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+str(iteration)+".jpg")
 
-            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data[0], cond_data_int: _data[1]})
+            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data[1,:,:], cond_data_int: _data[0,:,:]})		# earlier frame as condition
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)
 
@@ -209,7 +209,7 @@ with tf.Session() as session:
         if iteration % 100 == 99:
             dev_disc_costs = []
             images, _ = next(dev_gen)
-            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images[0], cond_data_int: images[1]}) 
+            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images[1,:,:], cond_data_int: images[0,:,:]})    			# earlier frame as condition
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
