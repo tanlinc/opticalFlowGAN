@@ -43,11 +43,14 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
     output = lib.ops.linear.Linear(name+'.Linear', n_in, n_out, inputs)
     return LeakyReLU(output)
 
-def Generator(n_samples, noise=None):
+def Generator(n_samples, conditions, noise=None):
     if noise is None:
-        noise = tf.random_normal([n_samples, BATCH_SIZE])
+        noise = tf.random_normal([n_samples, 128])
 
-    output = lib.ops.linear.Linear('Generator.Input', BATCH_SIZE, 4*4*4*DIM, noise)
+    conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
+    output = tf.concat(noise, conditions) # for now just concat the inputs
+
+    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
