@@ -458,7 +458,7 @@ class GifWriter:
 
 ## Exposed functions
 
-def writeGif(filename, images, duration=0.1, repeat=True, dither=False,
+def writeGif(filename, images, duration=0.3, repeat=True, dither=False,
                 nq=0, subRectangles=False, dispose=None):
     """ writeGif(filename, images, duration=0.1, repeat=True, dither=False,
                     nq=0, subRectangles=True, dispose=None)
@@ -726,7 +726,7 @@ class NeuQuant:
 
         # Initialize
         self.setconstants(samplefac, colors)
-        self.pixels = np.fromstring(image.tostring(), np.uint32)
+        self.pixels = np.fromstring(image.tostring(), np.uint32) # this isnt working, tostring() replaced by tobytes()?
         self.setUpArrays()
 
         self.learn()
