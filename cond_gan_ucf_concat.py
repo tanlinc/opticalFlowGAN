@@ -45,12 +45,14 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
 
 def Generator(n_samples, conditions, noise=None):
     if noise is None:
-        noise = tf.random_normal([n_samples, 128])
+        noise = tf.random_normal([n_samples, BATCH_SIZE])
 
-    conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
-    output = tf.concat(noise, conditions) # for now just concat the inputs
+    #conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
+    # res=tf.concat(concat_dim=1,values=[t1, t2]) concat horizontally (1.dim)
+    #output = tf.concat(noise, conditions) # for now just concat the inputs
+    output = tf.concat([noise, conditions], 0)  
 
-    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise)
+    output = lib.ops.linear.Linear('Generator.Input', BATCH_SIZE, 4*4*4*DIM, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
@@ -72,7 +74,9 @@ def Generator(n_samples, conditions, noise=None):
 def Discriminator(inputs, conditions):
     output = tf.reshape(inputs, [-1, 3, 32, 32])
     conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
-    output = tf.concat(inputs, conditions) # for now just concat the inputs
+   # output = tf.concat(inputs, conditions) # for now just concat the inputs
+    output = tf.concat([inputs, conditions], 0)  
+
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
     output = LeakyReLU(output)
