@@ -45,14 +45,17 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
 
 def Generator(n_samples, conditions, noise=None):
     if noise is None:
-        noise = tf.random_normal([n_samples, BATCH_SIZE])
+        noise = tf.random_normal([n_samples, 32*32])
 
-    #conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
-    # res=tf.concat(concat_dim=1,values=[t1, t2]) concat horizontally (1.dim)
-    #output = tf.concat(noise, conditions) # for now just concat the inputs
-    output = tf.concat([noise, conditions], 0)  
+    conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
+    # for now just concat the inputs: noise as fourth dim of cond image 
+    output = tf.concat([noise, conditions], 1)  
+    print(output.shape) # should be BATCH_SIZE,4,32,32
 
-    output = lib.ops.linear.Linear('Generator.Input', BATCH_SIZE, 4*4*4*DIM, output)
+    output = tf.reshape(output, [-1,4096]) # 32x32x4 = 4096
+    print(output.shape) # should be BATCH_SIZE, 4096
+
+    output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
