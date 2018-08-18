@@ -49,7 +49,7 @@ def Generator(n_samples, conditions, noise=None):
 
     conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
     # for now just concat the inputs: noise as fourth dim of cond image 
-    output = tf.concat([noise, conditions], 1)  
+    output = tf.concat([noise, conds], 1)  
     print(output.shape) # should be BATCH_SIZE,4,32,32
 
     output = tf.reshape(output, [-1,4096]) # 32x32x4 = 4096
@@ -75,13 +75,14 @@ def Generator(n_samples, conditions, noise=None):
     return tf.reshape(output, [-1, OUTPUT_DIM])
 
 def Discriminator(inputs, conditions):
-    output = tf.reshape(inputs, [-1, 3, 32, 32])
+    inputs = tf.reshape(inputs, [-1, 3, 32, 32])
     conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
-   # output = tf.concat(inputs, conditions) # for now just concat the inputs
-    output = tf.concat([inputs, conditions], 0)  
+    # for now just concat the inputs
+    ins = tf.concat([inputs, conds], 1) 
+    print(ins.shape) # should be BATCH:SIZE, 6, 32, 32
+     
 
-
-    output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
+    output = lib.ops.conv2d.Conv2D('Discriminator.1', 6, DIM, 5, ins, stride=2)
     output = LeakyReLU(output)
 
     output = lib.ops.conv2d.Conv2D('Discriminator.2', DIM, 2*DIM, 5, output, stride=2)
