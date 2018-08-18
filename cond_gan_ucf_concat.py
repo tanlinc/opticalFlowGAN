@@ -47,14 +47,11 @@ def Generator(n_samples, conditions, noise=None):
     if noise is None:
         noise = tf.random_normal([n_samples, 32*32])
 
-    noise = tf.reshape(conditions, [n_samples, 1, 32, 32])
+    noise = tf.reshape(noise, [n_samples, 1, 32, 32])
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
     # for now just concat the inputs: noise as fourth dim of cond image 
-    output = tf.concat([noise, conds], 1)  
-    print(output.shape) # should be BATCH_SIZE,4,32,32
-
-    output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096
-    print(output.shape) # should be BATCH_SIZE, 4096
+    output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
+    output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
     output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output)
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
@@ -79,9 +76,7 @@ def Discriminator(inputs, conditions):
     inputs = tf.reshape(inputs, [-1, 3, 32, 32])
     conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
     # for now just concat the inputs
-    ins = tf.concat([inputs, conds], 1) 
-    print(ins.shape) # should be BATCH:SIZE, 6, 32, 32
-     
+    ins = tf.concat([inputs, conds], 1) #to: (BATCH_SIZE, 6, 32, 32)
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 6, DIM, 5, ins, stride=2)
     output = LeakyReLU(output)
@@ -150,7 +145,7 @@ elif MODE == 'wgan-gp':
     )
     differences = fake_data - real_data
     interpolates = real_data + (alpha*differences)
-    gradients = tf.gradients(Discriminator(interpolates), [interpolates])[0]
+    gradients = tf.gradients(Discriminator(interpolates), [interpolates])[0] #TODO: add conds here
     slopes = tf.sqrt(tf.reduce_sum(tf.square(gradients), reduction_indices=[1]))
     gradient_penalty = tf.reduce_mean((slopes-1.)**2)
     disc_cost += LAMBDA*gradient_penalty
