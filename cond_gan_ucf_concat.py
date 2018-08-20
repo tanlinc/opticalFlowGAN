@@ -48,19 +48,14 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
         noise = tf.random_normal([n_samples, 1024]) # 32*32 = 1024
 
     noise = tf.reshape(noise, [n_samples, 1, 32, 32])
+    print("conditions in generator")
     print(conditions.shape) # (32,32,3)
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
-    # is conds numpy?
-    #h, w, c = 32,32,3
-    #x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
-    #x = np.transpose(x, [2,0,1]) #e.g.(3,32,32)
-    #x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
-
-
 
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
-    print(output.shape)
+    print("outpput in generator")
+    print(output.shape) # (BATCH_SIZE,4,32,32)
     output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
     output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
@@ -181,10 +176,20 @@ dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
-fixed_cond_data_int = fixed_cond_samples[0,:,:]	  # earlier frame as condition
+
+
+    # is conds numpy?
+    #h, w, c = 32,32,3
+    #x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
+    #x = np.transpose(x, [2,0,1]) #e.g.(3,32,32)
+    #x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
+
+# extract real and cond data
+fixed_cond_data_int = fixed_cond_samples[:,0:3071]  # earlier frame as condition
+fixed_real_data_int = fixed_cond_samples[:,3072:6143]  # next frame as comparison to result of generator
+print("fixed cond data int")
 print(fixed_cond_data_int.shape)
-fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
-fixed_real_data_int = fixed_cond_samples[1,:,:]   # next frame as comparison to result of generator
+fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
@@ -211,8 +216,12 @@ with tf.Session() as session:
         else:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
-            _data, _ = next(gen)  # shape: (batchsize, 3072)
+            _data, _ = next(gen)  # shape: (batchsize, 6144) ##3072)
+            print("data shape")
             print(_data.shape)
+            #TODO: extract real and cond data
+            _cond_data = _data[:,0:3071] # earlier frame as conditional data,
+            _real_data = _data[:,3072:6143] # last frame as real data for discriminator
             
             # save first image of each batch
             #image1 = _data[0,:] # shape: (3072,)
@@ -221,7 +230,7 @@ with tf.Session() as session:
             #outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
             #tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+str(iteration)+".jpg")
 
-            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _data[1,:,:], cond_data_int: _data[0,:,:]})		# earlier frame as condition
+            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)
 
