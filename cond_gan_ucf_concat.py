@@ -166,8 +166,8 @@ elif MODE == 'dcgan':
 
 
 # Dataset iterators
-gen, _ = UCFdata.load_train_gen(BATCH_SIZE, 2, 2, (32,32,3)) # batch size, seq len, #classes, im size
-dev_gen, _ = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
+gen = UCFdata.load_train_gen(BATCH_SIZE, 2, 2, (32,32,3)) # batch size, seq len, #classes, im size
+dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
