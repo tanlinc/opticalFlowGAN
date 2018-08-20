@@ -48,14 +48,15 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
         noise = tf.random_normal([n_samples, 1024]) # 32*32 = 1024
 
     noise = tf.reshape(noise, [n_samples, 1, 32, 32])
-    print("conditions in generator")
-    print(conditions.shape) # (32,32,3)
+    # print("conditions in generator")
+    # print(conditions.shape) # (64,3072)
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
+    print("conditions in generator")
+    print(conds.shape)
 
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
-    print("outpput in generator")
-    print(output.shape) # (BATCH_SIZE,4,32,32)
+    # print(output.shape) # (BATCH_SIZE,4,32,32)
     output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
     output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
@@ -177,7 +178,6 @@ dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
 
-
     # is conds numpy?
     #h, w, c = 32,32,3
     #x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
@@ -185,10 +185,11 @@ fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
     #x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
 
 # extract real and cond data
-fixed_cond_data_int = fixed_cond_samples[:,0:3071]  # earlier frame as condition
-fixed_real_data_int = fixed_cond_samples[:,3072:6143]  # next frame as comparison to result of generator
+fixed_cond_data_int = fixed_cond_samples[:,0:3072]  # earlier frame as condition
+fixed_real_data_int = fixed_cond_samples[:,3073:6144]  # next frame as comparison to result of generator
 print("fixed cond data int")
-print(fixed_cond_data_int.shape)
+print(fixed_cond_data_int.shape) # (64,3071)
+print(fixed_real_data_int.shape) # (64,3071)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
