@@ -51,8 +51,7 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
     # print("conditions in generator")
     # print(conditions.shape) # (64,3072)
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
-    print("conditions in generator")
-    print(conds.shape)
+    # print(conds.shape) # (64,3,32,32)
 
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
@@ -186,10 +185,10 @@ fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
 
 # extract real and cond data
 fixed_cond_data_int = fixed_cond_samples[:,0:3072]  # earlier frame as condition
-fixed_real_data_int = fixed_cond_samples[:,3073:6144]  # next frame as comparison to result of generator
+fixed_real_data_int = fixed_cond_samples[:,3073:]  # next frame as comparison to result of generator
 print("fixed cond data int")
-print(fixed_cond_data_int.shape) # (64,3071)
-print(fixed_real_data_int.shape) # (64,3071)
+# print(fixed_cond_data_int.shape) # (64,3072)
+print(fixed_real_data_int.shape) # (64,3072)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
