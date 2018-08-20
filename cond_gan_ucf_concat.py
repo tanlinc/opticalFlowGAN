@@ -43,7 +43,7 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
     output = lib.ops.linear.Linear(name+'.Linear', n_in, n_out, inputs)
     return LeakyReLU(output)
 
-def Generator(n_samples, conditions, noise=None):
+def Generator(n_samples, conditions, noise=None):	# input conds additional to noise
     if noise is None:
         noise = tf.random_normal([n_samples, 32*32])
 
@@ -72,7 +72,7 @@ def Generator(n_samples, conditions, noise=None):
 
     return tf.reshape(output, [-1, OUTPUT_DIM])
 
-def Discriminator(inputs, conditions):
+def Discriminator(inputs, conditions):	# input conds as well
     inputs = tf.reshape(inputs, [-1, 3, 32, 32])
     conds = tf.reshape(conditions, [-1, 3, 32, 32])  # new conditional input: last frame
     # for now just concat the inputs
@@ -145,7 +145,7 @@ elif MODE == 'wgan-gp':
     )
     differences = fake_data - real_data
     interpolates = real_data + (alpha*differences)
-    gradients = tf.gradients(Discriminator(interpolates), [interpolates])[0] #TODO: add conds here
+    gradients = tf.gradients(Discriminator(interpolates, cond_data), [interpolates])[0] #added cond here
     slopes = tf.sqrt(tf.reduce_sum(tf.square(gradients), reduction_indices=[1]))
     gradient_penalty = tf.reduce_mean((slopes-1.)**2)
     disc_cost += LAMBDA*gradient_penalty
@@ -170,9 +170,10 @@ gen, _ = UCFdata.load_train_gen(BATCH_SIZE, 2, 2, (32,32,3)) # batch size, seq l
 dev_gen, _ = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
-fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, BATCH_SIZE)).astype('float32'))
-fixed_noise_samples = Generator(BATCH_SIZE, noise=fixed_noise) # Generator(n_samples, noise):
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
+fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, BATCH_SIZE)).astype('float32'))
+fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_samples, noise=fixed_noise) # Generator(n_samples,conds, noise):
+
 
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_samples})
