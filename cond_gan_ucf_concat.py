@@ -181,10 +181,10 @@ dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
-fixed_cond_data_int = fixed_cond_samples[0,:,:]})	# earlier frame as condition
+fixed_cond_data_int = fixed_cond_samples[0,:,:]	  # earlier frame as condition
 print(fixed_cond_data_int.shape)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
-fixed_real_data_int = fixed_cond_samples[1,:,:]})	# next frame as comparison to result of generator
+fixed_real_data_int = fixed_cond_samples[1,:,:]   # next frame as comparison to result of generator
 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
