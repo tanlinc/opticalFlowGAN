@@ -48,7 +48,16 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
         noise = tf.random_normal([n_samples, 1024]) # 32*32 = 1024
 
     noise = tf.reshape(noise, [n_samples, 1, 32, 32])
+    print(conditions.shape) # (32,32,3)
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
+    # is conds numpy?
+    #h, w, c = 32,32,3
+    #x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
+    #x = np.transpose(x, [2,0,1]) #e.g.(3,32,32)
+    #x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
+
+
+
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
     print(output.shape)
@@ -103,10 +112,10 @@ def Discriminator(inputs, conditions):	# input conds as well
     return tf.reshape(output, [-1])
 
 cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM]) # conditional input for both G and D
-cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]
+cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
 
 real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM])
-real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized [0,1]
+real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
 fake_data = Generator(BATCH_SIZE, cond_data)
 
 disc_real = Discriminator(real_data, cond_data)
@@ -172,12 +181,17 @@ dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
+fixed_cond_data_int = fixed_cond_samples[0,:,:]})	# earlier frame as condition
+print(fixed_cond_data_int.shape)
+fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
+fixed_real_data_int = fixed_cond_samples[1,:,:]})	# next frame as comparison to result of generator
+
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
-fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_samples, noise=fixed_noise) # Generator(n_samples,conds, noise):
+fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
 
 def generate_image(frame, true_dist):
-    samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_samples})
+    samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
     # batch size samples next to each other!
