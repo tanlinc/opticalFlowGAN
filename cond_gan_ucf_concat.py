@@ -15,13 +15,6 @@ import tflib.save_images
 import tflib.plot
 import tflib.UCFdataEasy as UCFdata
 
-# Download CIFAR-10 (Python version) at
-# https://www.cs.toronto.edu/~kriz/cifar.html and fill in the path to the
-# extracted files here!
-#DATA_DIR = ''
-#if len(DATA_DIR) == 0:
-#    raise Exception('Please specify path to data directory in gan_cifar.py!')
-
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
@@ -48,14 +41,11 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
         noise = tf.random_normal([n_samples, 1024]) # 32*32 = 1024
 
     noise = tf.reshape(noise, [n_samples, 1, 32, 32])
-    # print("conditions in generator")
-    # print(conditions.shape) # (64,3072)
-    conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
-    # print(conds.shape) # (64,3,32,32)
+    # new conditional input: last frame
+    conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # conditions: (64,3072) TO conds: (64,3,32,32)
 
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
-    # print(output.shape) # (BATCH_SIZE,4,32,32)
     output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
     output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
@@ -169,37 +159,22 @@ elif MODE == 'dcgan':
     disc_train_op = tf.train.AdamOptimizer(learning_rate=2e-4, beta1=0.5).minimize(disc_cost,
                                                                                    var_list=lib.params_with_name('Discriminator.'))
 
-
 # Dataset iterators
 gen = UCFdata.load_train_gen(BATCH_SIZE, 2, 2, (32,32,3)) # batch size, seq len, #classes, im size
 dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
-# For generating samples
+# For generating samples: define fixed noise and conditional input
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
-
-    # is conds numpy?
-    #h, w, c = 32,32,3
-    #x = x.reshape(h,w,c)  # this needs to be added.. do the transpose here!
-    #x = np.transpose(x, [2,0,1]) #e.g.(3,32,32)
-    #x = x.reshape(h*w*c,)	# uncomment for 64x64 gan!
-
-# extract real and cond data
-fixed_cond_data_int = fixed_cond_samples[:,0:3072]  # earlier frame as condition
-fixed_real_data_int = fixed_cond_samples[:,3072:]  # next frame as comparison to result of generator
-print("fixed cond data int")
-# print(fixed_cond_data_int.shape) # (64,3072)
-print(fixed_real_data_int.shape) # (64,3072)
+fixed_cond_data_int = fixed_cond_samples[:,0:3072]  # earlier frame as condition  # shape (64,3072)
+fixed_real_data_int = fixed_cond_samples[:,3072:]  # next frame as comparison to result of generator  # shape (64,3072)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
-
-fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
+fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # for additional channel: 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
-
-def generate_image(frame, true_dist):
+def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
-    # batch size samples next to each other!
 
 # Train loop
 with tf.Session() as session:
@@ -216,19 +191,10 @@ with tf.Session() as session:
         else:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
-            _data, _ = next(gen)  # shape: (batchsize, 6144) ##3072)
-            print("data shape")
-            print(_data.shape)
-            #TODO: extract real and cond data
-            _cond_data = _data[:,0:3071] # earlier frame as conditional data,
-            _real_data = _data[:,3072:6143] # last frame as real data for discriminator
-            
-            # save first image of each batch
-            #image1 = _data[0,:] # shape: (3072,)
-            #image1 = image1.reshape(32,32,3)
-            #image1  = np.transpose(image1, [2,0,1])
-            #outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/sample"
-            #tflib.save_images.save_images(image1.reshape((1,3,32,32)), outpath+str(iteration)+".jpg")
+            _data, _ = next(gen)  # shape: (batchsize, 6144) ##not 3072 anymore
+            # extract real and cond data
+            _cond_data = _data[:,0:3072] # earlier frame as conditional data,
+            _real_data = _data[:,3072:] # last frame as real data for discriminator
 
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})
             if MODE == 'wgan':
