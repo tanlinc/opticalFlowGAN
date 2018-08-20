@@ -174,6 +174,9 @@ class DataSet():
                 X.append(sequence)
                 y.append(self.get_class_one_hot(sample[1]))
 
+            print(X.shape)
+            print(y.shape)
+            print((np.array(X), np.array(y)).shape)
             yield (np.array(X), np.array(y))
 
     def build_image_sequence(self, frames):
