@@ -45,15 +45,16 @@ def LeakyReLULayer(name, n_in, n_out, inputs):
 
 def Generator(n_samples, conditions, noise=None):	# input conds additional to noise
     if noise is None:
-        noise = tf.random_normal([n_samples, 32*32])
+        noise = tf.random_normal([n_samples, 1024]) # 32*32 = 1024
 
     noise = tf.reshape(noise, [n_samples, 1, 32, 32])
     conds = tf.reshape(conditions, [n_samples, 3, 32, 32])  # new conditional input: last frame
     # for now just concat the inputs: noise as fourth dim of cond image 
     output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
+    print(output.shape)
     output = tf.reshape(output, [n_samples, 4096]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
-    output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output)
+    output = lib.ops.linear.Linear('Generator.Input', 4096, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
@@ -171,7 +172,7 @@ dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 2, 2, (32,32,3))
 
 # For generating samples
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
-fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, BATCH_SIZE)).astype('float32'))
+fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_samples, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
 
