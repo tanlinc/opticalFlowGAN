@@ -1,0 +1,136 @@
+2018-08-21 17:09:17.797622: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
+2018-08-21 17:09:18.019553: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-08-21 17:09:18.020421: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
+name: GeForce GTX TITAN X major: 5 minor: 2 memoryClockRate(GHz): 1.076
+pciBusID: 0000:05:00.0
+totalMemory: 11.93GiB freeMemory: 370.94MiB
+2018-08-21 17:09:18.246283: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-08-21 17:09:18.247050: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
+name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
+pciBusID: 0000:07:00.0
+totalMemory: 5.93GiB freeMemory: 191.25MiB
+2018-08-21 17:09:18.247289: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
+2018-08-21 17:09:19.153722: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-08-21 17:09:19.153778: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
+2018-08-21 17:09:19.153793: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
+2018-08-21 17:09:19.153804: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
+2018-08-21 17:09:19.154072: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 89 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
+2018-08-21 17:09:19.156267: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 135 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
+2018-08-21 17:09:19.162329: E tensorflow/stream_executor/cuda/cuda_driver.cc:936] failed to allocate 135.00M (141557760 bytes) from device: CUDA_ERROR_OUT_OF_MEMORY
+2018-08-21 17:09:31.769642: W tensorflow/core/common_runtime/bfc_allocator.cc:275] Allocator (GPU_0_bfc) ran out of memory trying to allocate 800.0KiB.  Current allocation summary follows.
+2018-08-21 17:09:31.769720: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (256): 	Total Chunks: 3, Chunks in use: 3. 768B allocated for chunks. 768B in use in bin. 516B client-requested in use in bin.
+2018-08-21 17:09:31.769747: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (512): 	Total Chunks: 2, Chunks in use: 2. 1.0KiB allocated for chunks. 1.0KiB in use in bin. 1.0KiB client-requested in use in bin.
+2018-08-21 17:09:31.769770: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (1024): 	Total Chunks: 1, Chunks in use: 1. 1.2KiB allocated for chunks. 1.2KiB in use in bin. 1.0KiB client-requested in use in bin.
+2018-08-21 17:09:31.769791: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (2048): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.769812: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (4096): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.769832: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (8192): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.769855: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (16384): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.769887: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (32768): 	Total Chunks: 2, Chunks in use: 2. 75.0KiB allocated for chunks. 75.0KiB in use in bin. 75.0KiB client-requested in use in bin.
+2018-08-21 17:09:31.769941: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (65536): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.769971: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (131072): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770004: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (262144): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770030: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (524288): 	Total Chunks: 1, Chunks in use: 1. 800.0KiB allocated for chunks. 800.0KiB in use in bin. 800.0KiB client-requested in use in bin.
+2018-08-21 17:09:31.770052: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (1048576): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770077: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (2097152): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770109: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (4194304): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770137: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (8388608): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770162: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (16777216): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770183: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (33554432): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770212: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (67108864): 	Total Chunks: 1, Chunks in use: 1. 88.83MiB allocated for chunks. 88.83MiB in use in bin. 64.00MiB client-requested in use in bin.
+2018-08-21 17:09:31.770235: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (134217728): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770260: I tensorflow/core/common_runtime/bfc_allocator.cc:630] Bin (268435456): 	Total Chunks: 0, Chunks in use: 0. 0B allocated for chunks. 0B in use in bin. 0B client-requested in use in bin.
+2018-08-21 17:09:31.770285: I tensorflow/core/common_runtime/bfc_allocator.cc:646] Bin for 800.0KiB was 512.0KiB, Chunk State: 
+2018-08-21 17:09:31.770307: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e80000 of size 1280
+2018-08-21 17:09:31.770327: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e80500 of size 256
+2018-08-21 17:09:31.770346: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e80600 of size 256
+2018-08-21 17:09:31.770371: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e80700 of size 256
+2018-08-21 17:09:31.770396: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e80800 of size 38400
+2018-08-21 17:09:31.770421: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e89e00 of size 38400
+2018-08-21 17:09:31.770448: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e93400 of size 512
+2018-08-21 17:09:31.770474: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e93600 of size 512
+2018-08-21 17:09:31.770500: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913e93800 of size 819200
+2018-08-21 17:09:31.770534: I tensorflow/core/common_runtime/bfc_allocator.cc:665] Chunk at 0x913f5b800 of size 93145088
+2018-08-21 17:09:31.770560: I tensorflow/core/common_runtime/bfc_allocator.cc:671]      Summary of in-use Chunks by size: 
+2018-08-21 17:09:31.770584: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 3 Chunks of size 256 totalling 768B
+2018-08-21 17:09:31.770607: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 2 Chunks of size 512 totalling 1.0KiB
+2018-08-21 17:09:31.770630: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 1 Chunks of size 1280 totalling 1.2KiB
+2018-08-21 17:09:31.770653: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 2 Chunks of size 38400 totalling 75.0KiB
+2018-08-21 17:09:31.770680: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 1 Chunks of size 819200 totalling 800.0KiB
+2018-08-21 17:09:31.770705: I tensorflow/core/common_runtime/bfc_allocator.cc:674] 1 Chunks of size 93145088 totalling 88.83MiB
+2018-08-21 17:09:31.770727: I tensorflow/core/common_runtime/bfc_allocator.cc:678] Sum Total of in-use chunks: 89.69MiB
+2018-08-21 17:09:31.770753: I tensorflow/core/common_runtime/bfc_allocator.cc:680] Stats: 
+Limit:                    94044160
+InUse:                    94044160
+MaxInUse:                 94044160
+NumAllocs:                      10
+MaxAllocSize:             93145088
+
+2018-08-21 17:09:31.770776: W tensorflow/core/common_runtime/bfc_allocator.cc:279] *************************************************************************xxxxxxxxxxxxxxxxxxxxxxxxxxx
+2018-08-21 17:09:31.770846: W tensorflow/core/framework/op_kernel.cc:1295] OP_REQUIRES failed at constant_op.cc:75 : Resource exhausted: OOM when allocating tensor of shape [5,5,64,128] and type float
+2018-08-21 17:09:31.771105: E tensorflow/core/common_runtime/executor.cc:660] Executor failed to create kernel. Resource exhausted: OOM when allocating tensor of shape [5,5,64,128] and type float
+	 [[Node: Discriminator.2/Discriminator.2.Filters/initial_value = Const[dtype=DT_FLOAT, value=Tensor<type: float shape: [5,5,64,128] values: [[[0.0173497703 0.00665851403 0.0598594844]]]...>, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+Using TensorFlow backend.
+Uppercase local vars:
+	BATCH_SIZE: 64
+	CRITIC_ITERS: 5
+	DIM: 64
+	ITERS: 100000
+	LAMBDA: 10
+	MODE: wgan-gp
+	OUTPUT_DIM: 3072
+Creating train generator with 139 samples.
+Traceback (most recent call last):
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1322, in _do_call
+    return fn(*args)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1307, in _run_fn
+    options, feed_dict, fetch_list, target_list, run_metadata)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1409, in _call_tf_sessionrun
+    run_metadata)
+tensorflow.python.framework.errors_impl.ResourceExhaustedError: OOM when allocating tensor of shape [5,5,64,128] and type float
+	 [[Node: Discriminator.2/Discriminator.2.Filters/initial_value = Const[dtype=DT_FLOAT, value=Tensor<type: float shape: [5,5,64,128] values: [[[0.0173497703 0.00665851403 0.0598594844]]]...>, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "../../../cond_gan_ucf_concat_ssim.py", line 201, in <module>
+    session.run(tf.global_variables_initializer())
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 900, in run
+    run_metadata_ptr)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1135, in _run
+    feed_dict_tensor, options, run_metadata)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1316, in _do_run
+    run_metadata)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/client/session.py", line 1335, in _do_call
+    raise type(e)(node_def, op, message)
+tensorflow.python.framework.errors_impl.ResourceExhaustedError: OOM when allocating tensor of shape [5,5,64,128] and type float
+	 [[Node: Discriminator.2/Discriminator.2.Filters/initial_value = Const[dtype=DT_FLOAT, value=Tensor<type: float shape: [5,5,64,128] values: [[[0.0173497703 0.00665851403 0.0598594844]]]...>, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+
+Caused by op 'Discriminator.2/Discriminator.2.Filters/initial_value', defined at:
+  File "../../../cond_gan_ucf_concat_ssim.py", line 109, in <module>
+    disc_real = Discriminator(real_data, cond_data)
+  File "../../../cond_gan_ucf_concat_ssim.py", line 82, in Discriminator
+    output = lib.ops.conv2d.Conv2D('Discriminator.2', DIM, 2*DIM, 5, output, stride=2)  # (5,5,64,128) resource exhausted error
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/ops/conv2d.py", line 88, in Conv2D
+    filters = lib.param(name+'.Filters', filter_values)
+  File "/home/linkermann/opticalFlow/opticalFlowGAN/tflib/__init__.py", line 25, in param
+    param = tf.Variable(*args, **kwargs)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/ops/variables.py", line 235, in __init__
+    constraint=constraint)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/ops/variables.py", line 355, in _init_from_args
+    initial_value, name="initial_value", dtype=dtype)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/ops.py", line 1014, in convert_to_tensor
+    as_ref=False)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/ops.py", line 1104, in internal_convert_to_tensor
+    ret = conversion_func(value, dtype=dtype, name=name, as_ref=as_ref)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/constant_op.py", line 235, in _constant_tensor_conversion_function
+    return constant(v, dtype=dtype, name=name)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/constant_op.py", line 220, in constant
+    name=name).outputs[0]
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/ops.py", line 3392, in create_op
+    op_def=op_def)
+  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/tensorflow/python/framework/ops.py", line 1718, in __init__
+    self._traceback = self._graph._extract_stack()  # pylint: disable=protected-access
+
+ResourceExhaustedError (see above for traceback): OOM when allocating tensor of shape [5,5,64,128] and type float
+	 [[Node: Discriminator.2/Discriminator.2.Filters/initial_value = Const[dtype=DT_FLOAT, value=Tensor<type: float shape: [5,5,64,128] values: [[[0.0173497703 0.00665851403 0.0598594844]]]...>, _device="/job:localhost/replica:0/task:0/device:GPU:0"]()]]
+
