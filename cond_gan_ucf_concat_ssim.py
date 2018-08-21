@@ -14,6 +14,9 @@ import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
 import tflib.UCFdataEasy as UCFdata
+from skimage import img_as_float, img_as_ubyte
+from skimage.measure import compare_ssim as ssim
+from skimage.color import rgb2gray
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
@@ -170,11 +173,28 @@ fixed_real_data_int = fixed_cond_samples[:,3072:]  # next frame as comparison to
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # for additional channel: 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
+file = open(“ssimfile.txt”,”w+”)  # a file for storing the mse and ssim values
+
+def mse(x, y):
+    return np.linalg.norm(x - y)
 
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
+    print(samples.shape)
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
+    print(samples.shape)
+    file.write("Iteration %d :" % frame)
+    # compare generated to real one
+    for i in range(0,64):
+        real = tf.reshape(fixed_real_data_int[i,:], [32,32,3]) 
+        x = img_as_ubyte(rgb2gray(img_as_float(real))) # fixed_real_data_int
+        pred = tf.reshape(samples[i,:], [32,32,3]) 
+        y = img_as_ubyte(rgb2gray(img_as_float(pred)))  # samples
+        # to 0-255 for mse calculation
+        mse = mse(y, x)
+        ssim = ssim(y, x, data_range=x.max() - x.min())
+        file.write("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % i, mse, ssim) 
 
 # Train loop
 with tf.Session() as session:
@@ -217,3 +237,5 @@ with tf.Session() as session:
             lib.plot.flush()
 
         lib.plot.tick()
+
+file.close() 
