@@ -173,7 +173,7 @@ fixed_real_data_int = fixed_cond_samples[:,3072:]  # next frame as comparison to
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('float32'))  # for additional channel: 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
-file = open(“ssimfile.txt”,”w+”)  # a file for storing the mse and ssim values
+file = open("ssimfile.txt","w")  # a file for storing the mse and ssim values
 
 def mse(x, y):
     return np.linalg.norm(x - y)
