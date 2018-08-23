@@ -230,8 +230,11 @@ with tf.Session() as session:
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
             dev_disc_costs = []
-            images, _ = next(dev_gen)
-            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images[1,:,:], cond_data_int: images[0,:,:]})    			# earlier frame as condition
+            _data, _ = next(gen)  # shape: (batchsize, 6144) ##not 3072 anymore
+            # extract real and cond data
+            _cond_data = _data[:,0:3072] # earlier frame as conditional data,
+            _real_data = _data[:,3072:] # last frame as real data for discriminator
+            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})    			# earlier frame as condition
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
