@@ -13,7 +13,7 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.UCFdataDesktop as UCFdata
+import tflib.UCFdataEasy as UCFdata
 from skimage import img_as_float, img_as_ubyte
 from skimage.measure import compare_ssim as ssim
 from skimage.color import rgb2gray

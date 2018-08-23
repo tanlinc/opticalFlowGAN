@@ -13,7 +13,7 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.UCFdataDesktop as UCFdata
+import tflib.UCFdataEasy as UCFdata
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
@@ -184,7 +184,10 @@ with tf.Session() as session:
         start_time = time.time()
         # Train generator
         if iteration > 0:
-            _ = session.run(gen_train_op)
+            _data, _ = next(gen)  # shape: (batchsize, 6144) ##not 3072 anymore
+            # extract real and cond data
+            _cond_data = _data[:,0:3072] # earlier frame as conditional data,
+            _ = session.run(gen_train_op, feed_dict={cond_data_int: fixed_cond_data_int})
         # Train critic
         if MODE == 'dcgan':
             disc_iters = 1
