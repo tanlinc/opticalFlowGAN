@@ -13,7 +13,7 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.UCFdataEasy as UCFdata
+import tflib.UCFdataDesktop as UCFdata
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
@@ -172,7 +172,7 @@ fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 1024)).astype('floa
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
-    samples = session.run(fixed_noise_samples, feed_dict={cond_data_int: fixed_cond_data_int})
+    samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
 
