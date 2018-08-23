@@ -187,7 +187,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     file.write("Iteration %d :" % frame)
     # compare generated to real one
     for i in range(0,64):
-        real = tf.reshape(fixed_real_data_int[i,:], [32,32,3]) 
+        real = fixed_real_data_int[i,:]
+        real = np.asarray(real)
+        real = np.reshape(real, (32,32,3))  #use np?
+        # real = tf.reshape(fixed_real_data_int[i,:], [32,32,3]) 
         x = img_as_ubyte(rgb2gray(img_as_float(real))) # fixed_real_data_int
         pred = tf.reshape(samples[i,:], [32,32,3]) 
         y = img_as_ubyte(rgb2gray(img_as_float(pred)))  # samples
