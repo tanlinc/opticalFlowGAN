@@ -182,9 +182,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     # do I need fixed cond and real data?
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
-    print(samples.shape)
+    # print(samples.shape)
     lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
-    print(samples.shape)
     file.write("Iteration %d :" % frame)
     # compare generated to real one
     for i in range(0,64):
@@ -205,7 +204,11 @@ with tf.Session() as session:
         start_time = time.time()
         # Train generator
         if iteration > 0:
-            _ = session.run(gen_train_op)
+            _data, _ = next(gen)  # shape: (batchsize, 6144) ##not 3072 anymore
+            # extract real and cond data
+            _cond_data = _data[:,0:3072] # earlier frame as conditional data,
+            # _real_data = _data[:,3072:] # last frame as real data for discriminator
+            _ = session.run(gen_train_op, feed_dict={cond_data_int: _cond_data})
         # Train critic
         if MODE == 'dcgan':
             disc_iters = 1
