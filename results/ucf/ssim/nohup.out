@@ -1,43 +1,10 @@
-2018-08-23 11:27:59.865630: I tensorflow/core/platform/cpu_feature_guard.cc:140] Your CPU supports instructions that this TensorFlow binary was not compiled to use: SSE4.1 SSE4.2
-2018-08-23 11:28:01.031080: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2018-08-23 11:28:01.031952: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 0 with properties: 
-name: GeForce GTX TITAN X major: 5 minor: 2 memoryClockRate(GHz): 1.076
-pciBusID: 0000:05:00.0
-totalMemory: 11.93GiB freeMemory: 11.81GiB
-2018-08-23 11:28:01.215069: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:898] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
-2018-08-23 11:28:01.215821: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1356] Found device 1 with properties: 
-name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
-pciBusID: 0000:07:00.0
-totalMemory: 5.93GiB freeMemory: 5.83GiB
-2018-08-23 11:28:01.216121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1435] Adding visible gpu devices: 0, 1
-2018-08-23 11:28:01.805004: I tensorflow/core/common_runtime/gpu/gpu_device.cc:923] Device interconnect StreamExecutor with strength 1 edge matrix:
-2018-08-23 11:28:01.805054: I tensorflow/core/common_runtime/gpu/gpu_device.cc:929]      0 1 
-2018-08-23 11:28:01.805067: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 0:   N Y 
-2018-08-23 11:28:01.805077: I tensorflow/core/common_runtime/gpu/gpu_device.cc:942] 1:   Y N 
-2018-08-23 11:28:01.805496: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 11436 MB memory) -> physical GPU (device: 0, name: GeForce GTX TITAN X, pci bus id: 0000:05:00.0, compute capability: 5.2)
-2018-08-23 11:28:01.976203: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1053] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:1 with 5609 MB memory) -> physical GPU (device: 1, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
-Using TensorFlow backend.
-Uppercase local vars:
-	BATCH_SIZE: 64
-	CRITIC_ITERS: 5
-	DIM: 64
-	ITERS: 100000
-	LAMBDA: 10
-	MODE: wgan-gp
-	OUTPUT_DIM: 3072
-Creating train generator with 139 samples.
-iter 0	train disc cost	-2.50679874420166	time	10.76970648765564
-iter 1	train disc cost	-9.835164070129395	time	11.577737808227539
-iter 2	train disc cost	-22.69989585876465	time	11.025896549224854
-iter 3	train disc cost	-42.24610137939453	time	10.981634378433228
-iter 4	train disc cost	-63.199623107910156	time	10.994484186172485
-Traceback (most recent call last):
-  File "../../../cond_gan_ucf_concat_ssim.py", line 240, in <module>
-    generate_image(iteration, _data)
-  File "../../../cond_gan_ucf_concat_ssim.py", line 191, in generate_image
-    x = img_as_ubyte(rgb2gray(img_as_float(real))) # fixed_real_data_int
-  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/skimage/util/dtype.py", line 336, in img_as_float
-    return convert(image, np.float64, force_copy)
-  File "/home/linkermann/miniconda2/envs/MA/lib/python3.5/site-packages/skimage/util/dtype.py", line 113, in convert
-    .format(dtypeobj_in, dtypeobj_out))
-ValueError: Can not convert from object to float64.
+2018-08-27 13:46:46.837645: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:897] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-08-27 13:46:46.838044: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: GeForce GTX 960 major: 5 minor: 2 memoryClockRate(GHz): 1.228
+pciBusID: 0000:01:00.0
+totalMemory: 1,95GiB freeMemory: 1,64GiB
+2018-08-27 13:46:46.838065: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-08-27 13:46:47.093412: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-08-27 13:46:47.093455: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-08-27 13:46:47.093465: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-08-27 13:46:47.093596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 1398 MB memory) -> physical GPU (device: 0, name: GeForce GTX 960, pci bus id: 0000:01:00.0, compute capability: 5.2)

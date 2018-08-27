@@ -154,7 +154,7 @@ class DataSet():
                 if data_type is "images":
                     # Get and resample frames.
                     frames = self.get_frames_for_sample(sample)
-                    frames = self.rescale_list(frames, self.seq_length, False)
+                    frames = self.rescale_list(frames, self.seq_length, True)
 
                     # Build the image sequence
                     sequence = self.build_image_sequence(frames)
