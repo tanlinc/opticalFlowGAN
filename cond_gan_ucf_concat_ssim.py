@@ -13,7 +13,7 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.UCFdataDesktop as UCFdata
+import tflib.UCFdataEasy as UCFdata
 from skimage import img_as_float, img_as_ubyte
 from skimage.measure import compare_ssim as ssim
 from skimage.color import rgb2gray
@@ -183,15 +183,15 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     # print(samples.shape)
-    # samples.add(fixed_cond_data_int) # TODO how to show last frame next to generated samples?? 
-    lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
-    file.write("Iteration %d :" % frame)
+    samples2show = np.append(samples, fixed_cond_data_int) # show last frame next to generated samples?? hope fcdi is also np..
+    lib.save_images.save_images(samples2show.reshape((2*BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
+    file.write("Iteration %d : \n" % frame)
     # compare generated to real one
-    for i in range(0,64):
-        real = np.reshape(fixed_real_data_int[i,:], (32,32,3))  #use np.reshape! np-array!
-        x = img_as_ubyte(rgb2gray(img_as_float(real)))  
-        pred = np.reshape(samples[i,:] , (32,32,3)) 
-        y = img_as_ubyte(rgb2gray(img_as_float(pred)))  # to 0-255 for mse calculation
+    for i in range(0, BATCH_SIZE):
+        real = np.reshape(fixed_real_data_int[i], (32,32,3))  #use np.reshape! np-array!
+        x = rgb2gray(img_as_float(real))  # to grayscale for ssim and mse calc
+        pred = np.reshape(samples[i] , (32,32,3)) 
+        y = rgb2gray(img_as_float(pred))  # not to 0-255 for mse calculation.. img_as_ubyte
         mseval = mse(x, y)
         ssimval = ssim(x, y, data_range=y.max() - y.min())
         file.write("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % (i, mseval, ssimval)) 

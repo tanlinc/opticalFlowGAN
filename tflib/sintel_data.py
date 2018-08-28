@@ -1,17 +1,6 @@
 
-
-
-tools.add_arguments_for_module(parser, datasets, argument_for_class='training_dataset', default='MpiSintelFinal', skip_params=['is_cropped'], parameter_defaults={'root': './MPI-Sintel/flow/training'})
-    
-tools.add_arguments_for_module(parser, datasets, argument_for_class='validation_dataset', default='MpiSintelClean', skip_params=['is_cropped'], parameter_defaults={'root': './MPI-Sintel/flow/training', 'replicates': 1})
-    
-tools.add_arguments_for_module(parser, datasets, argument_for_class='inference_dataset', default='MpiSintelClean', skip_params=['is_cropped'], parameter_defaults={'root': './MPI-Sintel/flow/training', 'replicates': 1})
-
-
 main_dir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(main_dir)
-
-
 
 # Dynamically load the dataset class with parameters passed in via "--argument_[param]=[value]" arguments
     with tools.TimerBlock("Initializing Datasets") as block:
