@@ -210,7 +210,7 @@ class DataSet():
         return parts[-1].replace('.jpg', '')
 
     @staticmethod
-    def rescale_list(input_list, size, skipBool):		
+    def rescale_list(input_list, size, skipNum):		
         """Given a list and a size, return a rescaled/samples list. For example,
         if we want a list of size 5 and we have a list of size 25, return a new
         list of size five which is every 5th element of the origina list."""
