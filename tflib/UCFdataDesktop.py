@@ -154,7 +154,7 @@ class DataSet():
                 if data_type is "images":
                     # Get and resample frames.
                     frames = self.get_frames_for_sample(sample)
-                    frames = self.rescale_list(frames, self.seq_length, False)
+                    frames = self.rescale_list(frames, self.seq_length, 3)  # number determines skip behaviour
 
                     # Build the image sequence
                     sequence = self.build_image_sequence(frames)
@@ -208,23 +208,29 @@ class DataSet():
         return parts[-1].replace('.jpg', '')
 
     @staticmethod
-    def rescale_list(input_list, size, skipBool):		
+    def rescale_list(input_list, size, skipNum):		
         """Given a list and a size, return a rescaled/samples list. For example,
         if we want a list of size 5 and we have a list of size 25, return a new
         list of size five which is every 5th element of the original list."""
         assert len(input_list) >= size
       
         ### this skips more frames in between if larger number of frames for clip   	 
-        if(skipBool):
+        if(skipNum == 1):
             # Get the number to skip between iterations.
             skip = len(input_list) // size
             # Build our new output.
             output = [input_list[i] for i in range(0, len(input_list), skip)]
 
         ### this skips beginning or end of sequence, no frames in between
-        else:
+        if(skipNum == 2):
             rdm = random.randint(0, len(input_list) - size)
             output = input_list[rdm:rdm+size]
+        
+        else: # skip every 2nd frame ..then random start .. 
+            filtered_list = [input_list[i] for i in range(0, len(input_list), 2)]
+            rdm = random.randint(0, len(filtered_list) - size) #should never be problem that too few are left
+            output = filtered_list[rdm:rdm+size]
+            # output = filtered_list[0:size] # always start from beginning
 
         # Cut off the last one if needed.
         return output[:size]

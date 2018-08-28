@@ -183,21 +183,18 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     # print(samples.shape)
-    lib.save_images.save_images(samples.reshape((BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
-    file.write("Iteration %d :" % frame)
+    samples2show = np.append(samples, fixed_cond_data_int) # show last frame next to generated samples?? hope fcdi is also np..
+    lib.save_images.save_images(samples2show.reshape((2*BATCH_SIZE, 3, 32, 32)), 'samples_{}.jpg'.format(frame))
+    file.write("Iteration %d : \n" % frame)
     # compare generated to real one
-    for i in range(0,64):
-        real = fixed_real_data_int[i,:]
-        real = np.asarray(real)
-        real = np.reshape(real, (32,32,3))  #use np?
-        # real = tf.reshape(fixed_real_data_int[i,:], [32,32,3]) 
-        x = img_as_ubyte(rgb2gray(img_as_float(real))) # fixed_real_data_int
-        pred = tf.reshape(samples[i,:], [32,32,3]) 
-        y = img_as_ubyte(rgb2gray(img_as_float(pred)))  # samples
-        # to 0-255 for mse calculation
-        mse = mse(y, x)
-        ssim = ssim(y, x, data_range=x.max() - x.min())
-        file.write("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % i, mse, ssim) 
+    for i in range(0, BATCH_SIZE):
+        real = np.reshape(fixed_real_data_int[i], (32,32,3))  #use np.reshape! np-array!
+        x = rgb2gray(img_as_float(real))  # to grayscale for ssim and mse calc
+        pred = np.reshape(samples[i] , (32,32,3)) 
+        y = rgb2gray(img_as_float(pred))  # not to 0-255 for mse calculation.. img_as_ubyte
+        mseval = mse(x, y)
+        ssimval = ssim(x, y, data_range=y.max() - y.min())
+        file.write("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % (i, mseval, ssimval)) 
 
 # Train loop
 with tf.Session() as session:
