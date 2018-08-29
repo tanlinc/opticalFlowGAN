@@ -73,7 +73,7 @@ class DataSet():
             # Generate batch_size samples.
             for _ in range(batch_size):
                 # TODO Get a random sample.
-                ri = random.randint(0, len(data)) # random integer s.t. a <= N <= b.
+                ri = random.randint(0, len(data) - 1) # random integer s.t. a <= N <= b.
                 sample = data[ri]
                 flow = flow_data[ri]
                 sequence = self.build_image_sequence(sample)
