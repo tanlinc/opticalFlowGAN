@@ -5,7 +5,8 @@ import numpy as np
 import random
 from glob import glob
 from os.path import join, isfile
-from tflib.processor import process_image
+from tflib.processor import process_image, process_image_for_flow, randomCrop, centerCrop
+from tflib.flow_handler import read_flo_file
 
 class DataSet():
 
@@ -51,9 +52,6 @@ class DataSet():
             flow_list += [file]
             validation_image_list += [[validation_img1, validation_img2]]
 
-        size = len(train_image_list)
-        # frame_size = train_image_list[0][0].shape
-
         assert (len(train_image_list) == len(flow_list))
         return [train_image_list, flow_list, validation_image_list] # or rather tuple?
 
@@ -72,25 +70,23 @@ class DataSet():
 
             # Generate batch_size samples.
             for _ in range(batch_size):
-                # TODO Get a random sample.
+                # Get a random sample.
                 ri = random.randint(0, len(data) - 1) # random integer s.t. a <= N <= b.
                 sample = data[ri]
-                flow = flow_data[ri]
-                sequence = self.build_image_sequence(sample)
+                # Given a set of filenames, build a sequence.
+                sequence = [process_and_crop_image(x, self.image_shape) for x in sample]
+                flow_filename = flow_data[ri]
+                flow_array = read_flo_file(flow_filename) # returns  np: (h, w, 2)	
+                flow_cropped = centerCrop(flow_array, (32,32))
                 
                 if concat:
-                    # We want to pass the sequence back as a single array. This
-                    # is used to pass into an MLP rather than an RNN.
+                    # pass sequence back as single array (into an MLP rather than an RNN)
                     sequence = np.concatenate(sequence).ravel()
 
                 X.append(sequence)
                 F.append(flow)
 
             yield (np.array(X), np.array(F))
-
-    def build_image_sequence(self, frames):
-        """Given a set of frames (filenames), build our sequence."""
-        return [process_image(x, self.image_shape) for x in frames]		
 
 # (seq_length=1, image_shape=(32, 32, 3))
 def load_train_gen(batch_size, imageShape):

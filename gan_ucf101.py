@@ -2,7 +2,6 @@ import os, sys
 sys.path.append(os.getcwd())
 
 import time
-
 import numpy as np
 import tensorflow as tf
 
@@ -13,23 +12,18 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.ucf101
-# import tflib.inception_score
 import tflib.plot
 import tflib.processor
-#import tflib.ucf101
 import tflib.UCFdata
-
-# DATA_DIR = '/home/linkermann/opticalFlow/opticalFlowGAN/data'
-#if len(DATA_DIR) == 0:
-#    raise Exception('Please specify path to data directory in gan_ucf101.py!')
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
 BATCH_SIZE = 30 # Batch size
-ITERS = 200000 # How many generator iterations to train for
-OUTPUT_DIM = 2304 # Number of pixels in UCF101 (3*32*24)
+ITERS = 100000 # How many generator iterations to train for, 200000 too much.. slow :/
+IM_DIM = 32 # square image dimensions to downsample to
+OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels in UCF101 (3*32*32)
 
 lib.print_model_settings(locals().copy())
 
@@ -72,7 +66,7 @@ def Generator(n_samples, noise=None):
     return tf.reshape(output, [-1, OUTPUT_DIM])
 
 def Discriminator(inputs):
-    output = tf.reshape(inputs, [-1, 3, 32, 24])
+    output = tf.reshape(inputs, [-1, 3, IM_DIM, IM_DIM])
 
     output = lib.ops.conv2d.Conv2D('Discriminator.1', 3, DIM, 5, output, stride=2)
     output = LeakyReLU(output)
@@ -87,8 +81,8 @@ def Discriminator(inputs):
         output = lib.ops.batchnorm.Batchnorm('Discriminator.BN3', [0,2,3], output)
     output = LeakyReLU(output)
 
-    output = tf.reshape(output, [-1, 4*4*3*DIM])
-    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*3*DIM, 1, output)
+    output = tf.reshape(output, [-1, 4*4*4*DIM])
+    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*4*DIM, 1, output)
 
     return tf.reshape(output, [-1])
 
@@ -158,25 +152,7 @@ fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
     samples = ((samples+1.)*(255./2)).astype('int32')
-    lib.save_images.save_images(samples.reshape((128, 3, 40, 40)), 'samples_{}.jpg'.format(frame)) # here size of output image?
-
-# For calculating inception score
-# samples_100 = Generator(100)
-#def get_inception_score():
-#    all_samples = []
-#    for i in range(10):
-#        all_samples.append(session.run(samples_100))
-#    all_samples = np.concatenate(all_samples, axis=0)
-#    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
-#    all_samples = all_samples.reshape((-1, 3, 320, 240)).transpose(0,2,3,1)
-#    return lib.inception_score.get_inception_score(list(all_samples))
-
-# Dataset iterators
-#train_gen = lib.ucf101.load_train_gen(BATCH_SIZE)
-#def inf_train_gen():
-#    while True:
-#        for images, labels in train_gen():
-#            yield images
+    lib.save_images.save_images(samples.reshape((128, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
 
 # Train loop
 with tf.Session() as session:
@@ -203,15 +179,9 @@ with tf.Session() as session:
         lib.plot.plot('train disc cost', _disc_cost)
         lib.plot.plot('time', time.time() - start_time)
 
-        # Calculate inception score every 1K iters
-        #if iteration % 1000 == 999:
-        #    inception_score = get_inception_score()
-        #    lib.plot.plot('inception score', inception_score[0])
-
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
             dev_disc_costs = []
-            # for images in next(dev_gen):
             images, _ = next(dev_gen)
             _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: images}) 
             dev_disc_costs.append(_dev_disc_cost)

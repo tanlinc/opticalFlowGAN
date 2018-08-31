@@ -20,7 +20,7 @@ DIM = 64 # This overfits substantially; you're probably better off with 64 # or 
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
 BATCH_SIZE = 64 # Batch size
-ITERS = 100000 # How many generator iterations to train for # 200000 takes too long
+ITERS = 50000 # How many generator iterations to train for # 200000 takes too long
 OUTPUT_DIM = 3072 # Number of pixels in UCF101 (3*32*32)
 
 lib.print_model_settings(locals().copy())
