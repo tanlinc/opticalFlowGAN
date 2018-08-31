@@ -1,0 +1,10 @@
+2018-08-27 13:46:46.837645: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:897] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-08-27 13:46:46.838044: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: GeForce GTX 960 major: 5 minor: 2 memoryClockRate(GHz): 1.228
+pciBusID: 0000:01:00.0
+totalMemory: 1,95GiB freeMemory: 1,64GiB
+2018-08-27 13:46:46.838065: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-08-27 13:46:47.093412: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-08-27 13:46:47.093455: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-08-27 13:46:47.093465: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-08-27 13:46:47.093596: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 1398 MB memory) -> physical GPU (device: 0, name: GeForce GTX 960, pci bus id: 0000:01:00.0, compute capability: 5.2)
