@@ -5,7 +5,7 @@ import numpy as np
 import random
 from glob import glob
 from os.path import join, isfile
-from tflib.processor import process_image, process_and_crop_image, read_and_crop_flow #, randomCrop, centerCrop
+from tflib.processor import process_image, process_and_crop_image #, randomCrop, centerCrop
 
 class DataSet():
 
@@ -40,7 +40,7 @@ class DataSet():
         train_image_list = []
         validation_image_list = []
 
-        for i, file in enumerate(sorted_file_list):  # nur alley_1 until now??
+        for i, file in enumerate(sorted_file_list):
             nextflow = sorted_file_list[(i+1)%lenli]
             cat1 = get_category_from_path(file)
             cat2 = get_category_from_path(nextflow)
@@ -86,7 +86,7 @@ class DataSet():
         """Return a generator of images that we can use to train on.
         """
         # Get the right dataset for the generator.
-        data, flow_data, valid_data = self.data
+        data, _ , valid_data = self.data
         if(train_test == 'validation'):
             data = valid_data
         # print(data.shape) # (48, 2)
@@ -105,19 +105,13 @@ class DataSet():
                 sample = data[ri] # shape (2,), 2 frame filenames are in there
   
                 # Given a set of filenames, build a sequence.
-                sequence = [process_and_crop_image(x, self.image_shape) for x in sample]
-
-                # get corresponding flows
-                flow_filenames = flow_data[ri]
-                flow_array = [read_and_crop_flow(str(x), self.image_shape) for x in flow_filenames] # returns  np: (2, h, w, 2)	      
+                sequence = [process_image(x, self.image_shape) for x in sample] # change to crop?      
 
                 if concat:
                     # pass sequence back as single array (into an MLP rather than an RNN)
                     sequence = np.concatenate(sequence).ravel()
-                    flows = np.concatenate(flow_array).ravel() # need?
 
                 X.append(sequence)  # (n, 6144) -- 3072 + 3072 = two images
-                F.append(flows)     # (n, 4096) -- 2048 + 2048 = two flows
 
             yield (np.array(X), np.array(F))
 
