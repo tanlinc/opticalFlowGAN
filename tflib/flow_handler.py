@@ -23,11 +23,10 @@ def read_flo_file(filename):
     assert os.path.isfile(filename) is True, "file does not exist %r" % str(filename)
     assert filename[-4:] == '.flo', "file ending is not .flo %r" % filename[-4:]
     f = open(filename,'rb')
-    flo_number = np.fromfile(f, np.float32, count=1)[0]
-    assert flo_number == TAG_FLOAT, 'Flow number %r incorrect. Invalid .flo file' % flo_number
-    w = np.fromfile(f, np.int32, count=1)
-    h = np.fromfile(f, np.int32, count=1)
-    #if error try: data = np.fromfile(f, np.float32, count=2*w[0]*h[0])
+    flo_number = np.fromfile(f, np.float32, count=1)[0] # need [0]!
+    assert flo_number == TAG_FLOAT, 'Magic Flow number %r incorrect. Invalid .flo file' % flo_number
+    w = np.fromfile(f, np.int32, count=1)[0] # need 0!
+    h = np.fromfile(f, np.int32, count=1)[0] # need 0!
     data = np.fromfile(f, np.float32, count=2*w*h)
     # Reshape data into 3D array (columns, rows, bands)
     flow = np.resize(data, (int(h), int(w), 2))	
