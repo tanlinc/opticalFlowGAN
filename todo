@@ -1,0 +1,49 @@
+
+----------------------------------------------------------- # fix ssmi..
+other measures (psnr, mae?)
+read paper GAN eval measures
+is 0 or -1 worse, what does it mean...
+
+----------------------------------------------------------- # flow prediction
+cropping makes sense? any alternative?
+
+----------------------------------------------------------- # pause and start again
+read about checkpoints/saving and restoring
+implement it
+
+---------------------------------------------------------- # interactive sessions with gpu mem growth
+read about 
+- interactive session instead of Session?
+- eval instead of feed_dict of placeholders?
+
+tf.reset_default_graph() # Start with an empty graph
+###### Create a new session that uses minimal RAM
+config = tf.ConfigProto()
+### Allow memory growth => Use memory as needed, easy but not as fast
+config.gpu_options.allow_growth=True  
+sess = tf.InteractiveSession(config=config)    
+
+import mapcoordinates
+my_mapcoordinates = mapcoordinates.my_mapcoordinates
+Iwarped = my_mapcoordinates(I1,Coords4D).eval(session=sess)
+
+
+---------------------------------------------------------- # VAE on input cond images to get latent code
+VAE loss fct.. separate training or how?
+architecture?
+
+---------------------------------------------------------- # apply warping
+import tfICGOps
+# image batch
+I1_col  = misc.face()
+I1_col_batch = I1_col[np.newaxis,:,:,:]  # NHWC
+
+# flow image batch
+Flow = np.zeros([wdn,wdy,wdx,2])
+Flow_N2HW = np.transpose(Flow, [0,3,1,2])
+I2_col_batch_tf = tfICGOps.warpimage(I1_col_batch, Flow_N2HW)
+
+if not "sess" in locals():
+    sess  = tf.InteractiveSession()
+
+I2_col_batch = I2_col_batch_tf.eval()
