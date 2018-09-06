@@ -13,7 +13,7 @@ import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
 import tflib.flow_handler as fh
-import tflib.SINTELdataDesktopFlow as sintel
+import tflib.SINTELdataFlow as sintel
 from skimage.measure import compare_ssim as ssim
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
