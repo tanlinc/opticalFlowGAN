@@ -2,6 +2,8 @@ data/sequences
 data/train
 data/test
 data/SINTEL
+tflib/SINTELdataFlow.py
+tflib/SINTELdataFrame.py
 cifardata
 tflib/__pycache__
 tflib/ops/__pycache__
