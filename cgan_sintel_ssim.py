@@ -181,7 +181,7 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     samples_255 = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     for i in range(0, BATCH_SIZE):
         samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0) # show last frame next to generated sample
-    lib.save_images.save_images(samples2show.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
+    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
     print("Iteration %d : \n" % frame)
     # compare generated to real one
     for i in range(0, BATCH_SIZE):
