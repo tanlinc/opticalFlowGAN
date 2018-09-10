@@ -49849,3 +49849,2494 @@ sample 18 	 MSE: 4074.11 	 SSIM: -0.00
 sample 19 	 MSE: 2722.49 	 SSIM: -0.00 
 
 sample 20 	 MSE: 4437.82 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.41 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.98 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.54 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.27 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.75 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.45 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.82 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.97 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.44 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.68 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.42 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.01 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.02 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.51 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.76 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.56 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.08 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.71 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.26 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.33 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.78 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.11 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.02 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.79 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.45 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.61 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.53 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.89 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.07 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.04 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.53 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.39 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.97 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6668.95 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4046.90 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.50 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2115.10 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.03 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.87 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.84 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.70 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.33 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.55 	 SSIM: -0.00 
+
+iter 38099	SSIM for sample 2	-0.00014433623026581155	MSE for sample 1	2173.93310546875	SSIM for sample 3	-0.0009168162700677562	train disc cost	-2.8174877166748047	MSE for sample 2	5678.76171875	MSE for sample 3	2114.899658203125	SSIM for sample 1	-0.0008176739908615009	time	11.52633288860321	dev disc cost	-3.0301718711853027
+Iteration 38199 : 
+
+sample 0 	 MSE: 2173.45 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.85 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.64 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.41 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.16 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.22 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.93 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.82 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.45 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.15 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.13 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5005.00 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.11 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4021.15 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.81 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.72 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6804.01 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.80 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.62 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.63 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.15 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.96 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4843.32 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5102.19 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.17 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6635.03 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.81 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.08 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.58 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.97 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.92 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6952.09 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.02 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.62 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.34 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4767.59 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.57 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.42 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.64 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.33 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.03 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.93 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.14 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.78 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.35 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.82 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3853.16 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.55 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.13 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6014.17 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.99 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.06 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.53 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.53 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.35 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.45 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.83 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.93 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.60 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.40 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.50 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3261.02 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.04 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5140.12 	 SSIM: -0.00 
+
+iter 38199	SSIM for sample 2	-0.00014821398220061683	MSE for sample 1	2173.4521484375	SSIM for sample 3	-0.0009354772023554269	train disc cost	-2.801673173904419	MSE for sample 2	5679.85107421875	MSE for sample 3	2114.63818359375	SSIM for sample 1	-0.0008550574554580845	time	11.653096027374268	dev disc cost	-2.825819730758667
+Iteration 38299 : 
+
+sample 0 	 MSE: 2173.65 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.27 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.97 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.85 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.10 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.11 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.58 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2130.04 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.69 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.88 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.62 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.69 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.03 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4021.02 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.14 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.38 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.29 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.61 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.50 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.65 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.77 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.86 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.84 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.85 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.16 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.74 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.66 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.18 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.14 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.53 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.90 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.60 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.12 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.12 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.34 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.84 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.64 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.01 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.55 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.24 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.06 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.72 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.21 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.15 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.13 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.46 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3853.18 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.35 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.12 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.28 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.09 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.67 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.38 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.14 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.22 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.20 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.27 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2115.11 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.33 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.95 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.06 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.64 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.41 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.73 	 SSIM: -0.00 
+
+iter 38299	SSIM for sample 2	-0.00014384264959827828	MSE for sample 1	2173.646728515625	SSIM for sample 3	-0.0009134551560595249	train disc cost	-2.7988016605377197	MSE for sample 2	5679.26611328125	MSE for sample 3	2114.965576171875	SSIM for sample 1	-0.0008464821016987176	time	11.417975397109986	dev disc cost	-2.7809596061706543
+Iteration 38399 : 
+
+sample 0 	 MSE: 2173.44 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5678.67 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.68 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.96 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.31 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.62 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.57 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.70 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.36 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.79 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.95 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.38 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.70 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.35 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5415.74 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.10 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.41 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.43 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.00 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.37 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.95 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.68 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.26 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.57 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.08 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.65 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.34 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.70 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.78 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4561.99 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.50 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.51 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.66 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5063.85 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.04 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.35 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.46 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.90 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.32 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2805.91 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.70 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.35 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.68 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.12 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.64 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.26 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.25 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.42 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.13 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.19 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.05 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.74 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.16 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.73 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.27 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4046.54 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4349.95 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.73 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5109.97 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.48 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.81 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.44 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.02 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.36 	 SSIM: -0.00 
+
+iter 38399	SSIM for sample 2	-0.00014084996386553626	MSE for sample 1	2173.435302734375	SSIM for sample 3	-0.0009277393810691994	train disc cost	-2.798713445663452	MSE for sample 2	5678.6650390625	MSE for sample 3	2114.67578125	SSIM for sample 1	-0.0008504466604995511	time	11.556657545566559	dev disc cost	-2.6509201526641846
+Iteration 38499 : 
+
+sample 0 	 MSE: 2173.87 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5680.30 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2115.14 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.27 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.12 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.46 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.02 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2130.22 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.81 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.26 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.98 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.94 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.27 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4021.30 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.55 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.72 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.87 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.87 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.70 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.75 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.44 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6730.17 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4843.17 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5102.22 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.63 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6635.02 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.82 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.39 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.65 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.89 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4614.16 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6952.04 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.19 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.60 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.58 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4767.08 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.63 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.38 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.83 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.25 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.20 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.83 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.39 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.59 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.14 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.73 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3853.19 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.04 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.56 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6014.04 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.13 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.33 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.84 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.46 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.73 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.60 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.83 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2115.17 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.57 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.47 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.49 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3261.32 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.49 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5140.06 	 SSIM: -0.00 
+
+iter 38499	SSIM for sample 2	-0.00015017910235543116	MSE for sample 1	2173.87158203125	SSIM for sample 3	-0.0009092710598713301	train disc cost	-2.813356876373291	MSE for sample 2	5680.3046875	MSE for sample 3	2115.140869140625	SSIM for sample 1	-0.000838912919652705	time	11.586898367404938	dev disc cost	-2.736140489578247
+Iteration 38599 : 
+
+sample 0 	 MSE: 2173.56 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5678.71 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.86 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.00 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.81 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.98 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.08 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.97 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.51 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.04 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.03 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.65 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.11 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.75 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5415.85 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.47 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.36 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.65 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.31 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.64 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.69 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.83 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.94 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.55 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.12 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.94 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.75 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.04 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.23 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.34 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.79 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.66 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.90 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5063.89 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.53 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.95 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.56 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.32 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.66 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.08 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.99 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.76 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.07 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.10 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.00 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.71 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.98 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.70 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.48 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.71 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.10 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.82 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.65 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.07 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.45 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.46 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.36 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.91 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.29 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.95 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.66 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.73 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.30 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.76 	 SSIM: -0.00 
+
+iter 38599	SSIM for sample 2	-0.0001435453319490853	MSE for sample 1	2173.558349609375	SSIM for sample 3	-0.0009157136883252232	train disc cost	-2.7956795692443848	MSE for sample 2	5678.70947265625	MSE for sample 3	2114.858154296875	SSIM for sample 1	-0.0008442873868474305	time	11.437847528457642	dev disc cost	-2.7608132362365723
+Iteration 38699 : 
+
+sample 0 	 MSE: 2173.38 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.48 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.84 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.85 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.42 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.72 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.63 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.88 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.60 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.48 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.99 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.27 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.38 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.32 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.32 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.25 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.36 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.35 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.31 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.98 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.89 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.61 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.74 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.78 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.08 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.69 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.34 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.15 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.19 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.19 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.43 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.46 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.18 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.27 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4993.98 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.68 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.38 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.00 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2408.06 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.10 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.87 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.42 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.92 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6784.86 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.82 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.34 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.54 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.75 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.97 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.17 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.83 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.58 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.13 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.78 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.10 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.13 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.24 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.93 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5109.98 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.84 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.78 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.74 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.23 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.35 	 SSIM: -0.00 
+
+iter 38699	SSIM for sample 2	-0.00014699009053525174	MSE for sample 1	2173.37890625	SSIM for sample 3	-0.0009131389719848982	train disc cost	-2.7744829654693604	MSE for sample 2	5679.478515625	MSE for sample 3	2114.841796875	SSIM for sample 1	-0.0008548456121768364	time	11.46487105846405	dev disc cost	-2.5851962566375732
+Iteration 38799 : 
+
+sample 0 	 MSE: 2173.14 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.37 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.69 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.05 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.82 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.96 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.08 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.77 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.58 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.57 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.89 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.75 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.94 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.74 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.09 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.60 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.60 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.37 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.28 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.77 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.68 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.82 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.92 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.74 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.37 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.79 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.75 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.88 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.16 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.35 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.65 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.53 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.93 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.28 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.37 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.47 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.40 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.87 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.76 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.08 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.89 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.46 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.68 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.18 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.09 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.19 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.81 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.58 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.90 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.85 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.91 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.81 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.46 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.01 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.30 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.17 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.12 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.80 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.63 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.81 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.97 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.44 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.17 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.82 	 SSIM: -0.00 
+
+iter 38799	SSIM for sample 2	-0.00014489779973322043	MSE for sample 1	2173.143798828125	SSIM for sample 3	-0.0009206447722320384	train disc cost	-2.7864151000976562	MSE for sample 2	5679.369140625	MSE for sample 3	2114.693603515625	SSIM for sample 1	-0.0008618300990008779	time	11.464788963794708	dev disc cost	-2.731908082962036
+Iteration 38899 : 
+
+sample 0 	 MSE: 2173.39 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.85 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.98 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.84 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.69 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.89 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.03 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.96 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.84 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.75 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.95 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.60 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.86 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.81 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.51 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.68 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.77 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.40 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.54 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.97 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.11 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.95 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.94 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.98 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.06 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.78 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.39 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.30 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.56 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.47 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.91 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.68 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.16 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.44 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.31 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.82 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.29 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.05 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.92 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.31 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.03 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.55 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.97 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.37 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.00 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.42 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.74 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.72 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.99 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.28 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.79 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.08 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.38 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.22 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.35 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.27 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.36 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2115.11 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.42 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.31 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.99 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.86 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.32 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.59 	 SSIM: -0.00 
+
+iter 38899	SSIM for sample 2	-0.00014649758515524692	MSE for sample 1	2173.390869140625	SSIM for sample 3	-0.0009134314935731469	train disc cost	-2.764492988586426	MSE for sample 2	5679.84619140625	MSE for sample 3	2114.98388671875	SSIM for sample 1	-0.0008443362875432983	time	11.35165489435196	dev disc cost	-2.8323581218719482
+Iteration 38999 : 
+
+sample 0 	 MSE: 2173.17 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5680.02 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.86 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.84 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.29 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.33 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.38 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.89 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.62 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.38 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.27 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.84 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.41 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4021.12 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.60 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.72 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6804.08 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.94 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.66 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.90 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.03 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.99 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4843.38 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.95 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.86 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6635.24 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.86 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.03 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.68 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.82 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4614.05 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6952.17 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.25 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.40 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.60 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.87 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.63 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.56 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.85 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.22 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.89 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.84 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.18 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.88 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.24 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.86 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3853.47 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.53 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.71 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.74 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.29 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.12 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.73 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.32 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.57 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.45 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.82 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.96 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.72 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.32 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.58 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.76 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.20 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.96 	 SSIM: -0.00 
+
+iter 38999	SSIM for sample 2	-0.00014735733839443534	MSE for sample 1	2173.167236328125	SSIM for sample 3	-0.0009146142351497195	train disc cost	-2.7711474895477295	MSE for sample 2	5680.01708984375	MSE for sample 3	2114.862060546875	SSIM for sample 1	-0.0008589320657858653	time	11.49724957704544	dev disc cost	-2.9526526927948
+Iteration 39099 : 
+
+sample 0 	 MSE: 2172.93 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5678.27 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.57 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.86 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.45 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.85 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.73 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.58 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.36 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.74 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.40 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.55 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.16 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.66 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5415.69 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.36 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.75 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.22 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.07 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.69 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.56 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.60 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.50 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.58 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.18 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.77 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.30 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.52 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.81 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4561.92 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.38 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.63 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.91 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5063.76 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.21 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.38 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.52 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.94 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.64 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.09 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.51 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.49 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.84 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.41 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.76 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.16 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.51 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.56 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.18 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.25 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.99 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.88 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.28 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.84 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.14 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4046.94 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4349.94 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.68 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.36 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.49 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.15 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.37 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.04 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.62 	 SSIM: -0.00 
+
+iter 39099	SSIM for sample 2	-0.00014136848818305134	MSE for sample 1	2172.932861328125	SSIM for sample 3	-0.000937842175591117	train disc cost	-2.7349514961242676	MSE for sample 2	5678.2666015625	MSE for sample 3	2114.574951171875	SSIM for sample 1	-0.000880621699324058	time	11.366892764568329	dev disc cost	-2.7816717624664307
+Iteration 39199 : 
+
+sample 0 	 MSE: 2173.38 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5678.68 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.73 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.55 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.65 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.89 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.56 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.76 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.54 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.38 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.04 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.46 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.71 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.72 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5415.72 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.30 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.16 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.22 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4073.86 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.56 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.69 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.31 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.53 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.53 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5683.94 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.51 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.19 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.86 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.67 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.01 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.38 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.16 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.98 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5063.56 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.26 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.79 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.59 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.92 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.48 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.12 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.82 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.48 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.98 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6784.59 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.50 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.27 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.70 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9465.96 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.85 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6012.96 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.23 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.46 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.37 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.73 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6668.89 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4046.91 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4349.96 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.86 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.51 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.58 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.04 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.45 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.22 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.72 	 SSIM: -0.00 
+
+iter 39199	SSIM for sample 2	-0.0001417257077880905	MSE for sample 1	2173.378662109375	SSIM for sample 3	-0.0009345482886644694	train disc cost	-2.8429558277130127	MSE for sample 2	5678.68359375	MSE for sample 3	2114.7333984375	SSIM for sample 1	-0.0008523045567601891	time	11.45832231760025	dev disc cost	-2.980982780456543
+Iteration 39299 : 
+
+sample 0 	 MSE: 2173.66 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.50 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.87 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.80 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.02 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.80 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.50 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.86 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.61 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.51 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.96 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.57 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.76 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.89 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.26 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.59 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.79 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.28 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.16 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.46 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.07 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.38 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.85 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.89 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5683.70 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.55 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.14 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.21 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.11 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.29 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.53 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.70 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.01 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.18 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4993.93 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4767.07 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.23 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.83 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.64 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.07 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.98 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.32 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.35 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.47 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.94 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.27 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.88 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.09 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.83 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.68 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.75 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.85 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4588.94 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.93 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6668.82 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.27 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.33 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.85 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.32 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.05 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.10 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.82 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.33 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.63 	 SSIM: -0.00 
+
+iter 39299	SSIM for sample 2	-0.00014540896505914143	MSE for sample 1	2173.6630859375	SSIM for sample 3	-0.0009336693529622053	train disc cost	-2.7739245891571045	MSE for sample 2	5679.498046875	MSE for sample 3	2114.867919921875	SSIM for sample 1	-0.0008490829782477014	time	11.484529819488525	dev disc cost	-2.799806833267212
+Iteration 39399 : 
+
+sample 0 	 MSE: 2173.26 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5680.17 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.70 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.20 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.94 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.09 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.92 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.63 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.42 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.19 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.28 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.56 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.76 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.82 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.36 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.59 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6804.08 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.41 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.34 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.81 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.18 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.99 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.64 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5102.13 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.12 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6635.10 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.68 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.88 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.09 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.23 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.50 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.85 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.12 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.38 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.32 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4767.09 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.42 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.94 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.83 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.02 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.79 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.82 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.24 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.60 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.98 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.29 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.72 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.92 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.46 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.74 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.15 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.10 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.48 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.02 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.37 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.15 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.33 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.66 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.44 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.15 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.31 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.55 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.03 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.77 	 SSIM: -0.00 
+
+iter 39399	SSIM for sample 2	-0.00014658479703117	MSE for sample 1	2173.2607421875	SSIM for sample 3	-0.000917502564622309	train disc cost	-2.7694733142852783	MSE for sample 2	5680.17431640625	MSE for sample 3	2114.7041015625	SSIM for sample 1	-0.0008554090190531043	time	11.688198640346528	dev disc cost	-3.4842529296875
+Iteration 39499 : 
+
+sample 0 	 MSE: 2173.33 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.71 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.76 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.61 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.72 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.71 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.92 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.66 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.47 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.02 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.02 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.47 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.62 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.86 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.68 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.59 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6804.00 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.20 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.18 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.24 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.98 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.78 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.57 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5102.08 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.16 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6635.02 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.88 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.60 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.81 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.18 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.22 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.79 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.61 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.43 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.37 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.89 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.27 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.85 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.35 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2805.70 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.64 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.43 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.18 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.54 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.84 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.14 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.54 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.34 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.57 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.94 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.95 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.16 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.39 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.01 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.33 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.12 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.12 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.69 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.32 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.78 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.40 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.68 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.05 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.67 	 SSIM: -0.00 
+
+iter 39499	SSIM for sample 2	-0.00014586617097237266	MSE for sample 1	2173.327880859375	SSIM for sample 3	-0.0009231943654331165	train disc cost	-2.7525675296783447	MSE for sample 2	5679.70751953125	MSE for sample 3	2114.760498046875	SSIM for sample 1	-0.0008442997269984643	time	11.501522710323334	dev disc cost	-2.791170120239258
+Iteration 39599 : 
+
+sample 0 	 MSE: 2173.26 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.25 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.75 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.01 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.07 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.04 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.94 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.70 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.56 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.80 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.86 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.58 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.01 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.99 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.32 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.73 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.87 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.66 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.30 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.88 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.27 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.96 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.75 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5102.03 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5683.94 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.75 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.93 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.93 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.29 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.40 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.71 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.53 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.42 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.31 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.27 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.67 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.79 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4581.24 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2408.17 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.05 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.78 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.59 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.27 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.29 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4719.03 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.59 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.99 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.61 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.23 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.53 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.33 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.03 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.30 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.21 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.17 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.37 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.58 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.83 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.27 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4432.28 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.79 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.58 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.37 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.75 	 SSIM: -0.00 
+
+iter 39599	SSIM for sample 2	-0.0001458179510413204	MSE for sample 1	2173.2568359375	SSIM for sample 3	-0.000916751262498048	train disc cost	-2.8311986923217773	MSE for sample 2	5679.2548828125	MSE for sample 3	2114.754150390625	SSIM for sample 1	-0.0008576746547955143	time	11.63155844449997	dev disc cost	-2.933688163757324
+Iteration 39699 : 
+
+sample 0 	 MSE: 2172.85 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5678.37 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.34 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7636.65 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.11 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.67 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.62 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.33 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.22 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.66 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.04 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.35 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.38 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.40 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5415.84 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.18 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.62 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4668.97 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4073.89 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.32 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.67 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.59 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.26 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.50 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5683.44 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.56 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.41 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.17 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4621.77 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4561.74 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.05 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.53 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.84 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5063.90 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4993.91 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.15 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.38 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.56 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.44 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2805.59 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.35 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.21 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3052.67 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.20 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.53 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.02 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.02 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.90 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6898.99 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6012.60 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4631.95 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.70 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4588.96 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5012.56 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.09 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4046.63 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4349.64 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.38 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.01 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.62 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6595.82 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.33 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.09 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.32 	 SSIM: -0.00 
+
+iter 39699	SSIM for sample 2	-0.0001421510081593125	MSE for sample 1	2172.84765625	SSIM for sample 3	-0.0009250693204777687	train disc cost	-2.771683931350708	MSE for sample 2	5678.3681640625	MSE for sample 3	2114.341796875	SSIM for sample 1	-0.0008712497100278224	time	11.62599619626999	dev disc cost	-3.185237169265747
+Iteration 39799 : 
+
+sample 0 	 MSE: 2173.49 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.26 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.61 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.01 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.62 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3817.91 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.94 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.67 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.39 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.86 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.48 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.53 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4989.95 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.77 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.05 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.74 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.69 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.50 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.35 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.35 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4437.91 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.54 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.63 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.71 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.13 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.73 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.72 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3198.00 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.18 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4561.98 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.54 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.38 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2529.95 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.36 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.21 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4767.06 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.43 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.93 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.32 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.06 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1867.98 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.72 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.18 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.51 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.93 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.33 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.56 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9466.90 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.20 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.46 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.05 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6612.01 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.33 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.10 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.35 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.09 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.29 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.69 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.21 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.93 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.34 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3261.00 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.19 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.54 	 SSIM: -0.00 
+
+iter 39799	SSIM for sample 2	-0.00014464438654196386	MSE for sample 1	2173.485595703125	SSIM for sample 3	-0.0009316852147817017	train disc cost	-2.7992422580718994	MSE for sample 2	5679.2626953125	MSE for sample 3	2114.612548828125	SSIM for sample 1	-0.0008425253942194181	time	11.640334787368774	dev disc cost	-2.534386157989502
+Iteration 39899 : 
+
+sample 0 	 MSE: 2173.51 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.45 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2114.88 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.02 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3804.68 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.06 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6659.98 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2129.93 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.69 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6746.01 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6482.61 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.58 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.31 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4020.89 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.17 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5059.50 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.39 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.34 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.25 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2722.71 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.16 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.71 	 SSIM: -0.00 
+
+sample 22 	 MSE: 4842.77 	 SSIM: -0.00 
+
+sample 23 	 MSE: 5101.63 	 SSIM: -0.00 
+
+sample 24 	 MSE: 5684.27 	 SSIM: -0.00 
+
+sample 25 	 MSE: 6634.92 	 SSIM: -0.00 
+
+sample 26 	 MSE: 5414.55 	 SSIM: -0.00 
+
+sample 27 	 MSE: 3197.74 	 SSIM: -0.00 
+
+sample 28 	 MSE: 4622.35 	 SSIM: -0.00 
+
+sample 29 	 MSE: 4562.12 	 SSIM: -0.00 
+
+sample 30 	 MSE: 4613.57 	 SSIM: -0.00 
+
+sample 31 	 MSE: 6951.48 	 SSIM: -0.00 
+
+sample 32 	 MSE: 2530.15 	 SSIM: -0.00 
+
+sample 33 	 MSE: 5064.19 	 SSIM: -0.00 
+
+sample 34 	 MSE: 4994.23 	 SSIM: -0.00 
+
+sample 35 	 MSE: 4766.91 	 SSIM: -0.00 
+
+sample 36 	 MSE: 4407.46 	 SSIM: -0.00 
+
+sample 37 	 MSE: 4580.91 	 SSIM: -0.00 
+
+sample 38 	 MSE: 2407.94 	 SSIM: -0.00 
+
+sample 39 	 MSE: 2806.09 	 SSIM: -0.00 
+
+sample 40 	 MSE: 1868.10 	 SSIM: -0.00 
+
+sample 41 	 MSE: 4041.74 	 SSIM: -0.00 
+
+sample 42 	 MSE: 3053.11 	 SSIM: -0.00 
+
+sample 43 	 MSE: 6785.28 	 SSIM: -0.00 
+
+sample 44 	 MSE: 4718.95 	 SSIM: -0.00 
+
+sample 45 	 MSE: 4570.33 	 SSIM: -0.00 
+
+sample 46 	 MSE: 3852.52 	 SSIM: -0.00 
+
+sample 47 	 MSE: 9467.06 	 SSIM: 0.00 
+
+sample 48 	 MSE: 6899.44 	 SSIM: -0.00 
+
+sample 49 	 MSE: 6013.65 	 SSIM: -0.00 
+
+sample 50 	 MSE: 4632.05 	 SSIM: -0.00 
+
+sample 51 	 MSE: 6611.47 	 SSIM: -0.00 
+
+sample 52 	 MSE: 4589.43 	 SSIM: -0.00 
+
+sample 53 	 MSE: 5013.04 	 SSIM: -0.00 
+
+sample 54 	 MSE: 6669.42 	 SSIM: -0.00 
+
+sample 55 	 MSE: 4047.02 	 SSIM: -0.00 
+
+sample 56 	 MSE: 4350.16 	 SSIM: -0.00 
+
+sample 57 	 MSE: 2114.97 	 SSIM: -0.00 
+
+sample 58 	 MSE: 5110.27 	 SSIM: -0.00 
+
+sample 59 	 MSE: 4431.99 	 SSIM: -0.00 
+
+sample 60 	 MSE: 6596.29 	 SSIM: -0.00 
+
+sample 61 	 MSE: 3260.97 	 SSIM: -0.00 
+
+sample 62 	 MSE: 1985.32 	 SSIM: -0.00 
+
+sample 63 	 MSE: 5139.68 	 SSIM: -0.00 
+
+iter 39899	SSIM for sample 2	-0.00014609140571931092	MSE for sample 1	2173.51416015625	SSIM for sample 3	-0.0009075798905810647	train disc cost	-2.7774734497070312	MSE for sample 2	5679.44921875	MSE for sample 3	2114.879150390625	SSIM for sample 1	-0.0008443716039687532	time	11.898961987495422	dev disc cost	-2.6450271606445312
+Iteration 39999 : 
+
+sample 0 	 MSE: 2173.63 	 SSIM: -0.00 
+
+sample 1 	 MSE: 5679.62 	 SSIM: -0.00 
+
+sample 2 	 MSE: 2115.22 	 SSIM: -0.00 
+
+sample 3 	 MSE: 7637.09 	 SSIM: -0.00 
+
+sample 4 	 MSE: 3805.35 	 SSIM: -0.00 
+
+sample 5 	 MSE: 3818.47 	 SSIM: -0.00 
+
+sample 6 	 MSE: 6660.03 	 SSIM: -0.00 
+
+sample 7 	 MSE: 2130.17 	 SSIM: -0.00 
+
+sample 8 	 MSE: 2096.92 	 SSIM: -0.00 
+
+sample 9 	 MSE: 6745.86 	 SSIM: -0.00 
+
+sample 10 	 MSE: 6483.31 	 SSIM: -0.00 
+
+sample 11 	 MSE: 5004.98 	 SSIM: -0.00 
+
+sample 12 	 MSE: 4990.33 	 SSIM: -0.00 
+
+sample 13 	 MSE: 4021.40 	 SSIM: -0.00 
+
+sample 14 	 MSE: 5416.65 	 SSIM: -0.00 
+
+sample 15 	 MSE: 5060.15 	 SSIM: -0.00 
+
+sample 16 	 MSE: 6803.72 	 SSIM: -0.00 
+
+sample 17 	 MSE: 4669.85 	 SSIM: -0.00 
+
+sample 18 	 MSE: 4074.50 	 SSIM: -0.00 
+
+sample 19 	 MSE: 2723.22 	 SSIM: -0.00 
+
+sample 20 	 MSE: 4438.64 	 SSIM: -0.00 
+
+sample 21 	 MSE: 6729.93 	 SSIM: -0.00 
