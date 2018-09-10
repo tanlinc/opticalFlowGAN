@@ -182,13 +182,14 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print("Iteration %d : \n" % frame)
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
     # samples_255 = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
-
-    samples2show = np.empty((128, OUTPUT_DIM))
+    
+    flowimages = [] 
     for i in range(0, BATCH_SIZE):
-        colorimg = fh.computeImg(samples[i].reshape(IM_DIM,IM_DIM,2))   # (32, 32, 3) # now color img!! :)  uint8 now?
-        colorimage_T = np.transpose(colorimg, [2,0,1])  #  (3, 32, 32)
-        samples2show[2i] = fixed_cond_data_int[i] # show last frame (which was cond input) next to generated sample
-        samples2show[2i+1] = colorimg_T.flatten()
+        flowimg = fh.computeImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (200, 200, 3) # now color img!! :)
+        flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 200, 200)
+    
+        flowimages.append(fixed_cond_data_int[i])
+        flowimages.append(flowimage_T.flatten())
 
         # compare generated flow to real one 		# is it float..?
         real = np.reshape(fixed_real_data_int[i], (IM_DIM,IM_DIM,2))  # use np.reshape! np-array!
@@ -199,6 +200,7 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         if (i < 3):
             lib.plot.plot('SSIM for sample %d' % (i+1), ssimval)
             lib.plot.plot('MSE for sample %d' % (i+1), mseval)
+    samples2show = np.array(flowimages)
     lib.save_images.save_images(samples2show.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
 
 # Train loop
