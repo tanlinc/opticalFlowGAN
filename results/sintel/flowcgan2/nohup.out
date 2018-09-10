@@ -1,0 +1,3019 @@
+2018-09-10 11:27:00.972513: I tensorflow/stream_executor/cuda/cuda_gpu_executor.cc:897] successful NUMA node read from SysFS had negative value (-1), but there must be at least one NUMA node, so returning NUMA node zero
+2018-09-10 11:27:00.973199: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1405] Found device 0 with properties: 
+name: GeForce GTX 980 Ti major: 5 minor: 2 memoryClockRate(GHz): 1.1395
+pciBusID: 0000:07:00.0
+totalMemory: 5.94GiB freeMemory: 5.83GiB
+2018-09-10 11:27:00.973230: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1484] Adding visible gpu devices: 0
+2018-09-10 11:27:01.290062: I tensorflow/core/common_runtime/gpu/gpu_device.cc:965] Device interconnect StreamExecutor with strength 1 edge matrix:
+2018-09-10 11:27:01.290121: I tensorflow/core/common_runtime/gpu/gpu_device.cc:971]      0 
+2018-09-10 11:27:01.290140: I tensorflow/core/common_runtime/gpu/gpu_device.cc:984] 0:   N 
+2018-09-10 11:27:01.290380: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1097] Created TensorFlow device (/job:localhost/replica:0/task:0/device:GPU:0 with 5608 MB memory) -> physical GPU (device: 0, name: GeForce GTX 980 Ti, pci bus id: 0000:07:00.0, compute capability: 5.2)
+Uppercase local vars:
+	BATCH_SIZE: 64
+	CRITIC_ITERS: 5
+	DIM: 64
+	IM_DIM: 32
+	ITERS: 100000
+	LAMBDA: 10
+	MODE: wgan-gp
+	OUTPUT_DIM: 3072
+	OUTPUT_DIM_FLOW: 2048
+	SQUARE_IM_DIM: 1024
+load lists from files
+load lists from files
+Creating train generator with 1018 samples.
+iter 0	train disc cost	-4.687137126922607	time	15.798778533935547
+iter 1	train disc cost	-20.452136993408203	time	17.208709239959717
+iter 2	train disc cost	-50.749427795410156	time	17.052447080612183
+iter 3	train disc cost	-99.40606689453125	time	16.94842839241028
+iter 4	train disc cost	-149.9625244140625	time	17.146080493927002
+Iteration 99 : 
+
+max flow: 1.3838 flow range: u = -0.987 .. -0.363; v = -0.990 .. -0.338
+
+sample 0 	 MSE: 298.93 	 SSIM: -0.029144 
+
+max flow: 1.3814 flow range: u = -0.984 .. -0.353; v = -0.985 .. -0.479
+
+sample 1 	 MSE: 1583.56 	 SSIM: 0.003423 
+
+max flow: 1.3920 flow range: u = -0.990 .. -0.368; v = -0.997 .. -0.313
+
+sample 2 	 MSE: 62.05 	 SSIM: -0.013409 
+
+max flow: 1.4046 flow range: u = -0.992 .. -0.252; v = -0.996 .. -0.578
+
+sample 3 	 MSE: 395.62 	 SSIM: 0.003370 
+
+max flow: 1.3829 flow range: u = -0.987 .. -0.368; v = -0.992 .. -0.564
+
+sample 4 	 MSE: 32.22 	 SSIM: 0.077445 
+
+max flow: 1.3839 flow range: u = -0.986 .. -0.348; v = -0.993 .. -0.518
+
+sample 5 	 MSE: 1914.82 	 SSIM: 0.005147 
+
+max flow: 1.3880 flow range: u = -0.987 .. -0.339; v = -0.990 .. -0.505
+
+sample 6 	 MSE: 138.23 	 SSIM: 0.041561 
+
+max flow: 1.3841 flow range: u = -0.986 .. -0.338; v = -0.985 .. -0.390
+
+sample 7 	 MSE: 93.41 	 SSIM: 0.077736 
+
+max flow: 1.3919 flow range: u = -0.987 .. -0.370; v = -0.991 .. -0.506
+
+sample 8 	 MSE: 785.39 	 SSIM: 0.001753 
+
+max flow: 1.4142 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 9 	 MSE: 1096.60 	 SSIM: 0.073673 
+
+max flow: 1.3914 flow range: u = -0.991 .. -0.344; v = -0.996 .. -0.450
+
+sample 10 	 MSE: 30.58 	 SSIM: 0.019477 
+
+max flow: 1.3874 flow range: u = -0.986 .. -0.361; v = -0.990 .. -0.472
+
+sample 11 	 MSE: 63.27 	 SSIM: 0.029381 
+
+max flow: 1.3848 flow range: u = -0.989 .. -0.350; v = -0.992 .. -0.527
+
+sample 12 	 MSE: 41.37 	 SSIM: 0.000247 
+
+max flow: 1.3932 flow range: u = -0.992 .. -0.365; v = -0.994 .. -0.581
+
+sample 13 	 MSE: 30.97 	 SSIM: 0.069173 
+
+max flow: 1.3904 flow range: u = -0.987 .. -0.362; v = -0.987 .. -0.477
+
+sample 14 	 MSE: 155.31 	 SSIM: -0.013556 
+
+max flow: 1.4140 flow range: u = -0.999 .. 1.000; v = -1.000 .. 1.000
+
+sample 15 	 MSE: 350.47 	 SSIM: 0.124612 
+
+max flow: 1.3830 flow range: u = -0.985 .. -0.360; v = -0.990 .. -0.534
+
+sample 16 	 MSE: 71.52 	 SSIM: -0.009781 
+
+max flow: 1.3897 flow range: u = -0.983 .. -0.382; v = -0.989 .. -0.534
+
+sample 17 	 MSE: 5277.20 	 SSIM: -0.004793 
+
+max flow: 1.3830 flow range: u = -0.988 .. -0.375; v = -0.988 .. -0.402
+
+sample 18 	 MSE: 334.39 	 SSIM: -0.015006 
+
+max flow: 1.4138 flow range: u = -0.999 .. 1.000; v = -1.000 .. 1.000
+
+sample 19 	 MSE: 19.78 	 SSIM: 0.298032 
+
+max flow: 1.3880 flow range: u = -0.986 .. -0.222; v = -0.992 .. -0.252
+
+sample 20 	 MSE: 1581.31 	 SSIM: 0.000111 
+
+max flow: 1.4142 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 21 	 MSE: 337.84 	 SSIM: 0.108245 
+
+max flow: 1.3880 flow range: u = -0.988 .. -0.347; v = -0.991 .. -0.531
+
+sample 22 	 MSE: 166.30 	 SSIM: -0.010294 
+
+max flow: 1.3895 flow range: u = -0.986 .. -0.380; v = -0.988 .. -0.426
+
+sample 23 	 MSE: 75.64 	 SSIM: 0.032305 
+
+max flow: 1.3902 flow range: u = -0.989 .. -0.359; v = -0.986 .. -0.463
+
+sample 24 	 MSE: 853.18 	 SSIM: 0.000185 
+
+max flow: 1.3751 flow range: u = -0.990 .. -0.341; v = -0.987 .. -0.511
+
+sample 25 	 MSE: 28.94 	 SSIM: 0.093277 
+
+max flow: 1.3820 flow range: u = -0.986 .. -0.360; v = -0.988 .. -0.332
+
+sample 26 	 MSE: 46.77 	 SSIM: -0.060106 
+
+max flow: 1.3861 flow range: u = -0.984 .. -0.346; v = -0.988 .. -0.409
+
+sample 27 	 MSE: 45.98 	 SSIM: -0.049752 
+
+max flow: 1.4136 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 28 	 MSE: 184.59 	 SSIM: -0.080125 
+
+max flow: 1.3798 flow range: u = -0.990 .. -0.332; v = -0.988 .. -0.405
+
+sample 29 	 MSE: 959.03 	 SSIM: -0.000533 
+
+max flow: 1.3778 flow range: u = -0.980 .. -0.356; v = -0.990 .. -0.463
+
+sample 30 	 MSE: 134.87 	 SSIM: 0.044322 
+
+max flow: 1.3797 flow range: u = -0.987 .. -0.331; v = -0.991 .. -0.369
+
+sample 31 	 MSE: 46.69 	 SSIM: -0.013600 
+
+max flow: 1.3860 flow range: u = -0.986 .. -0.356; v = -0.994 .. -0.513
+
+sample 32 	 MSE: 35.98 	 SSIM: 0.024111 
+
+max flow: 1.3871 flow range: u = -0.993 .. -0.330; v = -0.989 .. -0.441
+
+sample 33 	 MSE: 30.15 	 SSIM: 0.044024 
+
+max flow: 1.3801 flow range: u = -0.990 .. -0.343; v = -0.988 .. -0.409
+
+sample 34 	 MSE: 55.00 	 SSIM: -0.012178 
+
+max flow: 1.3820 flow range: u = -0.985 .. -0.372; v = -0.993 .. -0.549
+
+sample 35 	 MSE: 380.65 	 SSIM: -0.001535 
+
+max flow: 1.3845 flow range: u = -0.985 .. -0.369; v = -0.989 .. -0.564
+
+sample 36 	 MSE: 43.47 	 SSIM: 0.011313 
+
+max flow: 1.4142 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 37 	 MSE: 121.24 	 SSIM: 0.004811 
+
+max flow: 1.3916 flow range: u = -0.993 .. 0.881; v = -0.999 .. 0.610
+
+sample 38 	 MSE: 44.95 	 SSIM: -0.082658 
+
+max flow: 1.3870 flow range: u = -0.984 .. -0.368; v = -0.990 .. -0.536
+
+sample 39 	 MSE: 1227.93 	 SSIM: -0.000084 
+
+max flow: 1.3869 flow range: u = -0.992 .. 0.164; v = -0.997 .. -0.066
+
+sample 40 	 MSE: 1061.96 	 SSIM: -0.002099 
+
+max flow: 1.3844 flow range: u = -0.983 .. -0.352; v = -0.993 .. -0.523
+
+sample 41 	 MSE: 216.86 	 SSIM: -0.038216 
+
+max flow: 1.3776 flow range: u = -0.986 .. -0.343; v = -0.991 .. -0.357
+
+sample 42 	 MSE: 126.25 	 SSIM: -0.074056 
+
+max flow: 1.4046 flow range: u = -0.998 .. 0.987; v = -1.000 .. 0.815
+
+sample 43 	 MSE: 10.16 	 SSIM: 0.408766 
+
+max flow: 1.3834 flow range: u = -0.989 .. -0.342; v = -0.987 .. -0.505
+
+sample 44 	 MSE: 47.57 	 SSIM: -0.014710 
+
+max flow: 1.3802 flow range: u = -0.983 .. -0.353; v = -0.990 .. -0.544
+
+sample 45 	 MSE: 46.06 	 SSIM: -0.051171 
+
+max flow: 1.4142 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 46 	 MSE: 112.88 	 SSIM: 0.023194 
+
+max flow: 1.3886 flow range: u = -0.991 .. -0.340; v = -0.989 .. -0.357
+
+sample 47 	 MSE: 944.61 	 SSIM: 0.004573 
+
+max flow: 1.3802 flow range: u = -0.989 .. -0.371; v = -0.988 .. -0.271
+
+sample 48 	 MSE: 958.50 	 SSIM: -0.003273 
+
+max flow: 1.4140 flow range: u = -0.999 .. 1.000; v = -1.000 .. 1.000
+
+sample 49 	 MSE: 351.78 	 SSIM: 0.032141 
+
+max flow: 1.3904 flow range: u = -0.987 .. -0.381; v = -0.991 .. -0.561
+
+sample 50 	 MSE: 42.22 	 SSIM: -0.008569 
+
+max flow: 1.3774 flow range: u = -0.982 .. -0.345; v = -0.984 .. -0.502
+
+sample 51 	 MSE: 1500.91 	 SSIM: 0.016818 
+
+max flow: 1.3864 flow range: u = -0.990 .. -0.363; v = -0.991 .. -0.571
+
+sample 52 	 MSE: 41.35 	 SSIM: 0.000006 
+
+max flow: 1.3833 flow range: u = -0.985 .. -0.344; v = -0.985 .. -0.393
+
+sample 53 	 MSE: 258.22 	 SSIM: 0.016901 
+
+max flow: 1.4140 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 54 	 MSE: 365.31 	 SSIM: 0.030864 
+
+max flow: 1.3782 flow range: u = -0.986 .. -0.337; v = -0.985 .. -0.498
+
+sample 55 	 MSE: 193.64 	 SSIM: -0.012703 
+
+max flow: 1.4053 flow range: u = -0.999 .. 0.994; v = -1.000 .. 0.943
+
+sample 56 	 MSE: 528.57 	 SSIM: 0.028850 
+
+max flow: 1.4135 flow range: u = -0.999 .. 1.000; v = -1.000 .. 0.999
+
+sample 57 	 MSE: 20.81 	 SSIM: 0.288204 
+
+max flow: 1.3829 flow range: u = -0.993 .. -0.348; v = -0.988 .. -0.409
+
+sample 58 	 MSE: 161.62 	 SSIM: 0.047340 
+
+max flow: 1.3843 flow range: u = -0.990 .. -0.344; v = -0.993 .. -0.560
+
+sample 59 	 MSE: 147.01 	 SSIM: -0.081036 
+
+max flow: 1.3902 flow range: u = -0.995 .. -0.372; v = -0.991 .. -0.459
+
+sample 60 	 MSE: 335.15 	 SSIM: 0.033113 
+
+max flow: 1.3875 flow range: u = -0.991 .. -0.362; v = -0.991 .. -0.548
+
+sample 61 	 MSE: 41.36 	 SSIM: 0.000009 
+
+max flow: 1.3864 flow range: u = -0.991 .. -0.369; v = -0.994 .. -0.508
+
+sample 62 	 MSE: 32.44 	 SSIM: 0.048679 
+
+max flow: 1.4142 flow range: u = -1.000 .. 1.000; v = -1.000 .. 1.000
+
+sample 63 	 MSE: 337.85 	 SSIM: 0.097726 
+
+iter 99	train disc cost	-77.04193115234375	time	17.12108635651438	dev disc cost	-16.401748657226562	SSIM for sample 1	-0.02914389656359113	MSE for sample 1	298.9294738769531	SSIM for sample 2	0.0034225740398530873	MSE for sample 2	1583.5635986328125	SSIM for sample 3	-0.013408758441877264	MSE for sample 3	62.052345275878906
+Iteration 199 : 
+
+max flow: 1.4120 flow range: u = -0.999 .. -0.898; v = -1.000 .. -0.936
+
+sample 0 	 MSE: 302.26 	 SSIM: -0.006419 
+
+max flow: 1.4113 flow range: u = -0.998 .. -0.889; v = -1.000 .. -0.935
+
+sample 1 	 MSE: 1585.33 	 SSIM: 0.000199 
+
+max flow: 1.4127 flow range: u = -0.999 .. 0.439; v = -1.000 .. -0.790
+
+sample 2 	 MSE: 64.72 	 SSIM: -0.173784 
+
+max flow: 1.4114 flow range: u = -0.998 .. -0.886; v = -1.000 .. -0.510
+
+sample 3 	 MSE: 392.47 	 SSIM: 0.001116 
+
+max flow: 1.4093 flow range: u = -0.998 .. -0.911; v = -1.000 .. -0.763
+
+sample 4 	 MSE: 32.39 	 SSIM: 0.025324 
+
+max flow: 1.4107 flow range: u = -0.998 .. -0.910; v = -1.000 .. -0.941
+
+sample 5 	 MSE: 1916.00 	 SSIM: -0.000388 
+
+max flow: 1.4112 flow range: u = -0.998 .. -0.900; v = -1.000 .. -0.954
+
+sample 6 	 MSE: 134.64 	 SSIM: -0.008691 
+
+max flow: 1.4122 flow range: u = -0.999 .. -0.892; v = -1.000 .. -0.946
+
+sample 7 	 MSE: 94.25 	 SSIM: -0.001550 
+
+max flow: 1.4103 flow range: u = -0.998 .. -0.903; v = -1.000 .. -0.939
+
+sample 8 	 MSE: 788.59 	 SSIM: 0.000525 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.097; v = -1.000 .. -0.840
+
+sample 9 	 MSE: 1095.50 	 SSIM: 0.163627 
+
+max flow: 1.4126 flow range: u = -0.999 .. -0.903; v = -1.000 .. -0.936
+
+sample 10 	 MSE: 34.05 	 SSIM: 0.019634 
+
+max flow: 1.4122 flow range: u = -0.999 .. -0.914; v = -1.000 .. -0.905
+
+sample 11 	 MSE: 65.58 	 SSIM: 0.036282 
+
+max flow: 1.4102 flow range: u = -0.998 .. -0.914; v = -1.000 .. -0.834
+
+sample 12 	 MSE: 44.52 	 SSIM: 0.000029 
+
+max flow: 1.4107 flow range: u = -0.998 .. -0.909; v = -1.000 .. -0.480
+
+sample 13 	 MSE: 33.51 	 SSIM: 0.190492 
+
+max flow: 1.4116 flow range: u = -0.998 .. -0.897; v = -1.000 .. -0.950
+
+sample 14 	 MSE: 156.30 	 SSIM: -0.007011 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.847; v = -1.000 .. -0.913
+
+sample 15 	 MSE: 347.92 	 SSIM: 0.040866 
+
+max flow: 1.4100 flow range: u = -0.997 .. -0.916; v = -1.000 .. -0.786
+
+sample 16 	 MSE: 68.84 	 SSIM: -0.002527 
+
+max flow: 1.4117 flow range: u = -0.998 .. -0.913; v = -1.000 .. -0.888
+
+sample 17 	 MSE: 5277.84 	 SSIM: -0.000086 
+
+max flow: 1.4119 flow range: u = -0.998 .. -0.879; v = -1.000 .. -0.932
+
+sample 18 	 MSE: 337.97 	 SSIM: 0.000910 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.885; v = -1.000 .. -0.929
+
+sample 19 	 MSE: 22.14 	 SSIM: 0.094811 
+
+max flow: 1.4112 flow range: u = -0.999 .. -0.742; v = -1.000 .. -0.908
+
+sample 20 	 MSE: 1578.49 	 SSIM: 0.000162 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.825; v = -1.000 .. -0.767
+
+sample 21 	 MSE: 341.02 	 SSIM: 0.083541 
+
+max flow: 1.4118 flow range: u = -0.999 .. -0.913; v = -1.000 .. -0.949
+
+sample 22 	 MSE: 168.93 	 SSIM: -0.001044 
+
+max flow: 1.4122 flow range: u = -0.999 .. -0.905; v = -1.000 .. -0.943
+
+sample 23 	 MSE: 78.50 	 SSIM: 0.004792 
+
+max flow: 1.4122 flow range: u = -0.999 .. -0.904; v = -1.000 .. -0.941
+
+sample 24 	 MSE: 850.99 	 SSIM: -0.000537 
+
+max flow: 1.4117 flow range: u = -0.998 .. -0.902; v = -1.000 .. -0.955
+
+sample 25 	 MSE: 31.89 	 SSIM: 0.010102 
+
+max flow: 1.4121 flow range: u = -0.999 .. -0.884; v = -1.000 .. -0.929
+
+sample 26 	 MSE: 50.33 	 SSIM: -0.078600 
+
+max flow: 1.4121 flow range: u = -0.999 .. -0.898; v = -1.000 .. -0.949
+
+sample 27 	 MSE: 49.63 	 SSIM: -0.051063 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.674; v = -1.000 .. -0.703
+
+sample 28 	 MSE: 184.95 	 SSIM: -0.299067 
+
+max flow: 1.4109 flow range: u = -0.998 .. -0.826; v = -1.000 .. -0.938
+
+sample 29 	 MSE: 960.13 	 SSIM: -0.000196 
+
+max flow: 1.4104 flow range: u = -0.998 .. -0.897; v = -1.000 .. -0.949
+
+sample 30 	 MSE: 131.29 	 SSIM: -0.007968 
+
+max flow: 1.4121 flow range: u = -0.999 .. -0.878; v = -1.000 .. -0.936
+
+sample 31 	 MSE: 48.14 	 SSIM: -0.047361 
+
+max flow: 1.4124 flow range: u = -0.999 .. -0.919; v = -1.000 .. -0.906
+
+sample 32 	 MSE: 38.97 	 SSIM: -0.013265 
+
+max flow: 1.4122 flow range: u = -0.999 .. -0.900; v = -1.000 .. -0.954
+
+sample 33 	 MSE: 33.48 	 SSIM: 0.023324 
+
+max flow: 1.4119 flow range: u = -0.999 .. -0.897; v = -1.000 .. -0.935
+
+sample 34 	 MSE: 55.57 	 SSIM: 0.027158 
+
+max flow: 1.4116 flow range: u = -0.999 .. -0.923; v = -1.000 .. -0.862
+
+sample 35 	 MSE: 383.42 	 SSIM: -0.000401 
+
+max flow: 1.4098 flow range: u = -0.997 .. 0.404; v = -1.000 .. 0.524
+
+sample 36 	 MSE: 43.57 	 SSIM: 0.092547 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.846; v = -1.000 .. -0.374
+
+sample 37 	 MSE: 123.84 	 SSIM: -0.162550 
+
+max flow: 1.4128 flow range: u = -0.999 .. -0.883; v = -1.000 .. -0.920
+
+sample 38 	 MSE: 49.80 	 SSIM: -0.040260 
+
+max flow: 1.4103 flow range: u = -0.998 .. -0.917; v = -1.000 .. -0.843
+
+sample 39 	 MSE: 1231.23 	 SSIM: -0.000034 
+
+max flow: 1.4118 flow range: u = -0.998 .. -0.797; v = -1.000 .. -0.933
+
+sample 40 	 MSE: 1065.95 	 SSIM: -0.000587 
+
+max flow: 1.4125 flow range: u = -0.999 .. -0.907; v = -1.000 .. -0.936
+
+sample 41 	 MSE: 219.52 	 SSIM: -0.005134 
+
+max flow: 1.4117 flow range: u = -0.999 .. -0.882; v = -1.000 .. -0.933
+
+sample 42 	 MSE: 128.76 	 SSIM: -0.013295 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.895; v = -1.000 .. -0.912
+
+sample 43 	 MSE: 9.83 	 SSIM: 0.095744 
+
+max flow: 1.4131 flow range: u = -0.999 .. 0.901; v = -1.000 .. 0.758
+
+sample 44 	 MSE: 48.10 	 SSIM: -0.057445 
+
+max flow: 1.4123 flow range: u = -0.999 .. -0.910; v = -1.000 .. -0.956
+
+sample 45 	 MSE: 49.73 	 SSIM: -0.041457 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.905; v = -1.000 .. -0.723
+
+sample 46 	 MSE: 115.35 	 SSIM: -0.161119 
+
+max flow: 1.4121 flow range: u = -0.999 .. -0.893; v = -1.000 .. -0.934
+
+sample 47 	 MSE: 943.65 	 SSIM: 0.005401 
+
+max flow: 1.4114 flow range: u = -0.999 .. -0.891; v = -1.000 .. -0.912
+
+sample 48 	 MSE: 961.82 	 SSIM: -0.000441 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.707; v = -1.000 .. -0.911
+
+sample 49 	 MSE: 353.80 	 SSIM: -0.016243 
+
+max flow: 1.4092 flow range: u = -0.997 .. 0.308; v = -1.000 .. 0.600
+
+sample 50 	 MSE: 42.47 	 SSIM: 0.104358 
+
+max flow: 1.4105 flow range: u = -0.998 .. -0.886; v = -1.000 .. -0.952
+
+sample 51 	 MSE: 1499.35 	 SSIM: 0.002167 
+
+max flow: 1.4102 flow range: u = -0.999 .. -0.871; v = -1.000 .. -0.819
+
+sample 52 	 MSE: 44.46 	 SSIM: -0.000002 
+
+max flow: 1.4114 flow range: u = -0.998 .. -0.890; v = -1.000 .. -0.934
+
+sample 53 	 MSE: 259.72 	 SSIM: 0.017268 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.024; v = -1.000 .. -0.874
+
+sample 54 	 MSE: 369.96 	 SSIM: 0.028149 
+
+max flow: 1.4099 flow range: u = -0.997 .. -0.792; v = -1.000 .. -0.872
+
+sample 55 	 MSE: 194.26 	 SSIM: 0.007647 
+
+max flow: 1.4132 flow range: u = -1.000 .. 0.418; v = -1.000 .. -0.816
+
+sample 56 	 MSE: 531.43 	 SSIM: 0.027308 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.891; v = -1.000 .. -0.928
+
+sample 57 	 MSE: 23.55 	 SSIM: 0.074600 
+
+max flow: 1.4111 flow range: u = -0.997 .. -0.888; v = -1.000 .. -0.926
+
+sample 58 	 MSE: 158.96 	 SSIM: 0.000677 
+
+max flow: 1.4103 flow range: u = -0.997 .. -0.877; v = -1.000 .. -0.713
+
+sample 59 	 MSE: 149.64 	 SSIM: -0.034979 
+
+max flow: 1.4120 flow range: u = -0.999 .. -0.909; v = -1.000 .. -0.918
+
+sample 60 	 MSE: 337.77 	 SSIM: 0.016508 
+
+max flow: 1.4106 flow range: u = -0.998 .. -0.920; v = -1.000 .. -0.850
+
+sample 61 	 MSE: 44.46 	 SSIM: 0.000000 
+
+max flow: 1.4119 flow range: u = -0.998 .. 0.172; v = -1.000 .. 0.497
+
+sample 62 	 MSE: 33.72 	 SSIM: 0.058062 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.809; v = -1.000 .. -0.738
+
+sample 63 	 MSE: 341.01 	 SSIM: 0.086077 
+
+iter 199	train disc cost	-7.455816268920898	time	17.08429902076721	dev disc cost	-2.792832136154175	SSIM for sample 1	-0.006418689455164985	MSE for sample 1	302.255126953125	SSIM for sample 2	0.00019898757527721375	MSE for sample 2	1585.334228515625	SSIM for sample 3	-0.17378412262063442	MSE for sample 3	64.72087097167969
+Iteration 299 : 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.971; v = -1.000 .. -0.971
+
+sample 0 	 MSE: 302.58 	 SSIM: -0.001923 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.934; v = -1.000 .. -0.949
+
+sample 1 	 MSE: 1585.56 	 SSIM: 0.010848 
+
+max flow: 1.4134 flow range: u = -1.000 .. 0.978; v = -1.000 .. -0.892
+
+sample 2 	 MSE: 68.00 	 SSIM: -0.452188 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.980; v = -1.000 .. -0.640
+
+sample 3 	 MSE: 392.01 	 SSIM: 0.000737 
+
+max flow: 1.4133 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.924
+
+sample 4 	 MSE: 32.28 	 SSIM: 0.001653 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.975; v = -1.000 .. -0.946
+
+sample 5 	 MSE: 1916.06 	 SSIM: 0.000293 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.969; v = -1.000 .. -0.978
+
+sample 6 	 MSE: 134.12 	 SSIM: -0.002034 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.969; v = -1.000 .. -0.969
+
+sample 7 	 MSE: 94.33 	 SSIM: -0.012102 
+
+max flow: 1.4133 flow range: u = -1.000 .. -0.973; v = -1.000 .. -0.960
+
+sample 8 	 MSE: 789.02 	 SSIM: 0.000072 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.185; v = -1.000 .. -0.821
+
+sample 9 	 MSE: 1094.54 	 SSIM: 0.203797 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.974; v = -1.000 .. -0.962
+
+sample 10 	 MSE: 34.40 	 SSIM: 0.013920 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.623; v = -1.000 .. -0.940
+
+sample 11 	 MSE: 65.72 	 SSIM: 0.012396 
+
+max flow: 1.4133 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.888
+
+sample 12 	 MSE: 44.97 	 SSIM: 0.000074 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.765
+
+sample 13 	 MSE: 33.77 	 SSIM: 0.148480 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.965; v = -1.000 .. -0.972
+
+sample 14 	 MSE: 156.46 	 SSIM: -0.002498 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.320; v = -1.000 .. -0.786
+
+sample 15 	 MSE: 347.85 	 SSIM: 0.267054 
+
+max flow: 1.4133 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.941
+
+sample 16 	 MSE: 68.36 	 SSIM: 0.000406 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.944
+
+sample 17 	 MSE: 5277.99 	 SSIM: 0.000251 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.962; v = -1.000 .. -0.959
+
+sample 18 	 MSE: 338.34 	 SSIM: 0.000368 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.884; v = -1.000 .. -0.948
+
+sample 19 	 MSE: 22.52 	 SSIM: 0.262756 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.914; v = -1.000 .. -0.963
+
+sample 20 	 MSE: 1577.99 	 SSIM: -0.000673 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.133; v = -1.000 .. 0.395
+
+sample 21 	 MSE: 340.91 	 SSIM: 0.203809 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.965
+
+sample 22 	 MSE: 169.27 	 SSIM: 0.000420 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.973; v = -1.000 .. -0.973
+
+sample 23 	 MSE: 78.79 	 SSIM: -0.028984 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.958; v = -1.000 .. -0.968
+
+sample 24 	 MSE: 850.83 	 SSIM: -0.000970 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.939; v = -1.000 .. -0.954
+
+sample 25 	 MSE: 32.18 	 SSIM: -0.023452 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.972
+
+sample 26 	 MSE: 50.68 	 SSIM: -0.058636 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.761; v = -1.000 .. -0.974
+
+sample 27 	 MSE: 49.65 	 SSIM: -0.148245 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.129; v = -1.000 .. -0.898
+
+sample 28 	 MSE: 180.90 	 SSIM: -0.179290 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.962
+
+sample 29 	 MSE: 960.23 	 SSIM: -0.000008 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.972
+
+sample 30 	 MSE: 130.74 	 SSIM: -0.002794 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.960; v = -1.000 .. -0.970
+
+sample 31 	 MSE: 48.25 	 SSIM: -0.015829 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.916
+
+sample 32 	 MSE: 39.32 	 SSIM: 0.004070 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.967
+
+sample 33 	 MSE: 33.86 	 SSIM: 0.013140 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.971
+
+sample 34 	 MSE: 55.57 	 SSIM: 0.007573 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.839
+
+sample 35 	 MSE: 383.74 	 SSIM: -0.000514 
+
+max flow: 1.4131 flow range: u = -1.000 .. -0.901; v = -1.000 .. -0.744
+
+sample 36 	 MSE: 45.74 	 SSIM: -0.011128 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.801; v = -1.000 .. -0.841
+
+sample 37 	 MSE: 124.08 	 SSIM: -0.168877 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.951; v = -1.000 .. -0.961
+
+sample 38 	 MSE: 50.11 	 SSIM: -0.031270 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.920
+
+sample 39 	 MSE: 1231.70 	 SSIM: 0.000005 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.797; v = -1.000 .. -0.945
+
+sample 40 	 MSE: 1066.24 	 SSIM: -0.001301 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.975; v = -1.000 .. -0.959
+
+sample 41 	 MSE: 219.72 	 SSIM: 0.002897 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.963; v = -1.000 .. -0.963
+
+sample 42 	 MSE: 129.03 	 SSIM: -0.002351 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.894; v = -1.000 .. -0.945
+
+sample 43 	 MSE: 9.97 	 SSIM: 0.247042 
+
+max flow: 1.4136 flow range: u = -1.000 .. 0.816; v = -1.000 .. -0.825
+
+sample 44 	 MSE: 47.48 	 SSIM: -0.036061 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.968
+
+sample 45 	 MSE: 50.05 	 SSIM: -0.019591 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.331; v = -1.000 .. -0.859
+
+sample 46 	 MSE: 115.47 	 SSIM: -0.121661 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.967
+
+sample 47 	 MSE: 943.60 	 SSIM: 0.000822 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.967; v = -1.000 .. -0.967
+
+sample 48 	 MSE: 962.16 	 SSIM: -0.000069 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.945; v = -1.000 .. -0.915
+
+sample 49 	 MSE: 353.84 	 SSIM: -0.004911 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.959; v = -1.000 .. -0.747
+
+sample 50 	 MSE: 44.65 	 SSIM: -0.018098 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.969; v = -1.000 .. -0.965
+
+sample 51 	 MSE: 1499.20 	 SSIM: 0.001114 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.850
+
+sample 52 	 MSE: 44.87 	 SSIM: 0.000002 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.962; v = -1.000 .. -0.978
+
+sample 53 	 MSE: 259.83 	 SSIM: -0.003306 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.296; v = -1.000 .. -0.906
+
+sample 54 	 MSE: 369.38 	 SSIM: 0.053496 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.953; v = -1.000 .. -0.962
+
+sample 55 	 MSE: 194.68 	 SSIM: 0.000195 
+
+max flow: 1.4138 flow range: u = -1.000 .. 0.669; v = -1.000 .. -0.863
+
+sample 56 	 MSE: 531.42 	 SSIM: 0.009710 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.951; v = -1.000 .. -0.952
+
+sample 57 	 MSE: 23.94 	 SSIM: 0.072286 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.950; v = -1.000 .. -0.972
+
+sample 58 	 MSE: 158.39 	 SSIM: -0.000186 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.912
+
+sample 59 	 MSE: 150.06 	 SSIM: -0.011939 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.935; v = -1.000 .. -0.926
+
+sample 60 	 MSE: 338.07 	 SSIM: 0.016025 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.844
+
+sample 61 	 MSE: 44.88 	 SSIM: 0.000003 
+
+max flow: 1.4140 flow range: u = -1.000 .. 0.243; v = -1.000 .. -0.866
+
+sample 62 	 MSE: 33.94 	 SSIM: 0.068241 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.221; v = -1.000 .. -0.088
+
+sample 63 	 MSE: 340.93 	 SSIM: 0.136287 
+
+iter 299	train disc cost	-4.209330081939697	time	17.09191241502762	dev disc cost	-3.774986743927002	SSIM for sample 1	-0.0019232084088443599	MSE for sample 1	302.57781982421875	SSIM for sample 2	0.010848474012761549	MSE for sample 2	1585.556396484375	SSIM for sample 3	-0.45218767931205356	MSE for sample 3	67.9978256225586
+Iteration 399 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.982
+
+sample 0 	 MSE: 302.69 	 SSIM: -0.000119 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.933
+
+sample 1 	 MSE: 1585.59 	 SSIM: 0.006141 
+
+max flow: 1.4128 flow range: u = -0.999 .. 0.618; v = -1.000 .. -0.924
+
+sample 2 	 MSE: 65.54 	 SSIM: -0.430276 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.826
+
+sample 3 	 MSE: 391.79 	 SSIM: 0.000184 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.962
+
+sample 4 	 MSE: 32.40 	 SSIM: 0.003051 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.963
+
+sample 5 	 MSE: 1916.17 	 SSIM: 0.000179 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.985
+
+sample 6 	 MSE: 134.01 	 SSIM: -0.001558 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.984; v = -1.000 .. -0.982
+
+sample 7 	 MSE: 94.36 	 SSIM: -0.003780 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.974
+
+sample 8 	 MSE: 789.18 	 SSIM: 0.000033 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.278; v = -1.000 .. -0.441
+
+sample 9 	 MSE: 1094.91 	 SSIM: 0.149284 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.874
+
+sample 10 	 MSE: 34.54 	 SSIM: 0.029848 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.016; v = -1.000 .. -0.942
+
+sample 11 	 MSE: 65.74 	 SSIM: -0.208252 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.952
+
+sample 12 	 MSE: 45.20 	 SSIM: 0.000004 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.901
+
+sample 13 	 MSE: 34.00 	 SSIM: 0.083978 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.982
+
+sample 14 	 MSE: 156.51 	 SSIM: -0.004153 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.898; v = -1.000 .. -0.152
+
+sample 15 	 MSE: 348.62 	 SSIM: 0.303825 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.971
+
+sample 16 	 MSE: 68.25 	 SSIM: -0.000156 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.970
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000246 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.978
+
+sample 18 	 MSE: 338.42 	 SSIM: 0.000243 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.950; v = -1.000 .. -0.668
+
+sample 19 	 MSE: 22.26 	 SSIM: 0.388073 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.202; v = -1.000 .. -0.938
+
+sample 20 	 MSE: 1580.01 	 SSIM: -0.008958 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.309; v = -1.000 .. 0.511
+
+sample 21 	 MSE: 339.48 	 SSIM: 0.381809 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.976
+
+sample 22 	 MSE: 169.37 	 SSIM: 0.000144 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.973
+
+sample 23 	 MSE: 78.88 	 SSIM: -0.014625 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.971; v = -1.000 .. -0.979
+
+sample 24 	 MSE: 850.78 	 SSIM: 0.000195 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.975
+
+sample 25 	 MSE: 32.31 	 SSIM: -0.027077 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.978
+
+sample 26 	 MSE: 50.73 	 SSIM: -0.056447 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.920; v = -1.000 .. -0.982
+
+sample 27 	 MSE: 49.97 	 SSIM: -0.117817 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.304; v = -1.000 .. -0.612
+
+sample 28 	 MSE: 180.21 	 SSIM: -0.219601 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.975
+
+sample 29 	 MSE: 960.26 	 SSIM: -0.000046 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.983
+
+sample 30 	 MSE: 130.63 	 SSIM: -0.001792 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.974; v = -1.000 .. -0.978
+
+sample 31 	 MSE: 48.29 	 SSIM: -0.026747 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.946
+
+sample 32 	 MSE: 39.52 	 SSIM: -0.000559 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.943
+
+sample 33 	 MSE: 33.95 	 SSIM: 0.009096 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.964
+
+sample 34 	 MSE: 55.63 	 SSIM: 0.001862 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.967
+
+sample 35 	 MSE: 383.93 	 SSIM: 0.000362 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.888; v = -1.000 .. 0.513
+
+sample 36 	 MSE: 47.27 	 SSIM: -0.203120 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.641; v = -1.000 .. -0.884
+
+sample 37 	 MSE: 123.97 	 SSIM: -0.136152 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.894
+
+sample 38 	 MSE: 50.13 	 SSIM: -0.050405 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.945
+
+sample 39 	 MSE: 1231.83 	 SSIM: 0.000033 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.935
+
+sample 40 	 MSE: 1066.74 	 SSIM: -0.000112 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.560
+
+sample 41 	 MSE: 219.54 	 SSIM: -0.009417 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.980; v = -1.000 .. -0.953
+
+sample 42 	 MSE: 129.10 	 SSIM: -0.010420 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.629
+
+sample 43 	 MSE: 10.30 	 SSIM: 0.497828 
+
+max flow: 1.4136 flow range: u = -1.000 .. 0.503; v = -1.000 .. -0.697
+
+sample 44 	 MSE: 47.12 	 SSIM: -0.017218 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.978
+
+sample 45 	 MSE: 50.20 	 SSIM: -0.055291 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.071; v = -1.000 .. -0.817
+
+sample 46 	 MSE: 115.38 	 SSIM: -0.017853 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.966; v = -1.000 .. -0.971
+
+sample 47 	 MSE: 943.60 	 SSIM: -0.000462 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.978
+
+sample 48 	 MSE: 962.23 	 SSIM: -0.000032 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.948; v = -1.000 .. -0.688
+
+sample 49 	 MSE: 353.64 	 SSIM: 0.016384 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.887; v = -1.000 .. 0.476
+
+sample 50 	 MSE: 46.61 	 SSIM: -0.208980 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.971
+
+sample 51 	 MSE: 1499.15 	 SSIM: 0.000080 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.943
+
+sample 52 	 MSE: 45.13 	 SSIM: -0.000001 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.980; v = -1.000 .. -0.975
+
+sample 53 	 MSE: 259.81 	 SSIM: -0.007092 
+
+max flow: 1.4135 flow range: u = -1.000 .. 0.129; v = -1.000 .. -0.671
+
+sample 54 	 MSE: 368.51 	 SSIM: 0.044200 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.935; v = -1.000 .. -0.959
+
+sample 55 	 MSE: 194.63 	 SSIM: 0.000859 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.974; v = -1.000 .. -0.317
+
+sample 56 	 MSE: 531.13 	 SSIM: 0.018843 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.783
+
+sample 57 	 MSE: 23.84 	 SSIM: 0.388659 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.979
+
+sample 58 	 MSE: 158.27 	 SSIM: -0.000360 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.933
+
+sample 59 	 MSE: 150.19 	 SSIM: -0.002348 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.920; v = -1.000 .. 0.859
+
+sample 60 	 MSE: 337.70 	 SSIM: 0.076721 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.945
+
+sample 61 	 MSE: 45.11 	 SSIM: -0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.397; v = -1.000 .. -0.750
+
+sample 62 	 MSE: 33.86 	 SSIM: 0.056631 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.366; v = -1.000 .. 0.430
+
+sample 63 	 MSE: 339.43 	 SSIM: 0.349027 
+
+iter 399	train disc cost	-3.6376535892486572	time	17.098995192050936	dev disc cost	-2.3155806064605713	SSIM for sample 1	-0.00011878247143424628	MSE for sample 1	302.6862487792969	SSIM for sample 2	0.006140637091692935	MSE for sample 2	1585.5938720703125	SSIM for sample 3	-0.43027635498976724	MSE for sample 3	65.53695678710938
+Iteration 499 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.974
+
+sample 0 	 MSE: 302.71 	 SSIM: 0.000002 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.965; v = -1.000 .. -0.961
+
+sample 1 	 MSE: 1585.67 	 SSIM: 0.003396 
+
+max flow: 1.4127 flow range: u = -0.998 .. 0.372; v = -1.000 .. -0.897
+
+sample 2 	 MSE: 64.88 	 SSIM: -0.398028 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.873
+
+sample 3 	 MSE: 391.65 	 SSIM: 0.000448 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.971
+
+sample 4 	 MSE: 32.47 	 SSIM: 0.002880 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.979
+
+sample 5 	 MSE: 1916.20 	 SSIM: -0.000027 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.987
+
+sample 6 	 MSE: 134.00 	 SSIM: -0.001038 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.984
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.002659 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.975
+
+sample 8 	 MSE: 789.22 	 SSIM: 0.000020 
+
+max flow: 1.4115 flow range: u = -0.996 .. 0.915; v = -1.000 .. -0.920
+
+sample 9 	 MSE: 1098.51 	 SSIM: 0.213073 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.974
+
+sample 10 	 MSE: 34.58 	 SSIM: 0.000178 
+
+max flow: 1.4136 flow range: u = -0.999 .. 0.474; v = -1.000 .. -0.965
+
+sample 11 	 MSE: 65.95 	 SSIM: -0.379275 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.937
+
+sample 12 	 MSE: 45.30 	 SSIM: 0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.941
+
+sample 13 	 MSE: 34.21 	 SSIM: 0.061421 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.982
+
+sample 14 	 MSE: 156.52 	 SSIM: -0.001899 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.848
+
+sample 15 	 MSE: 347.84 	 SSIM: 0.225419 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.981
+
+sample 16 	 MSE: 68.21 	 SSIM: -0.000080 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.980
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000230 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.985
+
+sample 18 	 MSE: 338.44 	 SSIM: 0.000084 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.960
+
+sample 19 	 MSE: 22.64 	 SSIM: 0.070716 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.189; v = -1.000 .. -0.929
+
+sample 20 	 MSE: 1579.88 	 SSIM: -0.008732 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.968; v = -1.000 .. 0.483
+
+sample 21 	 MSE: 339.97 	 SSIM: 0.449724 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.987
+
+sample 22 	 MSE: 169.38 	 SSIM: 0.000122 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.981
+
+sample 23 	 MSE: 78.86 	 SSIM: -0.009179 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.975; v = -1.000 .. -0.980
+
+sample 24 	 MSE: 850.77 	 SSIM: 0.000162 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.984; v = -1.000 .. -0.983
+
+sample 25 	 MSE: 32.37 	 SSIM: -0.015608 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.981
+
+sample 26 	 MSE: 50.78 	 SSIM: -0.104846 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.970; v = -1.000 .. -0.985
+
+sample 27 	 MSE: 50.07 	 SSIM: -0.061278 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.960; v = -1.000 .. -0.882
+
+sample 28 	 MSE: 178.87 	 SSIM: -0.000521 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.974
+
+sample 29 	 MSE: 960.29 	 SSIM: -0.000058 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.986
+
+sample 30 	 MSE: 130.62 	 SSIM: -0.001669 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.980; v = -1.000 .. -0.979
+
+sample 31 	 MSE: 48.31 	 SSIM: -0.018412 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.968; v = -1.000 .. -0.976
+
+sample 32 	 MSE: 39.55 	 SSIM: -0.002659 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.957; v = -1.000 .. -0.964
+
+sample 33 	 MSE: 33.95 	 SSIM: 0.002197 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.985
+
+sample 34 	 MSE: 55.66 	 SSIM: -0.000460 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.961
+
+sample 35 	 MSE: 384.00 	 SSIM: 0.000254 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.781; v = -1.000 .. 0.000
+
+sample 36 	 MSE: 45.95 	 SSIM: -0.066493 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.815; v = -1.000 .. -0.939
+
+sample 37 	 MSE: 123.90 	 SSIM: -0.024349 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.983
+
+sample 38 	 MSE: 50.30 	 SSIM: -0.039751 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.959
+
+sample 39 	 MSE: 1231.95 	 SSIM: 0.000027 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.973
+
+sample 40 	 MSE: 1066.80 	 SSIM: 0.000012 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.873
+
+sample 41 	 MSE: 219.79 	 SSIM: 0.004954 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.983
+
+sample 42 	 MSE: 129.13 	 SSIM: -0.002961 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.966; v = -1.000 .. -0.927
+
+sample 43 	 MSE: 10.10 	 SSIM: 0.163155 
+
+max flow: 1.4139 flow range: u = -1.000 .. 0.174; v = -1.000 .. -0.749
+
+sample 44 	 MSE: 49.40 	 SSIM: -0.031644 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.985
+
+sample 45 	 MSE: 50.23 	 SSIM: -0.051081 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.956
+
+sample 46 	 MSE: 115.48 	 SSIM: -0.004172 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.666; v = -1.000 .. -0.955
+
+sample 47 	 MSE: 943.31 	 SSIM: 0.026424 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.981
+
+sample 48 	 MSE: 962.25 	 SSIM: -0.000017 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.926
+
+sample 49 	 MSE: 353.89 	 SSIM: 0.000660 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.909; v = -1.000 .. -0.030
+
+sample 50 	 MSE: 45.07 	 SSIM: -0.121465 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.976
+
+sample 51 	 MSE: 1499.10 	 SSIM: -0.000080 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.913
+
+sample 52 	 MSE: 45.23 	 SSIM: -0.000002 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.915; v = -1.000 .. -0.948
+
+sample 53 	 MSE: 259.79 	 SSIM: -0.004255 
+
+max flow: 1.3975 flow range: u = -0.982 .. 0.776; v = -1.000 .. -0.894
+
+sample 54 	 MSE: 351.50 	 SSIM: 0.098341 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.971; v = -1.000 .. -0.969
+
+sample 55 	 MSE: 194.74 	 SSIM: -0.000490 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.345
+
+sample 56 	 MSE: 531.30 	 SSIM: 0.016757 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.968
+
+sample 57 	 MSE: 24.05 	 SSIM: 0.050131 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.984
+
+sample 58 	 MSE: 158.32 	 SSIM: -0.000745 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.949
+
+sample 59 	 MSE: 150.36 	 SSIM: -0.002145 
+
+max flow: 1.4141 flow range: u = -1.000 .. 0.361; v = -1.000 .. 0.772
+
+sample 60 	 MSE: 334.86 	 SSIM: -0.021995 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.966
+
+sample 61 	 MSE: 45.20 	 SSIM: -0.000002 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.526; v = -1.000 .. -0.923
+
+sample 62 	 MSE: 34.05 	 SSIM: 0.107267 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.962; v = -1.000 .. 0.484
+
+sample 63 	 MSE: 339.78 	 SSIM: 0.453457 
+
+iter 499	train disc cost	-3.4262328147888184	time	17.133230764865875	dev disc cost	-2.6820785999298096	SSIM for sample 1	1.6840305125842596e-06	MSE for sample 1	302.7062683105469	SSIM for sample 2	0.003396221899170381	MSE for sample 2	1585.6748046875	SSIM for sample 3	-0.39802775820877967	MSE for sample 3	64.87992858886719
+Iteration 599 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.946
+
+sample 0 	 MSE: 302.71 	 SSIM: -0.000209 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.987
+
+sample 1 	 MSE: 1585.70 	 SSIM: 0.000105 
+
+max flow: 1.4140 flow range: u = -1.000 .. 0.380; v = -1.000 .. -0.898
+
+sample 2 	 MSE: 64.98 	 SSIM: -0.333124 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.970
+
+sample 3 	 MSE: 391.61 	 SSIM: 0.000023 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.983
+
+sample 4 	 MSE: 32.49 	 SSIM: 0.001336 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.987
+
+sample 5 	 MSE: 1916.21 	 SSIM: -0.000009 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.992
+
+sample 6 	 MSE: 133.98 	 SSIM: -0.000295 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.990
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.002270 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.989
+
+sample 8 	 MSE: 789.25 	 SSIM: 0.000010 
+
+max flow: 1.3867 flow range: u = -0.961 .. 0.751; v = -1.000 .. -0.926
+
+sample 9 	 MSE: 1097.80 	 SSIM: 0.213686 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.950
+
+sample 10 	 MSE: 34.56 	 SSIM: 0.019601 
+
+max flow: 1.4088 flow range: u = -0.996 .. 0.341; v = -1.000 .. -0.982
+
+sample 11 	 MSE: 66.30 	 SSIM: -0.379552 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.982
+
+sample 12 	 MSE: 45.33 	 SSIM: -0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.981
+
+sample 13 	 MSE: 34.25 	 SSIM: 0.025258 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.976
+
+sample 14 	 MSE: 156.55 	 SSIM: -0.000935 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.840
+
+sample 15 	 MSE: 347.99 	 SSIM: 0.229027 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.988
+
+sample 16 	 MSE: 68.19 	 SSIM: -0.000164 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.988
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000143 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.991
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000039 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.972
+
+sample 19 	 MSE: 22.66 	 SSIM: 0.025768 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.781; v = -1.000 .. -0.941
+
+sample 20 	 MSE: 1578.09 	 SSIM: -0.001449 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.805; v = -1.000 .. 0.252
+
+sample 21 	 MSE: 338.64 	 SSIM: 0.393874 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.990
+
+sample 22 	 MSE: 169.40 	 SSIM: 0.000095 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.985
+
+sample 23 	 MSE: 78.89 	 SSIM: 0.005365 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.982
+
+sample 24 	 MSE: 850.71 	 SSIM: 0.000101 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.992
+
+sample 25 	 MSE: 32.40 	 SSIM: -0.003845 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.987
+
+sample 26 	 MSE: 50.79 	 SSIM: -0.094449 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.985
+
+sample 27 	 MSE: 50.13 	 SSIM: -0.039477 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.939; v = -1.000 .. -0.832
+
+sample 28 	 MSE: 178.86 	 SSIM: -0.002824 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.991
+
+sample 29 	 MSE: 960.29 	 SSIM: 0.000006 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.991
+
+sample 30 	 MSE: 130.60 	 SSIM: -0.000491 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.989
+
+sample 31 	 MSE: 48.31 	 SSIM: -0.003539 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.984
+
+sample 32 	 MSE: 39.57 	 SSIM: -0.004920 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.683; v = -1.000 .. -0.958
+
+sample 33 	 MSE: 33.83 	 SSIM: 0.088797 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.990
+
+sample 34 	 MSE: 55.68 	 SSIM: -0.000167 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.985
+
+sample 35 	 MSE: 384.01 	 SSIM: 0.000157 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.666; v = -1.000 .. -0.669
+
+sample 36 	 MSE: 45.91 	 SSIM: -0.024723 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.270; v = -1.000 .. -0.893
+
+sample 37 	 MSE: 123.92 	 SSIM: -0.020734 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.974
+
+sample 38 	 MSE: 50.32 	 SSIM: -0.074001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.985
+
+sample 39 	 MSE: 1231.98 	 SSIM: 0.000007 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.987
+
+sample 40 	 MSE: 1066.82 	 SSIM: 0.000009 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.635
+
+sample 41 	 MSE: 219.69 	 SSIM: -0.007289 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.990
+
+sample 42 	 MSE: 129.14 	 SSIM: -0.001404 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.959; v = -1.000 .. -0.919
+
+sample 43 	 MSE: 10.09 	 SSIM: 0.170639 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.215; v = -1.000 .. -0.833
+
+sample 44 	 MSE: 50.75 	 SSIM: -0.028970 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.981
+
+sample 45 	 MSE: 50.26 	 SSIM: -0.075941 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.838; v = -1.000 .. -0.965
+
+sample 46 	 MSE: 115.49 	 SSIM: -0.014053 
+
+max flow: 1.4106 flow range: u = -0.998 .. -0.424; v = -1.000 .. -0.959
+
+sample 47 	 MSE: 942.53 	 SSIM: 0.037110 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.988
+
+sample 48 	 MSE: 962.26 	 SSIM: -0.000008 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.924; v = -1.000 .. -0.969
+
+sample 49 	 MSE: 353.95 	 SSIM: -0.007626 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.767; v = -1.000 .. -0.580
+
+sample 50 	 MSE: 44.92 	 SSIM: -0.067489 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.991
+
+sample 51 	 MSE: 1499.07 	 SSIM: 0.000048 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.987
+
+sample 52 	 MSE: 45.24 	 SSIM: -0.000001 
+
+max flow: 1.4132 flow range: u = -1.000 .. -0.935; v = -1.000 .. -0.891
+
+sample 53 	 MSE: 259.72 	 SSIM: -0.020691 
+
+max flow: 1.3651 flow range: u = -0.934 .. 0.709; v = -1.000 .. -0.916
+
+sample 54 	 MSE: 349.12 	 SSIM: 0.094840 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.990
+
+sample 55 	 MSE: 194.78 	 SSIM: 0.000084 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.221
+
+sample 56 	 MSE: 530.31 	 SSIM: 0.022073 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.972
+
+sample 57 	 MSE: 24.08 	 SSIM: 0.041463 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.992
+
+sample 58 	 MSE: 158.25 	 SSIM: -0.000165 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.981
+
+sample 59 	 MSE: 150.41 	 SSIM: -0.000212 
+
+max flow: 1.4060 flow range: u = -0.990 .. 0.520; v = -1.000 .. -0.829
+
+sample 60 	 MSE: 323.04 	 SSIM: -0.030227 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.979
+
+sample 61 	 MSE: 45.22 	 SSIM: -0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.977
+
+sample 62 	 MSE: 34.16 	 SSIM: 0.035180 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.816; v = -1.000 .. 0.335
+
+sample 63 	 MSE: 338.07 	 SSIM: 0.431218 
+
+iter 599	train disc cost	-3.3729567527770996	time	17.089163453578948	dev disc cost	-2.81123685836792	SSIM for sample 1	-0.00020932420147264753	MSE for sample 1	302.7054443359375	SSIM for sample 2	0.00010540008355299581	MSE for sample 2	1585.6959228515625	SSIM for sample 3	-0.33312443414949083	MSE for sample 3	64.98353576660156
+Iteration 699 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.948
+
+sample 0 	 MSE: 302.69 	 SSIM: -0.000839 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.989
+
+sample 1 	 MSE: 1585.69 	 SSIM: 0.000160 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.692; v = -1.000 .. -0.761
+
+sample 2 	 MSE: 65.16 	 SSIM: 0.037208 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.975; v = -1.000 .. -0.704
+
+sample 3 	 MSE: 391.81 	 SSIM: 0.000426 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.986
+
+sample 4 	 MSE: 32.49 	 SSIM: 0.000580 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.983
+
+sample 5 	 MSE: 1916.19 	 SSIM: 0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.995
+
+sample 6 	 MSE: 133.97 	 SSIM: -0.000261 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.992
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.000816 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.994
+
+sample 8 	 MSE: 789.24 	 SSIM: 0.000008 
+
+max flow: 1.4045 flow range: u = -0.986 .. 0.462; v = -1.000 .. -0.954
+
+sample 9 	 MSE: 1099.06 	 SSIM: 0.214175 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.976
+
+sample 10 	 MSE: 34.60 	 SSIM: 0.006779 
+
+max flow: 1.4061 flow range: u = -0.991 .. 0.189; v = -1.000 .. -0.983
+
+sample 11 	 MSE: 65.81 	 SSIM: -0.362127 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.955
+
+sample 12 	 MSE: 45.26 	 SSIM: 0.000010 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.984; v = -1.000 .. -0.949
+
+sample 13 	 MSE: 34.21 	 SSIM: 0.043133 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.955
+
+sample 14 	 MSE: 156.56 	 SSIM: -0.002597 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.868
+
+sample 15 	 MSE: 347.87 	 SSIM: 0.203784 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.990
+
+sample 16 	 MSE: 68.19 	 SSIM: -0.000068 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.982
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000081 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.994
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000029 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.966
+
+sample 19 	 MSE: 22.68 	 SSIM: 0.055458 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.663; v = -1.000 .. -0.946
+
+sample 20 	 MSE: 1578.91 	 SSIM: -0.002479 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.956; v = -1.000 .. 0.193
+
+sample 21 	 MSE: 339.08 	 SSIM: 0.445309 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.992
+
+sample 22 	 MSE: 169.40 	 SSIM: -0.000035 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.985
+
+sample 23 	 MSE: 78.94 	 SSIM: 0.006991 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.988
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000130 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.992
+
+sample 25 	 MSE: 32.39 	 SSIM: -0.002296 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.988
+
+sample 26 	 MSE: 50.79 	 SSIM: -0.092836 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.967
+
+sample 27 	 MSE: 50.15 	 SSIM: -0.105728 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.707
+
+sample 28 	 MSE: 178.84 	 SSIM: -0.013183 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.994
+
+sample 29 	 MSE: 960.29 	 SSIM: 0.000003 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.994
+
+sample 30 	 MSE: 130.59 	 SSIM: -0.000275 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.991
+
+sample 31 	 MSE: 48.31 	 SSIM: -0.002082 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.976
+
+sample 32 	 MSE: 39.55 	 SSIM: -0.000412 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.971; v = -1.000 .. -0.960
+
+sample 33 	 MSE: 33.97 	 SSIM: 0.012247 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.994
+
+sample 34 	 MSE: 55.67 	 SSIM: 0.000338 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.971
+
+sample 35 	 MSE: 384.00 	 SSIM: 0.000064 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.617; v = -1.000 .. -0.808
+
+sample 36 	 MSE: 45.27 	 SSIM: 0.024769 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.952; v = -1.000 .. -0.912
+
+sample 37 	 MSE: 123.92 	 SSIM: -0.011032 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.981
+
+sample 38 	 MSE: 50.33 	 SSIM: -0.086003 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.962
+
+sample 39 	 MSE: 1231.94 	 SSIM: 0.000004 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.986
+
+sample 40 	 MSE: 1066.82 	 SSIM: 0.000002 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.666
+
+sample 41 	 MSE: 219.62 	 SSIM: -0.004415 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.991
+
+sample 42 	 MSE: 129.15 	 SSIM: -0.000706 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.971
+
+sample 43 	 MSE: 10.12 	 SSIM: -0.000785 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.360; v = -1.000 .. -0.834
+
+sample 44 	 MSE: 50.87 	 SSIM: -0.020412 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.985
+
+sample 45 	 MSE: 50.29 	 SSIM: -0.073903 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.839
+
+sample 46 	 MSE: 115.47 	 SSIM: -0.001371 
+
+max flow: 1.4132 flow range: u = -0.999 .. -0.763; v = -1.000 .. -0.972
+
+sample 47 	 MSE: 943.20 	 SSIM: 0.026162 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.991
+
+sample 48 	 MSE: 962.26 	 SSIM: -0.000005 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.973; v = -1.000 .. -0.927
+
+sample 49 	 MSE: 353.95 	 SSIM: -0.008354 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.579; v = -1.000 .. -0.524
+
+sample 50 	 MSE: 44.78 	 SSIM: -0.083217 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.981
+
+sample 51 	 MSE: 1499.08 	 SSIM: 0.000118 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.980; v = -1.000 .. -0.979
+
+sample 52 	 MSE: 45.22 	 SSIM: -0.000000 
+
+max flow: 1.4092 flow range: u = -0.998 .. -0.743; v = -1.000 .. -0.807
+
+sample 53 	 MSE: 259.92 	 SSIM: -0.042165 
+
+max flow: 1.3835 flow range: u = -0.956 .. 0.443; v = -1.000 .. -0.943
+
+sample 54 	 MSE: 353.80 	 SSIM: 0.078051 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.993
+
+sample 55 	 MSE: 194.78 	 SSIM: 0.000057 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. 0.099
+
+sample 56 	 MSE: 530.36 	 SSIM: 0.035591 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.967
+
+sample 57 	 MSE: 24.09 	 SSIM: 0.059509 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.994
+
+sample 58 	 MSE: 158.24 	 SSIM: 0.000013 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.966; v = -1.000 .. -0.947
+
+sample 59 	 MSE: 150.35 	 SSIM: -0.005990 
+
+max flow: 1.3795 flow range: u = -0.950 .. 0.331; v = -1.000 .. -0.956
+
+sample 60 	 MSE: 326.43 	 SSIM: -0.021397 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.984; v = -1.000 .. -0.956
+
+sample 61 	 MSE: 45.18 	 SSIM: -0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.986
+
+sample 62 	 MSE: 34.16 	 SSIM: 0.030294 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.966; v = -1.000 .. 0.207
+
+sample 63 	 MSE: 338.91 	 SSIM: 0.451814 
+
+iter 699	train disc cost	-3.6140401363372803	time	17.099023430347444	dev disc cost	-6.433229446411133	SSIM for sample 1	-0.0008392658001990667	MSE for sample 1	302.6914367675781	SSIM for sample 2	0.00015998022627377424	MSE for sample 2	1585.6927490234375	SSIM for sample 3	0.03720793845868825	MSE for sample 3	65.16075134277344
+Iteration 799 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.902
+
+sample 0 	 MSE: 302.68 	 SSIM: 0.000355 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.781
+
+sample 1 	 MSE: 1585.51 	 SSIM: 0.006497 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.942; v = -1.000 .. -0.602
+
+sample 2 	 MSE: 65.08 	 SSIM: 0.123199 
+
+max flow: 1.4131 flow range: u = -0.999 .. -0.612; v = -0.999 .. -0.110
+
+sample 3 	 MSE: 395.32 	 SSIM: 0.002038 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.920; v = -1.000 .. -0.959
+
+sample 4 	 MSE: 32.52 	 SSIM: 0.007670 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.865; v = -1.000 .. -0.928
+
+sample 5 	 MSE: 1916.22 	 SSIM: 0.001589 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.996
+
+sample 6 	 MSE: 133.97 	 SSIM: -0.000234 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.993
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.001293 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.947; v = -1.000 .. -0.980
+
+sample 8 	 MSE: 789.13 	 SSIM: 0.000076 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.050; v = -1.000 .. -0.958
+
+sample 9 	 MSE: 1096.94 	 SSIM: 0.215613 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.984
+
+sample 10 	 MSE: 34.61 	 SSIM: 0.005875 
+
+max flow: 1.3514 flow range: u = -0.926 .. 0.277; v = -1.000 .. -0.979
+
+sample 11 	 MSE: 66.97 	 SSIM: -0.379617 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.671; v = -1.000 .. -0.702
+
+sample 12 	 MSE: 43.89 	 SSIM: 0.000150 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.612; v = -1.000 .. -0.813
+
+sample 13 	 MSE: 33.50 	 SSIM: 0.049872 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.683; v = -1.000 .. -0.773
+
+sample 14 	 MSE: 155.99 	 SSIM: 0.015128 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.963
+
+sample 15 	 MSE: 347.74 	 SSIM: 0.040957 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.927; v = -1.000 .. -0.933
+
+sample 16 	 MSE: 68.45 	 SSIM: -0.002771 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.890
+
+sample 17 	 MSE: 5277.99 	 SSIM: 0.000254 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.995
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000023 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.990
+
+sample 19 	 MSE: 22.71 	 SSIM: -0.000248 
+
+max flow: 1.4127 flow range: u = -0.999 .. -0.108; v = -1.000 .. -0.909
+
+sample 20 	 MSE: 1582.96 	 SSIM: -0.010871 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.585
+
+sample 21 	 MSE: 340.29 	 SSIM: 0.434164 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.790; v = -1.000 .. -0.990
+
+sample 22 	 MSE: 168.65 	 SSIM: -0.000061 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.987
+
+sample 23 	 MSE: 78.87 	 SSIM: 0.024449 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.991
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000041 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.976; v = -1.000 .. -0.980
+
+sample 25 	 MSE: 32.33 	 SSIM: -0.013563 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.988
+
+sample 26 	 MSE: 50.80 	 SSIM: -0.106084 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.962
+
+sample 27 	 MSE: 50.12 	 SSIM: -0.051166 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.653
+
+sample 28 	 MSE: 178.76 	 SSIM: -0.002654 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.995
+
+sample 29 	 MSE: 960.29 	 SSIM: -0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.995
+
+sample 30 	 MSE: 130.60 	 SSIM: -0.000305 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.993
+
+sample 31 	 MSE: 48.32 	 SSIM: -0.000974 
+
+max flow: 1.4138 flow range: u = -0.999 .. -0.482; v = -1.000 .. -0.935
+
+sample 32 	 MSE: 37.85 	 SSIM: 0.036248 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.986
+
+sample 33 	 MSE: 34.01 	 SSIM: 0.004570 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.995
+
+sample 34 	 MSE: 55.67 	 SSIM: -0.000482 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.856; v = -1.000 .. -0.778
+
+sample 35 	 MSE: 383.40 	 SSIM: 0.002224 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.659; v = -1.000 .. -0.749
+
+sample 36 	 MSE: 45.47 	 SSIM: 0.045559 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.966; v = -1.000 .. -0.633
+
+sample 37 	 MSE: 123.78 	 SSIM: 0.037451 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.988
+
+sample 38 	 MSE: 50.35 	 SSIM: -0.097424 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.964; v = -1.000 .. -0.858
+
+sample 39 	 MSE: 1231.65 	 SSIM: -0.000086 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.998
+
+sample 40 	 MSE: 1066.83 	 SSIM: 0.000002 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.960; v = -1.000 .. -0.279
+
+sample 41 	 MSE: 218.80 	 SSIM: -0.028416 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.991
+
+sample 42 	 MSE: 129.14 	 SSIM: 0.000756 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.986
+
+sample 43 	 MSE: 10.11 	 SSIM: 0.000826 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.793; v = -1.000 .. -0.754
+
+sample 44 	 MSE: 51.20 	 SSIM: -0.007230 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.931; v = -1.000 .. -0.991
+
+sample 45 	 MSE: 50.21 	 SSIM: -0.172155 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.491
+
+sample 46 	 MSE: 115.24 	 SSIM: 0.108280 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.947; v = -1.000 .. -0.984
+
+sample 47 	 MSE: 943.54 	 SSIM: 0.008551 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.992
+
+sample 48 	 MSE: 962.27 	 SSIM: -0.000004 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.970
+
+sample 49 	 MSE: 353.97 	 SSIM: -0.001715 
+
+max flow: 1.4112 flow range: u = -1.000 .. -0.795; v = -0.998 .. -0.117
+
+sample 50 	 MSE: 45.45 	 SSIM: -0.142970 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.892
+
+sample 51 	 MSE: 1499.27 	 SSIM: 0.001819 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.507; v = -1.000 .. -0.940
+
+sample 52 	 MSE: 43.81 	 SSIM: 0.000010 
+
+max flow: 1.3918 flow range: u = -0.982 .. -0.141; v = -1.000 .. -0.859
+
+sample 53 	 MSE: 262.12 	 SSIM: -0.093718 
+
+max flow: 1.3966 flow range: u = -0.975 .. 0.319; v = -1.000 .. -0.960
+
+sample 54 	 MSE: 359.19 	 SSIM: 0.070364 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.995
+
+sample 55 	 MSE: 194.78 	 SSIM: 0.000006 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. 0.666
+
+sample 56 	 MSE: 531.13 	 SSIM: 0.055663 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.985
+
+sample 57 	 MSE: 24.11 	 SSIM: 0.009771 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.986; v = -1.000 .. -0.994
+
+sample 58 	 MSE: 158.24 	 SSIM: 0.000133 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.832; v = -1.000 .. -0.616
+
+sample 59 	 MSE: 149.58 	 SSIM: -0.050257 
+
+max flow: 1.3866 flow range: u = -0.961 .. 0.396; v = -1.000 .. -0.978
+
+sample 60 	 MSE: 327.27 	 SSIM: -0.023145 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.397; v = -1.000 .. -0.894
+
+sample 61 	 MSE: 43.06 	 SSIM: 0.000012 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.975
+
+sample 62 	 MSE: 34.16 	 SSIM: 0.036408 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.639
+
+sample 63 	 MSE: 340.22 	 SSIM: 0.431622 
+
+iter 799	train disc cost	-3.71305775642395	time	17.117040412425993	dev disc cost	-1.6146818399429321	SSIM for sample 1	0.0003548328453040646	MSE for sample 1	302.67633056640625	SSIM for sample 2	0.006496651940657558	MSE for sample 2	1585.50634765625	SSIM for sample 3	0.12319889415844577	MSE for sample 3	65.07853698730469
+Iteration 899 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.968
+
+sample 0 	 MSE: 302.70 	 SSIM: 0.000447 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.955
+
+sample 1 	 MSE: 1585.66 	 SSIM: 0.001898 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.958
+
+sample 2 	 MSE: 65.35 	 SSIM: 0.011242 
+
+max flow: 1.4129 flow range: u = -1.000 .. -0.903; v = -0.999 .. -0.732
+
+sample 3 	 MSE: 392.69 	 SSIM: 0.003119 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.965; v = -1.000 .. -0.979
+
+sample 4 	 MSE: 32.49 	 SSIM: 0.003181 
+
+max flow: 1.4137 flow range: u = -0.999 .. -0.942; v = -1.000 .. -0.966
+
+sample 5 	 MSE: 1916.25 	 SSIM: 0.002895 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.995
+
+sample 6 	 MSE: 133.98 	 SSIM: -0.000634 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.992
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.000223 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.989
+
+sample 8 	 MSE: 789.22 	 SSIM: 0.000042 
+
+max flow: 1.4096 flow range: u = -0.993 .. 0.379; v = -1.000 .. -0.968
+
+sample 9 	 MSE: 1096.90 	 SSIM: 0.215709 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.982
+
+sample 10 	 MSE: 34.61 	 SSIM: 0.008805 
+
+max flow: 1.3212 flow range: u = -0.886 .. 0.205; v = -1.000 .. -0.980
+
+sample 11 	 MSE: 66.17 	 SSIM: -0.365328 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.972; v = -1.000 .. -0.942
+
+sample 12 	 MSE: 45.05 	 SSIM: 0.000023 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.932
+
+sample 13 	 MSE: 34.03 	 SSIM: 0.062567 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.746; v = -1.000 .. -0.980
+
+sample 14 	 MSE: 155.97 	 SSIM: 0.017430 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.925
+
+sample 15 	 MSE: 347.76 	 SSIM: 0.113958 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.873; v = -1.000 .. -0.975
+
+sample 16 	 MSE: 68.45 	 SSIM: -0.002510 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.977
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000018 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.993
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000022 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.976
+
+sample 19 	 MSE: 22.70 	 SSIM: 0.029330 
+
+max flow: 1.3419 flow range: u = -0.895 .. 0.201; v = -1.000 .. -0.943
+
+sample 20 	 MSE: 1597.39 	 SSIM: -0.016940 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.318
+
+sample 21 	 MSE: 339.54 	 SSIM: 0.454481 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.955; v = -1.000 .. -0.989
+
+sample 22 	 MSE: 169.31 	 SSIM: 0.000452 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.988
+
+sample 23 	 MSE: 78.96 	 SSIM: 0.007471 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.992
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000031 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.985; v = -1.000 .. -0.985
+
+sample 25 	 MSE: 32.36 	 SSIM: -0.015804 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.984
+
+sample 26 	 MSE: 50.80 	 SSIM: -0.130409 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.983
+
+sample 27 	 MSE: 50.16 	 SSIM: -0.073686 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.941; v = -1.000 .. -0.921
+
+sample 28 	 MSE: 178.88 	 SSIM: 0.005233 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.993
+
+sample 29 	 MSE: 960.29 	 SSIM: 0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.993
+
+sample 30 	 MSE: 130.59 	 SSIM: -0.000471 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.990
+
+sample 31 	 MSE: 48.32 	 SSIM: -0.000673 
+
+max flow: 1.4137 flow range: u = -0.999 .. -0.852; v = -1.000 .. -0.947
+
+sample 32 	 MSE: 39.29 	 SSIM: 0.013128 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.985
+
+sample 33 	 MSE: 34.01 	 SSIM: 0.006360 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.994
+
+sample 34 	 MSE: 55.67 	 SSIM: 0.000249 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.902
+
+sample 35 	 MSE: 383.74 	 SSIM: -0.000369 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.358; v = -1.000 .. -0.872
+
+sample 36 	 MSE: 44.83 	 SSIM: 0.112951 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.879; v = -1.000 .. -0.957
+
+sample 37 	 MSE: 123.90 	 SSIM: 0.003692 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.982
+
+sample 38 	 MSE: 50.35 	 SSIM: -0.125589 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.963
+
+sample 39 	 MSE: 1231.89 	 SSIM: 0.000010 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.998
+
+sample 40 	 MSE: 1066.83 	 SSIM: 0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.882
+
+sample 41 	 MSE: 219.79 	 SSIM: 0.000490 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.992
+
+sample 42 	 MSE: 129.15 	 SSIM: -0.000297 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.980
+
+sample 43 	 MSE: 10.11 	 SSIM: 0.007100 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.611; v = -1.000 .. -0.852
+
+sample 44 	 MSE: 51.14 	 SSIM: -0.008449 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.991
+
+sample 45 	 MSE: 50.31 	 SSIM: -0.064982 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.990; v = -1.000 .. -0.874
+
+sample 46 	 MSE: 115.37 	 SSIM: 0.001668 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.989
+
+sample 47 	 MSE: 943.57 	 SSIM: 0.001670 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.991
+
+sample 48 	 MSE: 962.27 	 SSIM: -0.000004 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.990
+
+sample 49 	 MSE: 353.96 	 SSIM: -0.001787 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.226; v = -1.000 .. -0.735
+
+sample 50 	 MSE: 43.77 	 SSIM: 0.105781 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.951
+
+sample 51 	 MSE: 1499.24 	 SSIM: 0.001192 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.946; v = -1.000 .. -0.958
+
+sample 52 	 MSE: 45.09 	 SSIM: -0.000000 
+
+max flow: 1.4106 flow range: u = -0.995 .. -0.545; v = -1.000 .. -0.935
+
+sample 53 	 MSE: 260.77 	 SSIM: -0.086733 
+
+max flow: 1.3854 flow range: u = -0.959 .. 0.195; v = -1.000 .. -0.974
+
+sample 54 	 MSE: 361.82 	 SSIM: 0.060671 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.995
+
+sample 55 	 MSE: 194.78 	 SSIM: 0.000019 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.313
+
+sample 56 	 MSE: 531.67 	 SSIM: 0.018034 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.976
+
+sample 57 	 MSE: 24.10 	 SSIM: 0.029960 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.978; v = -1.000 .. -0.994
+
+sample 58 	 MSE: 158.24 	 SSIM: 0.000321 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.945
+
+sample 59 	 MSE: 150.25 	 SSIM: -0.008466 
+
+max flow: 1.4083 flow range: u = -0.992 .. 0.150; v = -1.000 .. -0.979
+
+sample 60 	 MSE: 333.05 	 SSIM: -0.009238 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.951; v = -1.000 .. -0.959
+
+sample 61 	 MSE: 44.98 	 SSIM: -0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.966
+
+sample 62 	 MSE: 34.16 	 SSIM: 0.039691 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.185
+
+sample 63 	 MSE: 339.24 	 SSIM: 0.456675 
+
+iter 899	train disc cost	-3.529878616333008	time	17.09071449995041	dev disc cost	-3.948413848876953	SSIM for sample 1	0.0004465913211205737	MSE for sample 1	302.7015686035156	SSIM for sample 2	0.0018975628868470825	MSE for sample 2	1585.657470703125	SSIM for sample 3	0.011242056892110518	MSE for sample 3	65.3524169921875
+Iteration 999 : 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.977
+
+sample 0 	 MSE: 302.71 	 SSIM: 0.000228 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.968
+
+sample 1 	 MSE: 1585.68 	 SSIM: 0.003628 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.951
+
+sample 2 	 MSE: 65.36 	 SSIM: 0.013153 
+
+max flow: 1.4073 flow range: u = -1.000 .. -0.941; v = -0.997 .. -0.412
+
+sample 3 	 MSE: 393.67 	 SSIM: 0.004141 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.861; v = -1.000 .. -0.974
+
+sample 4 	 MSE: 32.59 	 SSIM: 0.007501 
+
+max flow: 1.4114 flow range: u = -0.996 .. -0.649; v = -1.000 .. -0.965
+
+sample 5 	 MSE: 1916.54 	 SSIM: 0.001936 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.996
+
+sample 6 	 MSE: 134.02 	 SSIM: -0.001346 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.995
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.000162 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.987
+
+sample 8 	 MSE: 789.20 	 SSIM: 0.000068 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.459; v = -1.000 .. -0.963
+
+sample 9 	 MSE: 1095.03 	 SSIM: 0.215536 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.991
+
+sample 10 	 MSE: 34.61 	 SSIM: 0.003601 
+
+max flow: 1.3493 flow range: u = -0.906 .. 0.136; v = -1.000 .. -0.982
+
+sample 11 	 MSE: 65.88 	 SSIM: -0.361460 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.978; v = -0.999 .. -0.877
+
+sample 12 	 MSE: 44.98 	 SSIM: 0.000004 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.931
+
+sample 13 	 MSE: 33.99 	 SSIM: 0.070455 
+
+max flow: 1.4025 flow range: u = -0.984 .. -0.216; v = -1.000 .. -0.982
+
+sample 14 	 MSE: 151.16 	 SSIM: 0.048752 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.980
+
+sample 15 	 MSE: 347.76 	 SSIM: 0.010339 
+
+max flow: 1.4131 flow range: u = -0.999 .. -0.554; v = -1.000 .. -0.979
+
+sample 16 	 MSE: 69.40 	 SSIM: -0.005405 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.980
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000124 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.996
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000033 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.987
+
+sample 19 	 MSE: 22.71 	 SSIM: 0.004391 
+
+max flow: 1.2769 flow range: u = -0.794 .. 0.400; v = -1.000 .. -0.972
+
+sample 20 	 MSE: 1602.67 	 SSIM: -0.021544 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.985; v = -0.999 .. -0.143
+
+sample 21 	 MSE: 336.74 	 SSIM: 0.474288 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.977; v = -1.000 .. -0.989
+
+sample 22 	 MSE: 169.34 	 SSIM: 0.000630 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.994
+
+sample 23 	 MSE: 78.96 	 SSIM: 0.004768 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.996
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000010 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.988
+
+sample 25 	 MSE: 32.37 	 SSIM: -0.012230 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.991
+
+sample 26 	 MSE: 50.80 	 SSIM: -0.083694 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.986
+
+sample 27 	 MSE: 50.17 	 SSIM: -0.071591 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.860; v = -1.000 .. -0.920
+
+sample 28 	 MSE: 178.97 	 SSIM: 0.000321 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.996
+
+sample 29 	 MSE: 960.29 	 SSIM: -0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.994
+
+sample 30 	 MSE: 130.64 	 SSIM: -0.000484 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.995
+
+sample 31 	 MSE: 48.32 	 SSIM: -0.000203 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.950; v = -1.000 .. -0.959
+
+sample 32 	 MSE: 39.48 	 SSIM: -0.013820 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.993
+
+sample 33 	 MSE: 34.01 	 SSIM: 0.002898 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.996
+
+sample 34 	 MSE: 55.67 	 SSIM: 0.000459 
+
+max flow: 1.4138 flow range: u = -1.000 .. -0.990; v = -0.999 .. -0.893
+
+sample 35 	 MSE: 383.72 	 SSIM: -0.001150 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.266; v = -1.000 .. -0.923
+
+sample 36 	 MSE: 43.06 	 SSIM: 0.151452 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.928; v = -1.000 .. -0.882
+
+sample 37 	 MSE: 123.80 	 SSIM: -0.005197 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.990
+
+sample 38 	 MSE: 50.35 	 SSIM: -0.096581 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.976
+
+sample 39 	 MSE: 1231.91 	 SSIM: 0.000002 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.999
+
+sample 40 	 MSE: 1066.83 	 SSIM: 0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.948
+
+sample 41 	 MSE: 219.85 	 SSIM: -0.001563 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.996
+
+sample 42 	 MSE: 129.15 	 SSIM: -0.000167 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.991
+
+sample 43 	 MSE: 10.11 	 SSIM: -0.002614 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.526; v = -1.000 .. -0.941
+
+sample 44 	 MSE: 50.98 	 SSIM: -0.020973 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.994
+
+sample 45 	 MSE: 50.31 	 SSIM: -0.086889 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.409
+
+sample 46 	 MSE: 115.01 	 SSIM: 0.157692 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.994
+
+sample 47 	 MSE: 943.57 	 SSIM: 0.001369 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.995
+
+sample 48 	 MSE: 962.27 	 SSIM: -0.000004 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.958
+
+sample 49 	 MSE: 353.95 	 SSIM: -0.004182 
+
+max flow: 1.4130 flow range: u = -0.998 .. -0.191; v = -1.000 .. -0.872
+
+sample 50 	 MSE: 42.23 	 SSIM: 0.135179 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.959
+
+sample 51 	 MSE: 1499.20 	 SSIM: 0.000184 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.969; v = -1.000 .. -0.952
+
+sample 52 	 MSE: 45.13 	 SSIM: -0.000005 
+
+max flow: 1.4071 flow range: u = -0.991 .. -0.400; v = -1.000 .. -0.970
+
+sample 53 	 MSE: 261.24 	 SSIM: -0.096001 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.341; v = -1.000 .. -0.979
+
+sample 54 	 MSE: 370.49 	 SSIM: 0.015041 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.997
+
+sample 55 	 MSE: 194.76 	 SSIM: -0.000102 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. 0.750
+
+sample 56 	 MSE: 531.47 	 SSIM: 0.057538 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.986
+
+sample 57 	 MSE: 24.11 	 SSIM: 0.006993 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.969; v = -1.000 .. -0.996
+
+sample 58 	 MSE: 158.27 	 SSIM: 0.000546 
+
+max flow: 1.4135 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.907
+
+sample 59 	 MSE: 150.07 	 SSIM: -0.014823 
+
+max flow: 1.4142 flow range: u = -1.000 .. 0.248; v = -1.000 .. -0.924
+
+sample 60 	 MSE: 337.31 	 SSIM: 0.029113 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.946; v = -1.000 .. -0.953
+
+sample 61 	 MSE: 45.09 	 SSIM: -0.000009 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.982
+
+sample 62 	 MSE: 34.17 	 SSIM: 0.033486 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.978; v = -0.999 .. -0.193
+
+sample 63 	 MSE: 336.49 	 SSIM: 0.474706 
+
+iter 999	train disc cost	-3.474987745285034	time	17.09944642543793	dev disc cost	-2.757826805114746	SSIM for sample 1	0.0002276820964088841	MSE for sample 1	302.7113037109375	SSIM for sample 2	0.0036276706499927536	MSE for sample 2	1585.675537109375	SSIM for sample 3	0.0131533648463754	MSE for sample 3	65.35628509521484
+Iteration 1099 : 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.609; v = -1.000 .. -0.944
+
+sample 0 	 MSE: 302.30 	 SSIM: -0.016467 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.965
+
+sample 1 	 MSE: 1585.67 	 SSIM: 0.001700 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.963
+
+sample 2 	 MSE: 65.36 	 SSIM: 0.008989 
+
+max flow: 1.3997 flow range: u = -1.000 .. -0.809; v = -0.980 .. -0.285
+
+sample 3 	 MSE: 394.98 	 SSIM: 0.000918 
+
+max flow: 1.4126 flow range: u = -0.998 .. -0.711; v = -1.000 .. -0.968
+
+sample 4 	 MSE: 33.31 	 SSIM: 0.029353 
+
+max flow: 1.4108 flow range: u = -0.998 .. -0.651; v = -1.000 .. -0.927
+
+sample 5 	 MSE: 1916.15 	 SSIM: 0.006505 
+
+max flow: 1.4138 flow range: u = -0.999 .. -0.897; v = -1.000 .. -0.994
+
+sample 6 	 MSE: 134.35 	 SSIM: -0.002438 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.996
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.000091 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.990
+
+sample 8 	 MSE: 789.21 	 SSIM: 0.000127 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.897; v = -1.000 .. -0.877
+
+sample 9 	 MSE: 1095.00 	 SSIM: 0.101596 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.991
+
+sample 10 	 MSE: 34.61 	 SSIM: 0.003958 
+
+max flow: 1.4105 flow range: u = -0.995 .. -0.001; v = -1.000 .. -0.981
+
+sample 11 	 MSE: 65.60 	 SSIM: -0.329902 
+
+max flow: 1.4133 flow range: u = -1.000 .. -0.967; v = -0.999 .. -0.882
+
+sample 12 	 MSE: 44.81 	 SSIM: 0.000024 
+
+max flow: 1.4134 flow range: u = -1.000 .. -0.934; v = -0.999 .. -0.862
+
+sample 13 	 MSE: 33.68 	 SSIM: 0.046105 
+
+max flow: 1.3308 flow range: u = -0.893 .. 0.316; v = -1.000 .. -0.985
+
+sample 14 	 MSE: 141.76 	 SSIM: 0.067107 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.987
+
+sample 15 	 MSE: 347.70 	 SSIM: 0.008622 
+
+max flow: 1.4028 flow range: u = -0.985 .. -0.166; v = -1.000 .. -0.973
+
+sample 16 	 MSE: 72.30 	 SSIM: -0.003209 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.989; v = -1.000 .. -0.980
+
+sample 17 	 MSE: 5277.98 	 SSIM: -0.000255 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.997
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000039 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.993
+
+sample 19 	 MSE: 22.72 	 SSIM: 0.001801 
+
+max flow: 1.2353 flow range: u = -0.725 .. 0.525; v = -1.000 .. -0.980
+
+sample 20 	 MSE: 1605.79 	 SSIM: -0.024776 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.654
+
+sample 21 	 MSE: 339.81 	 SSIM: 0.439319 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.958; v = -1.000 .. -0.988
+
+sample 22 	 MSE: 169.30 	 SSIM: 0.000805 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.992; v = -1.000 .. -0.993
+
+sample 23 	 MSE: 78.96 	 SSIM: 0.003610 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.997
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000005 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.981; v = -1.000 .. -0.983
+
+sample 25 	 MSE: 32.37 	 SSIM: 0.002387 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.992
+
+sample 26 	 MSE: 50.80 	 SSIM: -0.077657 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.988
+
+sample 27 	 MSE: 50.17 	 SSIM: -0.065036 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.949; v = -1.000 .. -0.948
+
+sample 28 	 MSE: 178.85 	 SSIM: 0.006161 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.998
+
+sample 29 	 MSE: 960.29 	 SSIM: -0.000001 
+
+max flow: 1.4135 flow range: u = -0.999 .. -0.821; v = -1.000 .. -0.993
+
+sample 30 	 MSE: 131.47 	 SSIM: -0.005359 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.995
+
+sample 31 	 MSE: 48.32 	 SSIM: -0.000060 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.963; v = -1.000 .. -0.940
+
+sample 32 	 MSE: 39.40 	 SSIM: -0.011855 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.994
+
+sample 33 	 MSE: 34.01 	 SSIM: 0.002084 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.997
+
+sample 34 	 MSE: 55.67 	 SSIM: 0.000797 
+
+max flow: 1.4129 flow range: u = -1.000 .. -0.990; v = -0.998 .. -0.792
+
+sample 35 	 MSE: 383.36 	 SSIM: -0.000962 
+
+max flow: 1.4137 flow range: u = -0.999 .. -0.693; v = -1.000 .. -0.940
+
+sample 36 	 MSE: 44.67 	 SSIM: 0.067917 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.874
+
+sample 37 	 MSE: 123.82 	 SSIM: 0.007553 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.993
+
+sample 38 	 MSE: 50.35 	 SSIM: -0.068850 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.925
+
+sample 39 	 MSE: 1231.83 	 SSIM: -0.000037 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.999
+
+sample 40 	 MSE: 1066.83 	 SSIM: 0.000001 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.900
+
+sample 41 	 MSE: 219.79 	 SSIM: -0.004170 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.996
+
+sample 42 	 MSE: 129.15 	 SSIM: -0.000025 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.994
+
+sample 43 	 MSE: 10.11 	 SSIM: -0.000597 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.630; v = -1.000 .. -0.973
+
+sample 44 	 MSE: 51.28 	 SSIM: -0.014633 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.995
+
+sample 45 	 MSE: 50.32 	 SSIM: -0.082629 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.766
+
+sample 46 	 MSE: 115.35 	 SSIM: 0.021061 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.994
+
+sample 47 	 MSE: 943.57 	 SSIM: 0.000200 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.996
+
+sample 48 	 MSE: 962.27 	 SSIM: -0.000003 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.996
+
+sample 49 	 MSE: 353.98 	 SSIM: -0.000682 
+
+max flow: 1.4136 flow range: u = -0.999 .. -0.590; v = -1.000 .. -0.906
+
+sample 50 	 MSE: 43.09 	 SSIM: 0.062638 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.982; v = -1.000 .. -0.918
+
+sample 51 	 MSE: 1499.35 	 SSIM: 0.001136 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.946; v = -1.000 .. -0.935
+
+sample 52 	 MSE: 44.94 	 SSIM: -0.000007 
+
+max flow: 1.3835 flow range: u = -0.956 .. 0.056; v = -1.000 .. -0.977
+
+sample 53 	 MSE: 263.79 	 SSIM: -0.114610 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.960; v = -1.000 .. -0.992
+
+sample 54 	 MSE: 371.44 	 SSIM: 0.000510 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.984; v = -1.000 .. -0.997
+
+sample 55 	 MSE: 194.77 	 SSIM: -0.000363 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. 0.764
+
+sample 56 	 MSE: 531.23 	 SSIM: 0.058375 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.992
+
+sample 57 	 MSE: 24.12 	 SSIM: 0.003107 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.953; v = -1.000 .. -0.996
+
+sample 58 	 MSE: 158.34 	 SSIM: 0.003247 
+
+max flow: 1.4137 flow range: u = -1.000 .. -0.869; v = -0.999 .. -0.899
+
+sample 59 	 MSE: 149.82 	 SSIM: -0.005668 
+
+max flow: 1.4069 flow range: u = -0.990 .. 0.359; v = -1.000 .. -0.979
+
+sample 60 	 MSE: 333.67 	 SSIM: -0.006759 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.968; v = -1.000 .. -0.932
+
+sample 61 	 MSE: 45.04 	 SSIM: -0.000008 
+
+max flow: 1.4142 flow range: u = -1.000 .. -1.000; v = -1.000 .. -0.982
+
+sample 62 	 MSE: 34.17 	 SSIM: 0.033263 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.480
+
+sample 63 	 MSE: 339.33 	 SSIM: 0.460058 
+
+iter 1099	train disc cost	-3.6017186641693115	time	17.084432115554808	dev disc cost	-4.494612693786621	SSIM for sample 1	-0.016467323798471843	MSE for sample 1	302.2969970703125	SSIM for sample 2	0.0016996495238587872	MSE for sample 2	1585.66796875	SSIM for sample 3	0.00898947177712132	MSE for sample 3	65.3635025024414
+Iteration 1199 : 
+
+max flow: 1.4140 flow range: u = -1.000 .. -0.662; v = -1.000 .. -0.987
+
+sample 0 	 MSE: 302.39 	 SSIM: -0.017580 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.996; v = -1.000 .. -0.957
+
+sample 1 	 MSE: 1585.67 	 SSIM: 0.001070 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.982
+
+sample 2 	 MSE: 65.38 	 SSIM: 0.002869 
+
+max flow: 1.3673 flow range: u = -1.000 .. -0.961; v = -0.936 .. 0.299
+
+sample 3 	 MSE: 402.69 	 SSIM: 0.001459 
+
+max flow: 1.4136 flow range: u = -1.000 .. -0.956; v = -1.000 .. -0.933
+
+sample 4 	 MSE: 32.29 	 SSIM: 0.002030 
+
+max flow: 1.4122 flow range: u = -1.000 .. -0.946; v = -0.999 .. -0.846
+
+sample 5 	 MSE: 1915.63 	 SSIM: 0.002234 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.988; v = -1.000 .. -0.997
+
+sample 6 	 MSE: 133.98 	 SSIM: -0.000564 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.998
+
+sample 7 	 MSE: 94.37 	 SSIM: -0.000031 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.994; v = -1.000 .. -0.991
+
+sample 8 	 MSE: 789.24 	 SSIM: 0.000015 
+
+max flow: 1.4133 flow range: u = -0.999 .. 0.059; v = -1.000 .. -0.983
+
+sample 9 	 MSE: 1094.69 	 SSIM: 0.220434 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.993
+
+sample 10 	 MSE: 34.61 	 SSIM: 0.002347 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.946; v = -1.000 .. -0.990
+
+sample 11 	 MSE: 65.99 	 SSIM: -0.004235 
+
+max flow: 1.4092 flow range: u = -1.000 .. -0.976; v = -0.994 .. -0.567
+
+sample 12 	 MSE: 42.97 	 SSIM: 0.000234 
+
+max flow: 1.4079 flow range: u = -1.000 .. -0.984; v = -0.992 .. -0.552
+
+sample 13 	 MSE: 31.36 	 SSIM: 0.211323 
+
+max flow: 1.3760 flow range: u = -0.946 .. -0.014; v = -1.000 .. -0.992
+
+sample 14 	 MSE: 147.88 	 SSIM: 0.057751 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.991; v = -1.000 .. -0.970
+
+sample 15 	 MSE: 347.73 	 SSIM: 0.034744 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.955; v = -1.000 .. -0.941
+
+sample 16 	 MSE: 68.36 	 SSIM: -0.000680 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.995; v = -1.000 .. -0.976
+
+sample 17 	 MSE: 5277.99 	 SSIM: -0.000240 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.998
+
+sample 18 	 MSE: 338.45 	 SSIM: 0.000017 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.992
+
+sample 19 	 MSE: 22.72 	 SSIM: 0.004657 
+
+max flow: 1.2562 flow range: u = -0.760 .. 0.432; v = -1.000 .. -0.988
+
+sample 20 	 MSE: 1600.72 	 SSIM: -0.022163 
+
+max flow: 1.4084 flow range: u = -1.000 .. -0.956; v = -0.993 .. -0.249
+
+sample 21 	 MSE: 336.18 	 SSIM: 0.470756 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.983; v = -1.000 .. -0.990
+
+sample 22 	 MSE: 169.40 	 SSIM: 0.000235 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.996
+
+sample 23 	 MSE: 78.96 	 SSIM: 0.001182 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.998
+
+sample 24 	 MSE: 850.70 	 SSIM: 0.000003 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.993; v = -1.000 .. -0.991
+
+sample 25 	 MSE: 32.40 	 SSIM: 0.000864 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.994
+
+sample 26 	 MSE: 50.80 	 SSIM: -0.050370 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.996
+
+sample 27 	 MSE: 50.18 	 SSIM: -0.018007 
+
+max flow: 1.4141 flow range: u = -1.000 .. -0.772; v = -1.000 .. -0.982
+
+sample 28 	 MSE: 179.54 	 SSIM: -0.020338 
+
+max flow: 1.4142 flow range: u = -1.000 .. -1.000; v = -1.000 .. -0.998
+
+sample 29 	 MSE: 960.29 	 SSIM: -0.000000 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.979; v = -1.000 .. -0.997
+
+sample 30 	 MSE: 130.62 	 SSIM: -0.002782 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.999; v = -1.000 .. -0.997
+
+sample 31 	 MSE: 48.32 	 SSIM: -0.000008 
+
+max flow: 1.4139 flow range: u = -1.000 .. -0.987; v = -1.000 .. -0.896
+
+sample 32 	 MSE: 39.32 	 SSIM: 0.005424 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.998; v = -1.000 .. -0.996
+
+sample 33 	 MSE: 34.01 	 SSIM: 0.000962 
+
+max flow: 1.4142 flow range: u = -1.000 .. -0.997; v = -1.000 .. -0.997
+
+sample 34 	 MSE: 55.67 	 SSIM: 0.000095 
