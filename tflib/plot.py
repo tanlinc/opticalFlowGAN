@@ -18,6 +18,11 @@ def tick():
 def plot(name, value):
 	_since_last_flush[name][_iter[0]] = value
 
+def restore(iteration):
+        with open('log.pkl', 'rb') as f:
+                _since_beginning = pickle.load(f)  # does not work??
+        _iter[0] = iteration
+
 def flush():
 	prints = []
 

@@ -28,7 +28,8 @@ CRITIC_ITERS = 5 # For WGAN and WGAN-GP, number of critic iters per gen iter
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 ITERS = 200000 # How many generator iterations to train for 
 OUTPUT_DIM = 784 # Number of pixels in MNIST (28*28)
-CONTINUE = False
+CONTINUE = True  # Default False, set True if restoring from checkpoint
+START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
 
 lib.print_model_settings(locals().copy())
 
@@ -194,7 +195,10 @@ elif MODE == 'dcgan':
     clip_disc_weights = None
 
 # For saving samples
-fixed_noise = tf.constant(np.random.normal(size=(128, 128)).astype('float32'))
+if(CONTINUE):
+    fixed_noise = tf.get_variable("noise", shape=[128, 128])
+else:
+    fixed_noise = tf.Variable(tf.random_normal(shape=[128, 128], dtype=tf.float32), name='noise')
 fixed_noise_samples = Generator(128, noise=fixed_noise) # shape: (?,784)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples) # shape (128,784)
@@ -224,13 +228,15 @@ with tf.Session() as session:
 
     if(CONTINUE):
          # Restore variables from disk.
-         saver.restore(sess, "model.ckpt")
+         saver.restore(session, "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt")
          print("Model restored.")
+         # fixed_noise = tf.get_variable("noise", shape=[128, 128])
+         lib.plot.restore(START_ITER)
     else:
          session.run(init_op)
-    gen = inf_train_gen()		# init iterator for training set
+    gen = inf_train_gen()		# init iterator for training set		
 
-    for iteration in range(ITERS):
+    for iteration in range(START_ITER, ITERS):  # START_ITER: 0 or from last checkpoint
         start_time = time.time()
 
         if iteration > 0:
@@ -267,7 +273,7 @@ with tf.Session() as session:
 
             generate_image(iteration, _data) # generate sample image,  from current batch (_data) ...but not used in fct
             # Save the variables to disk.
-            save_path = saver.save(sess, "model.ckpt")
+            save_path = saver.save(session, "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt")
             print("Model saved in path: %s" % save_path)
             chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
 

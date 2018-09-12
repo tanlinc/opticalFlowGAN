@@ -1,0 +1,2 @@
+model_checkpoint_path: "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt"
+all_model_checkpoint_paths: "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt"
