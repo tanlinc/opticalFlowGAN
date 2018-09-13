@@ -1,15 +1,11 @@
 
 ----------------------------------------------------------- # fix ssmi..
 other measures (psnr, mae?)
-read paper GAN eval measures
 is 0 or -1 worse, what does it mean...
+ssmi as cost fct?
 
 ----------------------------------------------------------- # flow prediction
 cropping makes sense? any alternative?
-
------------------------------------------------------------ # pause and start again
-read about checkpoints/saving and restoring
-implement it
 
 ---------------------------------------------------------- # interactive sessions with gpu mem growth
 read about 

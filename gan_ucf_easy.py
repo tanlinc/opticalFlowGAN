@@ -22,8 +22,16 @@ BATCH_SIZE = 64 # Batch size
 ITERS = 10000 # How many generator iterations to train for .. slow :/ test 10000, for real 100000..
 IM_DIM = 32 # square image width to crop to
 OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels in UCF101 (3*32*32)
+CONTINUE = True  # Default False, set True if restoring from checkpoint
+START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "ucf/...."
+
+restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
 lib.print_model_settings(locals().copy())
+
+if(CONTINUE):
+    tf.reset_default_graph()
 
 def LeakyReLU(x, alpha=0.2):
     return tf.maximum(alpha*x, x)
@@ -141,21 +149,34 @@ elif MODE == 'dcgan':
                                                                                    var_list=lib.params_with_name('Discriminator.'))
 
 # For generating samples
-fixed_noise_128 = tf.constant(np.random.normal(size=(128, 128)).astype('float32'))
-fixed_noise_samples_128 = Generator(128, noise=fixed_noise_128) # Generator(n_samples, noise):
+if(CONTINUE):
+    fixed_noise = tf.get_variable("noise", shape=[128, 128]) # take same noise like saved model
+else:
+    fixed_noise = tf.Variable(tf.random_normal(shape=[128, 128], dtype=tf.float32), name='noise') #variable: saved
+fixed_noise_samples_128 = Generator(128, noise=fixed_noise) # Generator(n_samples, noise):
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples_128)
     #print(samples.shape) -- print((samples.min(), samples.max()))
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((128, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # 128 samples next to each other!
 
+init_op = tf.global_variables_initializer()  	# op to initialize the variables.
+saver = tf.train.Saver()			# ops to save and restore all the variables.
+
 # Train loop
 with tf.Session() as session:
-    session.run(tf.global_variables_initializer())
+   if(CONTINUE):
+         # Restore variables from disk.
+         saver.restore(session, restore_path)
+         print("Model restored.")
+         lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
+    else:
+         session.run(init_op)	
+
     gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 3, (IM_DIM,IM_DIM,3)) # batch size, seq len, #classes, im size
     dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 3, (IM_DIM,IM_DIM,3))
 
-    for iteration in range(ITERS):
+    for iteration in range(START_ITER, ITERS):  # START_ITER: 0 or from last checkpoint
         start_time = time.time()
         # Train generator
         if iteration > 0:
@@ -185,6 +206,11 @@ with tf.Session() as session:
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
+
+            # Save the variables to disk.
+            save_path = saver.save(session, restore_path)
+            print("Model saved in path: %s" % save_path)
+            # chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
 
         # Save logs every 100 iters
         if (iteration < 5) or (iteration % 100 == 99):

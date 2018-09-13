@@ -30,6 +30,9 @@ ITERS = 200000 # How many generator iterations to train for
 OUTPUT_DIM = 784 # Number of pixels in MNIST (28*28)
 CONTINUE = True  # Default False, set True if restoring from checkpoint
 START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "mnist/trysave"
+
+restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
 lib.print_model_settings(locals().copy())
 
@@ -63,13 +66,13 @@ def Generator(n_samples, noise=None):
     if noise is None:
         noise = tf.random_normal([n_samples, 128])
 
-    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise) # name, input_dim, output_dim, inputs
+    output = lib.ops.linear.Linear('Generator.Input', 128, 4*4*4*DIM, noise) #name,inputDim,outputDim,inputs
     if MODE == 'wgan':
         output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.2', 4*DIM, 2*DIM, 5, output) # name, input_dim, output_dim, filter_size, inputs
+    output = lib.ops.deconv2d.Deconv2D('Generator.2', 4*DIM, 2*DIM, 5, output) #name,inputDim,outputDim,filterSize,inputs
     if MODE == 'wgan':
         output = lib.ops.batchnorm.Batchnorm('Generator.BN2', [0,2,3], output)
     output = tf.nn.relu(output)
@@ -89,7 +92,7 @@ def Generator(n_samples, noise=None):
 def Discriminator(inputs):
     output = tf.reshape(inputs, [-1, 1, 28, 28]) # tensor of shape (batch size, num channels, height, width)
 
-    output = lib.ops.conv2d.Conv2D('Discriminator.1', 1, DIM, 5, output, stride=2) #  (name, input_dim, output_dim, filter_size, inputs)
+    output = lib.ops.conv2d.Conv2D('Discriminator.1', 1, DIM, 5, output, stride=2) #name,inputDim,outputDim,filterSize,inputs
     output = LeakyReLU(output)
 
     output = lib.ops.conv2d.Conv2D('Discriminator.2', DIM, 2*DIM, 5, output, stride=2)
@@ -196,14 +199,14 @@ elif MODE == 'dcgan':
 
 # For saving samples
 if(CONTINUE):
-    fixed_noise = tf.get_variable("noise", shape=[128, 128])
+    fixed_noise = tf.get_variable("noise", shape=[128, 128]) # take same noise like saved model
 else:
-    fixed_noise = tf.Variable(tf.random_normal(shape=[128, 128], dtype=tf.float32), name='noise')
-fixed_noise_samples = Generator(128, noise=fixed_noise) # shape: (?,784)
+    fixed_noise = tf.Variable(tf.random_normal(shape=[128, 128], dtype=tf.float32), name='noise') #variable: saved
+fixed_noise_samples = Generator(128, noise=fixed_noise) # shape: (128,784)
 def generate_image(frame, true_dist):
     samples = session.run(fixed_noise_samples) # shape (128,784)
     lib.save_images.save_images(
-        samples.reshape((128, 28, 28)), 	# 28x28 pixels images, 128 color value?
+        samples.reshape((128, 28, 28)), 	# 28x28 pixels images, 128 samples next to each other
         'samples_{}.png'.format(frame)
     )
 
@@ -215,23 +218,16 @@ def inf_train_gen():
             yield images
 
 
-# Add an op to initialize the variables.
-init_op = tf.global_variables_initializer()
-
-# Add ops to save and restore all the variables.
-saver = tf.train.Saver()
+init_op = tf.global_variables_initializer()  	# op to initialize the variables.
+saver = tf.train.Saver()			# ops to save and restore all the variables.
 
 # Train loop
 with tf.Session() as session:
-
-    #session.run(tf.global_variables_initializer())#
-
     if(CONTINUE):
          # Restore variables from disk.
-         saver.restore(session, "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt")
+         saver.restore(session, restore_path)
          print("Model restored.")
-         # fixed_noise = tf.get_variable("noise", shape=[128, 128])
-         lib.plot.restore(START_ITER)
+         lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
     else:
          session.run(init_op)
     gen = inf_train_gen()		# init iterator for training set		
@@ -271,11 +267,11 @@ with tf.Session() as session:
                 dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
 
-            generate_image(iteration, _data) # generate sample image,  from current batch (_data) ...but not used in fct
+            generate_image(iteration, _data) # generate sample image,  current batch (_data) not used in fct??
             # Save the variables to disk.
-            save_path = saver.save(session, "/home/linkermann/opticalFlow/opticalFlowGAN/results/mnist/trysave/model.ckpt")
+            save_path = saver.save(session, restore_path)
             print("Model saved in path: %s" % save_path)
-            chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
+            # chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
 
         # Write logs every 100 iters
         if (iteration < 5) or (iteration % 100 == 99):

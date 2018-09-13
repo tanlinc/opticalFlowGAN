@@ -31,8 +31,16 @@ BATCH_SIZE = 64 # Batch size. Must be a multiple of N_GPUS
 ITERS = 200000 # How many iterations to train for
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 OUTPUT_DIM = 64*64*3 # Number of pixels in each image
+CONTINUE = True  # Default False, set True if restoring from checkpoint
+START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "ucf/..."
+
+restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
 lib.print_model_settings(locals().copy())
+
+if(CONTINUE):
+    tf.reset_default_graph()
 
 def GeneratorAndDiscriminator():
     """
@@ -563,7 +571,10 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
         raise Exception()
 
     # For generating samples
-    fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, 128)).astype('float32'))
+    if(CONTINUE):
+        fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, 128]) # take same noise like saved model
+    else:
+        fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, 128], dtype=tf.float32), name='noise') #variable: saved.. still working??
     all_fixed_noise_samples = []
     for device_index, device in enumerate(DEVICES):
         n_samples = int(BATCH_SIZE / len(DEVICES))
@@ -597,9 +608,19 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
     lib.save_images.save_images(_x_r.reshape((int(BATCH_SIZE/N_GPUS), 3, 64, 64)), 'samples_groundtruth.png')
 
 
+    init_op = tf.global_variables_initializer()  	# op to initialize the variables.
+    saver = tf.train.Saver()			# ops to save and restore all the variables.
+
     # Train loop
-    session.run(tf.global_variables_initializer())
-    for iteration in range(ITERS):
+    if(CONTINUE):
+         # Restore variables from disk.
+         saver.restore(session, restore_path)
+         print("Model restored.")
+         lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
+    else:
+         session.run(init_op)		
+
+    for iteration in range(START_ITER, ITERS):  # START_ITER: 0 or from last checkpoint
 
         start_time = time.time()
 
@@ -633,6 +654,11 @@ with tf.Session(config=tf.ConfigProto(allow_soft_placement=True)) as session:
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
 
             generate_image(iteration)
+
+            # Save the variables to disk.
+            save_path = saver.save(session, restore_path)
+            print("Model saved in path: %s" % save_path)
+            # chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
 
         if (iteration < 5) or (iteration % 200 == 199):
             lib.plot.flush()

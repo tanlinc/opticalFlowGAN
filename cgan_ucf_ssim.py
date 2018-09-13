@@ -26,8 +26,16 @@ ITERS = 50000 # How many generator iterations to train for # 200000 takes too lo
 IM_DIM = 32
 SQUARE_IM_DIM = IM_DIM*IM_DIM  # 32*32 = 1024
 OUTPUT_DIM = SQUARE_IM_DIM*3 # Number of pixels in UCF101 (3*32*32)
+CONTINUE = True  # Default False, set True if restoring from checkpoint
+START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "ucf/...."
+
+restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
 lib.print_model_settings(locals().copy())
+
+if(CONTINUE):
+    tf.reset_default_graph()
 
 def LeakyReLU(x, alpha=0.2):
     return tf.maximum(alpha*x, x)
@@ -172,7 +180,11 @@ fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 3072)
 fixed_cond_data_int = fixed_cond_samples[:,0:OUTPUT_DIM]  # earlier frame as condition  # shape (64,3072)
 fixed_real_data_int = fixed_cond_samples[:,OUTPUT_DIM:]  # next frame as comparison to result of generator  # shape (64,3072)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
-fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, SQUARE_IM_DIM)).astype('float32'))  # for additional channel: 32*32 = 1024
+if(CONTINUE):
+    fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
+else:
+    fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, SQUARE_IM_DIM], dtype=tf.float32), name='noise') #variable: saved
+#fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, SQUARE_IM_DIM)).astype('float32'))  # for additional channel: 32*32 = 1024
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
 def mse(x, y):
@@ -196,11 +208,20 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
             lib.plot.plot('SSIM for sample %d \n' % (i+1), ssimval)
             lib.plot.plot('MSE for sample %d \n' % (i+1), mseval)
  
+init_op = tf.global_variables_initializer()  	# op to initialize the variables.
+saver = tf.train.Saver()			# ops to save and restore all the variables.
+
 # Train loop
 with tf.Session() as session:
-    session.run(tf.global_variables_initializer())
+    if(CONTINUE):
+         # Restore variables from disk.
+         saver.restore(session, restore_path)
+         print("Model restored.")
+         lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
+    else:
+         session.run(init_op)		
 
-    for iteration in range(ITERS):
+    for iteration in range(START_ITER, ITERS):  # START_ITER: 0 or from last checkpoint
         start_time = time.time()
         # Train generator
         if iteration > 0:
@@ -235,6 +256,11 @@ with tf.Session() as session:
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
+
+            # Save the variables to disk.
+            save_path = saver.save(session, restore_path)
+            print("Model saved in path: %s" % save_path)
+            # chkp.print_tensors_in_checkpoint_file("model.ckpt", tensor_name='', all_tensors=True)
 
         # Save logs every 100 iters
         if (iteration < 5) or (iteration % 100 == 99):
