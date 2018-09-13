@@ -13,18 +13,19 @@ import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
 import tflib.UCFdataEasy as UCFdata
+import tflib.inception_score
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 128 # This overfits substantially; you're probably better off with 64
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 CRITIC_ITERS = 5 # How many critic iterations per generator iteration
 BATCH_SIZE = 64 # Batch size
-ITERS = 10000 # How many generator iterations to train for .. slow :/ test 10000, for real 100000..
+ITERS = 10000 # How many generator iterations to train for .. slow :/ was 100000..
 IM_DIM = 32 # square image width to crop to
 OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels in UCF101 (3*32*32)
-CONTINUE = True  # Default False, set True if restoring from checkpoint
-START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
-CURRENT_PATH = "ucf/...."
+CONTINUE = False  # Default False, set True if restoring from checkpoint
+START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "ucf/inceptiontry"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
@@ -160,6 +161,17 @@ def generate_image(frame, true_dist):
     samples = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
     lib.save_images.save_images(samples.reshape((128, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # 128 samples next to each other!
 
+# For calculating inception score
+samples_100 = Generator(100)
+def get_inception_score():
+    all_samples = []
+    for i in range(10):
+        all_samples.append(session.run(samples_100))
+    all_samples = np.concatenate(all_samples, axis=0)
+    all_samples = ((all_samples+1.)*(255./2)).astype('int32')
+    all_samples = all_samples.reshape((-1, 3, IM_DIM, IM_DIM)).transpose(0,2,3,1)
+    return lib.inception_score.get_inception_score(list(all_samples))
+
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 saver = tf.train.Saver()			# ops to save and restore all the variables.
 
@@ -197,6 +209,11 @@ with tf.Session() as session:
 
         lib.plot.plot('train disc cost', _disc_cost)
         lib.plot.plot('time', time.time() - start_time)
+
+        # Calculate inception score every 1K iters
+        if iteration % 1000 == 999:
+            inception_score = get_inception_score()
+            lib.plot.plot('inception score', inception_score[0])
 
         # Calculate dev loss and generate samples every 100 iters
         if iteration % 100 == 99:
