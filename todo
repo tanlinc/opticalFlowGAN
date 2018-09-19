@@ -1,11 +1,12 @@
 
------------------------------------------------------------ # fix ssmi..
+----------------------------------------------------------- # eval (ssmi)
 other measures (psnr, mae?)
 is 0 or -1 worse, what does it mean...
 ssmi as cost fct?
 
 ----------------------------------------------------------- # flow prediction
 cropping makes sense? any alternative?
+fix it .. :/
 
 ---------------------------------------------------------- # interactive sessions with gpu mem growth
 read about 

@@ -12,8 +12,8 @@ import tflib.ops.batchnorm
 import tflib.ops.deconv2d
 import tflib.save_images
 import tflib.plot
-import tflib.SINTELdataDesktopFrame as sintel
-from skimage.measure import compare_ssim as ssim
+import tflib.SINTELdataFrame as sintel
+#from skimage.measure import compare_ssim as ssim
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
@@ -24,9 +24,9 @@ ITERS = 100000 # How many generator iterations to train for # 200000 takes too l
 IM_DIM = 32 # number of pixels along x and y (square assumed)
 SQUARE_IM_DIM = IM_DIM*IM_DIM # 32*32 = 1024
 OUTPUT_DIM = SQUARE_IM_DIM*3 # Number of pixels (3*32*32)
-CONTINUE = True  # Default False, set True if restoring from checkpoint
-START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
-CURRENT_PATH = "sintel/...."
+CONTINUE = False  # Default False, set True if restoring from checkpoint
+START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "sintel/cgantfssim"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
@@ -199,8 +199,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     for i in range(0, BATCH_SIZE):
         real = np.reshape(fixed_real_data_int[i], (IM_DIM,IM_DIM,3))  # use np.reshape! np-array!
         pred = np.reshape(samples[i] , (IM_DIM,IM_DIM,3))  # not samples_255!
-        mseval = mse(real, pred)
-        ssimval = ssim(real, pred, data_range = pred.max() - pred.min(), multichannel = True) # multichannel instead of grayscale
+        mseval = mse(real, pred) # tf fct on batch..?
+        ssimval = tf.image.ssim(real_gray, pred_gray, 255) # multichannel or grayscale ... also poss on batch..?
         print("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % (i, mseval, ssimval))
         if (i < 3):
             lib.plot.plot('SSIM for sample %d' % (i+1), ssimval)
