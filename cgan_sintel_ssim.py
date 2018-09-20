@@ -4,7 +4,7 @@ sys.path.append(os.getcwd())
 import time
 import numpy as np
 import tensorflow as tf
-from tf.keras.metrics import mse as tfmse
+#from tf.keras.metrics import mse as tfmse
 import tflib as lib
 import tflib.ops.linear
 import tflib.ops.conv2d
@@ -203,7 +203,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     pred = tf.reshape(samples_01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! 
     pred_gray = tf.image.rgb_to_grayscale(pred)
     ssimval = tf.image.ssim(real_gray, pred_gray, max_val=1.0)
-    mseval = tfmse(real, pred) # not on grayscale but on [0,1]..
+    mseval = tf.keras.metrics.mse(real, pred) # not on grayscale but on [0,1]..
+    # print tensor ....?
     #for i in range(0, BATCH_SIZE):
     #    real = np.reshape(fixed_real_data_int[i], (IM_DIM,IM_DIM,3))  # use np.reshape! np-array!
     #    pred = np.reshape(samples[i] , (IM_DIM,IM_DIM,3))  # not samples_255!
