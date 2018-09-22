@@ -170,7 +170,7 @@ def computeImg(flow):
 
 	u = u/(maxrad+eps)
 	v = v/(maxrad+eps)
-	img = computeColor(u, v)
+	img = computeColor(u, v)  # gives uint8
 
 	img_inverted = np.zeros_like(img)  # swap red and blue
 	img_inverted[:,:,0] = img[:,:,2]

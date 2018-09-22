@@ -24,8 +24,8 @@ ITERS = 100000 # How many generator iterations to train for # 200000 takes too l
 IM_DIM = 32 # number of pixels along x and y (square assumed)
 SQUARE_IM_DIM = IM_DIM*IM_DIM # 32*32 = 1024
 OUTPUT_DIM = SQUARE_IM_DIM*3 # Number of pixels (3*32*32)
-CONTINUE = False  # Default False, set True if restoring from checkpoint
-START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CONTINUE = True  # Default False, set True if restoring from checkpoint
+START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
 CURRENT_PATH = "sintel/cgantfssim"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
@@ -175,19 +175,15 @@ dev_gen = sintel.load_test_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3))
 
 # For generating samples: define fixed noise and conditional input
 fixed_cond_samples, _ = next(gen)  # shape: (batchsize, 2*output_dim)
-fixed_cond_data_int = fixed_cond_samples[:,0:OUTPUT_DIM]  # earlier frame as condition  # shape (64,3072)
-fixed_real_data_int = fixed_cond_samples[:,OUTPUT_DIM:]  # next frame as comparison to result of generator  # shape (64,3072)
+fixed_cond_data_int = fixed_cond_samples[:,0:OUTPUT_DIM]  # earlier frame as condition   # shape (64,3072)
+fixed_real_data_int = fixed_cond_samples[:,OUTPUT_DIM:]  # next frame as real for discr  # shape (64,3072)
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized to [-1,1]! 
 fixed_real_data_norm01 = tf.cast(fixed_cond_data_int, tf.float32)/255. # [0,1]
 if(CONTINUE):
-    fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
+    fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # get noise from saved model
 else:
-    fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, SQUARE_IM_DIM], dtype=tf.float32), name='noise') #variable: saved
-# fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, SQUARE_IM_DIM)).astype('float32'))  # for additional channel
-fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
-
-#def mse(x, y):
-#    return np.linalg.norm(x - y)
+    fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, SQUARE_IM_DIM]), name='noise') #var inst of const: var is saved, dtype float implicit  # shape for additional channel
+fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise)
 
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int}) # [-1,1]
@@ -199,21 +195,21 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print("Iteration %d : \n" % frame)
     # compare generated to real one
     real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! 
-    real_gray = tf.image.rgb_to_grayscale(real)
+    real_gray = tf.image.rgb_to_grayscale(real) # tensor batch to gray; returns original dtype = float [0,1]
     pred = tf.reshape(samples_01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! 
     pred_gray = tf.image.rgb_to_grayscale(pred)
-    ssimval = tf.image.ssim(real_gray, pred_gray, max_val=1.0)
-    mseval = tf.keras.metrics.mse(real, pred) # not on grayscale but on [0,1]..
-    # print tensor ....?
-    #for i in range(0, BATCH_SIZE):
-    #    real = np.reshape(fixed_real_data_int[i], (IM_DIM,IM_DIM,3))  # use np.reshape! np-array!
-    #    pred = np.reshape(samples[i] , (IM_DIM,IM_DIM,3))  # not samples_255!
-    #    mseval = mse(real, pred) # tf fct on batch..?
-    #    ssimval = tf.image.ssim(real_gray, pred_gray, 255) # multichannel or grayscale ... also poss on batch..?
-    #    print("sample %d \t MSE: %.2f \t SSIM: %.2f \r\n" % (i, mseval, ssimval))
+    ssimval = tf.image.ssim(real_gray, pred_gray, max_val=1.0) # input tensor 64-batch, output tensor of ssimvals (64,)
+    mseval_per_entry = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
+    mseval = tf.reduce_mean(mseval_per_entry, [1,2])
+    # ssimvals 0.2 to 0.75 :) # msevals 1-9 e -1 to -3
+    ssimval_list = ssimval.eval()  # to numpy array # (64,)
+    mseval_list = mseval.eval() # (64,)
+    #print(ssimval_list)
+    # print(mseval_list)
     for i in range (0,3):
-        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval[i])
-        lib.plot.plot('MSE for sample %d' % (i+1), mseval[i])
+        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list[i])
+        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list[i])
+        print("sample %d \t MSE: %.5f \t SSIM: %.5f \r\n" % (i, mseval_list[i], ssimval_list[i]))
 
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 saver = tf.train.Saver()			# ops to save and restore all the variables.

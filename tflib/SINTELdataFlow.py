@@ -5,9 +5,7 @@ import numpy as np
 import random
 from glob import glob
 from os.path import join, isfile
-from tflib.processor import process_image, process_and_crop_image, read_and_crop_flow #, randomCrop, centerCrop
-
-IS_SERVER = False # server needs different path
+from tflib.processor import process_image, process_and_crop_image, read_and_crop_flow, read_and_crop_flow_int
 
 class DataSet():
 
@@ -20,12 +18,12 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data."""
-        if(IS_SERVER):
-            root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
-            save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
-        else:
-            root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
-            save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
+        # (IS_SERVER):
+        root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
+        save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
+        # Desktop
+        # root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
+        # save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
 
         if isfile(join(save_root, 'train.npy')) and isfile(join(save_root, 'flow.npy')) and isfile(join(save_root, 'validation.npy')):
             print("load lists from files")
@@ -35,8 +33,8 @@ class DataSet():
             return (np_train_image_list, np_flow_list, np_validation_image_list) # tuple
 
         flow_root = join(root, 'flow')
-        image_root = join(root, 'clean')
-        validation_image_root = join(root, 'final')
+        image_root = join(root, 'clean')  # clean as training
+        validation_image_root = join(root, 'final')	# and final as test?
         flow_paths = join(root, 'flow/*/*.flo')
         file_list = glob(flow_paths)
         sorted_file_list= sorted(file_list)
@@ -51,7 +49,7 @@ class DataSet():
             cat1 = get_category_from_path(file)
             cat2 = get_category_from_path(nextflow)
             if not cat1 == cat2:
-                print("discarding because category of first frame is " + cat1 + " and next is " + cat2)
+                print("discarding bec category of first is " + cat1 + " and next is " + cat2)
                 continue
 
         #for file in sorted_file_list:
@@ -114,8 +112,8 @@ class DataSet():
                 sequence = [process_and_crop_image(x, self.image_shape) for x in sample] # processor..
 
                 # get corresponding flows
-                flow_filenames = flow_data[ri]
-                flow_array = [read_and_crop_flow(str(x), self.image_shape) for x in flow_filenames] # returns  np: (2, h, w, 2)	      
+                flow_filenames = flow_data[ri] # shape (2,), 2 flow filenames are in there
+                flow_array = [read_and_crop_flow_int(str(x), self.image_shape) for x in flow_filenames] # returns  np: (2, h*w*2) ?	      
 
                 if concat:
                     # pass sequence back as single array (into an MLP rather than an RNN)

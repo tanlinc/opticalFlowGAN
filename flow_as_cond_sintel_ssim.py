@@ -14,7 +14,7 @@ import tflib.save_images
 import tflib.plot
 import tflib.flow_handler as fh
 import tflib.SINTELdataFlow as sintel
-from skimage.measure import compare_ssim as ssim
+#from skimage.measure import compare_ssim as ssim
 
 MODE = 'wgan-gp' # Valid options are dcgan, wgan, or wgan-gp
 DIM = 64 # This overfits substantially; you're probably better off with 64 # or 128?
@@ -25,10 +25,10 @@ ITERS = 100000 # How many generator iterations to train for # 200000 takes too l
 IM_DIM = 32 # number of pixels along x and y (square assumed)
 SQUARE_IM_DIM = IM_DIM*IM_DIM # 32*32 = 1024
 OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels (3*32*32) - rgb color
-OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
-CONTINUE = True  # Default False, set True if restoring from checkpoint
-START_ITER = 600  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
-CURRENT_PATH = "sintel/...."
+# OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
+CONTINUE = False  # Default False, set True if restoring from checkpoint
+START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
+CURRENT_PATH = "sintel/flowascond"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
@@ -54,13 +54,13 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
 
     noise = tf.reshape(noise, [n_samples, 1, IM_DIM, IM_DIM])
     # new conditional input: last flow
-    conds = tf.reshape(conditions, [n_samples, 2, IM_DIM, IM_DIM])  # conditions: (64,2048) TO conds: (64,2,32,32)
+    conds = tf.reshape(conditions, [n_samples, 3, IM_DIM, IM_DIM])  # conditions: (64,3072) TO conds: (64,3,32,32)
 
-    # for now just concat the inputs: noise as third dim of cond image 
-    output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,3,32,32)
-    output = tf.reshape(output, [n_samples, OUTPUT_DIM]) # 32x32x3 = 3072; to: (BATCH_SIZE, 3072)
+    # for now just concat the inputs: noise as fourth dim of cond image 
+    output = tf.concat([noise, conds], 1)  # to: (BATCH_SIZE,4,32,32)
+    output = tf.reshape(output, [n_samples, SQUARE_IM_DIM*4]) # 32x32x4 = ...; to: (BATCH_SIZE, ...)
 
-    output = lib.ops.linear.Linear('Generator.Input', OUTPUT_DIM, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
+    output = lib.ops.linear.Linear('Generator.Input',  SQUARE_IM_DIM*4, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
@@ -73,19 +73,19 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
     output = lib.ops.batchnorm.Batchnorm('Generator.BN3', [0,2,3], output)
     output = tf.nn.relu(output)
 
-    output = lib.ops.deconv2d.Deconv2D('Generator.5', DIM, 2, 5, output)  # output flow --> dim is 2
+    output = lib.ops.deconv2d.Deconv2D('Generator.5', DIM, 3, 5, output)  # output flow --> dim is 3
 
-    output = tf.tanh(output)
+    output = tf.tanh(output) # to [0,1] ??
 
-    return tf.reshape(output, [-1, OUTPUT_DIM_FLOW])  # output flow --> dim is 2
+    return tf.reshape(output, [-1, OUTPUT_DIM])  # output flow color --> dim is 3
 
 def Discriminator(inputs, conditions):	# input conds as well
-    inputs = tf.reshape(inputs, [-1, 2, IM_DIM, IM_DIM])   # input flow --> dim is 2
-    conds = tf.reshape(conditions, [-1, 2, IM_DIM, IM_DIM])  # new conditional input: last flow
+    inputs = tf.reshape(inputs, [-1, 3, IM_DIM, IM_DIM])   # input flow in color --> dim is 3
+    conds = tf.reshape(conditions, [-1, 3, IM_DIM, IM_DIM])  # new conditional input: last flow in color
     # for now just concat the inputs
-    ins = tf.concat([inputs, conds], 1) #to: (BATCH_SIZE, 4, 32, 32)
+    ins = tf.concat([inputs, conds], 1) #to: (BATCH_SIZE, 6, 32, 32)
 
-    output = lib.ops.conv2d.Conv2D('Discriminator.1', 4, DIM, 5, ins, stride=2)  # first dim is 4 now
+    output = lib.ops.conv2d.Conv2D('Discriminator.1', 6, DIM, 5, ins, stride=2)  # first dim is 6 now
     output = LeakyReLU(output)
 
     output = lib.ops.conv2d.Conv2D('Discriminator.2', DIM, 2*DIM, 5, output, stride=2)
@@ -108,11 +108,11 @@ def Discriminator(inputs, conditions):	# input conds as well
 
     return tf.reshape(output, [-1])
 
-cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) # cond input for G and D
-cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
+cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM]) # cond input for G and D  # 1 earlier flow in color .. in [0,255]
+cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized to [-1,1]!
 
-real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) # flow as comparison for D
-real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized [0,1]!
+real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM]) # flow as comparison for D  # later flow in color .. in [0,255]
+real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized to [-1,1]!
 fake_data = Generator(BATCH_SIZE, cond_data)
 
 disc_real = Discriminator(real_data, cond_data)
@@ -177,47 +177,48 @@ dev_gen = sintel.load_test_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3))
 
 # For generating samples: define fixed noise and conditional input
 _, fixed_samples_flow = next(gen)  # shape: (batchsize, 4096) 
-fixed_cond_data_int = fixed_samples_flow[:,0:OUTPUT_DIM_FLOW]  # earlier flow as condition  # shape (64,2048)
-fixed_real_data_int = fixed_samples_flow[:,OUTPUT_DIM_FLOW:]  # next flow as comparison to result of generator  # shape (64,2048)
-fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
+fixed_cond_data_int = fixed_samples_flow[:,0:OUTPUT_DIM]  # earlier flow as condition, (64,3071),  uint8(0..255), 3 channel! transposed already!
+fixed_real_data_int = fixed_samples_flow[:,OUTPUT_DIM:]  # next flow as real to discr, (64,2048), 0..255
+fixed_real_data_norm01 = tf.cast(fixed_cond_data_int, tf.float32)/255. # [0,1]
+fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
 if(CONTINUE):
     fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
 else:
-    fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, SQUARE_IM_DIM], dtype=tf.float32), name='noise') #variable: saved
-#fixed_noise = tf.constant(np.random.normal(size=(BATCH_SIZE, SQUARE_IM_DIM)).astype('float32'))  # for additional channel
+    fixed_noise = tf.Variable(tf.random_normal(shape=[BATCH_SIZE, SQUARE_IM_DIM], dtype=tf.float32), name='noise') #variable instead of constant: saved  # for additional channel
 fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fixed_noise) # Generator(n_samples,conds, noise):
 
-def mse(x, y):
-    return np.linalg.norm(x - y)
+#def mse(x, y):
+#    return np.linalg.norm(x - y)
 
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     print("Iteration %d : \n" % frame)
-    samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int})
-    # samples_255 = ((samples+1.)*(255./2)).astype('int32') #back to [0,255] 
-    # (64, 2048)
-
-    flowimages = []    
+    samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
+    samples_255 = ((samples+1.)*(255./2)).astype('int32') # (-1,1) to [0,255] for displaying # (64, 3072)
+    samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
+  
     for i in range(0, BATCH_SIZE):
-        flowimg = fh.computeImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (200, 200, 3) # now color img!! :)
-        flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 200, 200)
-    
-        flowimg_cond = fh.computeImg(fixed_cond_data_int[i].reshape((IM_DIM,IM_DIM,2)))    # (200, 200, 3) # now color img!! :)
-        flowimage_cond_T = np.transpose(flowimg_cond, [2,0,1])  #  (3, 200, 200)
-    
-        flowimages.append(flowimage_cond_T.flatten())
-        flowimages.append(flowimage_T.flatten())
+        samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i].astype('int32'),axis=0) # show last frame next to generated sample
+    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
 
-        # compare generated to real one  # on real flow matrices, not on color ims! # is it float..?
-        real = np.reshape(fixed_real_data_int[i], (IM_DIM,IM_DIM,2))  # use np.reshape! np-array!
-        pred = np.reshape(samples[i] , (IM_DIM,IM_DIM,2))  # not samples2show!!
-        mseval = mse(real, pred)
-        ssimval = ssim(real, pred, data_range = pred.max() - pred.min(), multichannel = True) # multichannel instead of grayscale!!
-        print("sample %d \t MSE: %.2f \t SSIM: %.6f \r\n" % (i, mseval, ssimval))
-        if (i < 3):
-            lib.plot.plot('SSIM for sample %d' % (i+1), ssimval)
-            lib.plot.plot('MSE for sample %d' % (i+1), mseval) 
-    samples2show = np.array(flowimages) 
-    lib.save_images.save_images(samples2show.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
+    # compare generated to real one
+    real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! 
+    real_gray = tf.image.rgb_to_grayscale(real) # tensor batch to gray; returns original dtype = float [0,1]
+    pred = tf.reshape(samples_01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! 
+    pred_gray = tf.image.rgb_to_grayscale(pred)
+    ssimval = tf.image.ssim(real_gray, pred_gray, max_val=1.0) # input tensor 64-batch, output tensor of ssimvals (64,)
+    mseval_per_entry = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
+    mseval = tf.reduce_mean(mseval_per_entry, [1,2])
+    # print((real.min(), real.max()))         print(real.dtype)
+        
+    ssimval_list = ssimval.eval()  # to numpy array # (64,)
+    mseval_list = mseval.eval() # (64,)
+    # print(ssimval_list)
+    # print(mseval_list)
+    for i in range (0,3):
+        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list[i])
+        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list[i])
+        print("sample %d \t MSE: %.5f \t SSIM: %.5f \r\n" % (i, mseval_list[i], ssimval_list[i]))
+    # also save as .flo?
    
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 saver = tf.train.Saver()			# ops to save and restore all the variables.
@@ -237,7 +238,7 @@ with tf.Session() as session:
         # Train generator
         if iteration > 0:
             _, _flow_data = next(gen)  # shape: (batchsize, 6144), double output_dim now   # flow as second argument not needed
-            _cond_data = _flow_data[:,0:OUTPUT_DIM_FLOW] # earlier flow as conditional data, # next flow not needed here
+            _cond_data = _flow_data[:,0:OUTPUT_DIM] # earlier flow as conditional data, # next flow not needed here
             _ = session.run(gen_train_op, feed_dict={cond_data_int: _cond_data})
         # Train critic
         if MODE == 'dcgan':
@@ -245,9 +246,9 @@ with tf.Session() as session:
         else:
             disc_iters = CRITIC_ITERS
         for i in range(disc_iters):
-            _, _flow_data = next(gen)  # shape: (batchsize, 4096), double output_dim_flow now   # flow as second argument
-            _cond_data = _flow_data[:,0:OUTPUT_DIM_FLOW] # earlier flow as conditional data,
-            _real_data = _flow_data[:,OUTPUT_DIM_FLOW:]  # next flow as real data for discriminator
+            _, _flow_data = next(gen)  # shape: (batchsize, 4096), double output_dim now   # flow as second argument
+            _cond_data = _flow_data[:,0:OUTPUT_DIM] # earlier flow as conditional data,
+            _real_data = _flow_data[:,OUTPUT_DIM:]  # next flow as real data for discriminator
 
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})
             if MODE == 'wgan':
@@ -260,8 +261,8 @@ with tf.Session() as session:
         if iteration % 100 == 99:
             dev_disc_costs = []
             _, _flow_data = next(gen)  # shape: (batchsize, 6144), double output_dim now    # flow as second argument
-            _cond_data = _flow_data[:,0:OUTPUT_DIM_FLOW]	# earlier flow as conditional data,
-            _real_data = _flow_data[:,OUTPUT_DIM_FLOW:]  	# next flow as real data for discriminator
+            _cond_data = _flow_data[:,0:OUTPUT_DIM]	# earlier flow as conditional data,
+            _real_data = _flow_data[:,OUTPUT_DIM:]  	# next flow as real data for discriminator
             _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})   
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))

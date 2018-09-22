@@ -7,8 +7,6 @@ from glob import glob
 from os.path import join, isfile
 from tflib.processor import process_image, process_and_crop_image #, randomCrop, centerCrop
 
-IS_SERVER = False  # different path on server
-
 class DataSet():
 
     def __init__(self, image_shape=(32, 32, 3)): 
@@ -20,12 +18,12 @@ class DataSet():
     @staticmethod
     def get_data():
         """Load our data."""
-        if(IS_SERVER):
-            root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
-            save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
-        else:
-            root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
-            save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
+        # (IS_SERVER):
+        root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
+        save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
+        # Desktop
+        # root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
+        # save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
 
         if isfile(join(save_root, 'train.npy')) and isfile(join(save_root, 'flow.npy')) and isfile(join(save_root, 'validation.npy')):
             print("load lists from files")

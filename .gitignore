@@ -2,8 +2,9 @@ data/sequences
 data/train
 data/test
 data/SINTEL
-tflib/SINTELdataFlow.py
-tflib/SINTELdataFrame.py
 cifardata
 tflib/__pycache__
 tflib/ops/__pycache__
+results/sintel/flowascond/nohup.out
+results/sintel/cgantfssim/mode*
+results/sintel/flowascond/mode*

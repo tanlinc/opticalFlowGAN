@@ -4,7 +4,7 @@ Process an image that we can pass to our networks.
 from keras.preprocessing.image import img_to_array, load_img
 import numpy as np
 from imageio import imread
-from tflib.flow_handler import read_flo_file
+from tflib.flow_handler import read_flo_file, computeImg
 
 def randomCrop(img, crop_size):
     th, tw = crop_size
@@ -46,8 +46,20 @@ def process_and_crop_image(filename, target_shape): # cropping to desired shape
 
 
 def read_and_crop_flow(filename, target_shape): # cropping to desired shape
-    """Given an image, process it, crop it, and return a numpy array."""
+    """Given an image, read it, crop it, and return a numpy array."""
     h, w, c = target_shape
     flow = read_flo_file(filename)     # load image, already returns np
     flow_cropped = centerCrop(flow, (h,w)) # e.g. to (32,32,3)
     return flow_cropped
+
+def read_and_crop_flow_int(filename, target_shape): # cropping to desired shape
+    """Given an image, read it, crop it, turn it to an uint8 color image and return as a numpy array."""
+    h, w, c = target_shape
+    flow = read_flo_file(filename)     # load image, already returns np
+    flow_cropped = centerCrop(flow, (h,w)) # e.g. to (32,32,2)
+    color_flow = computeImg(flow_cropped)  # uint8 3 channel, e.g. (32,32,3)
+    x = color_flow.astype(np.uint8)	# is already 0-255 but just to be sure
+    x = x.reshape(h,w,3)  # is already in that shape.. just to be sure
+    x = np.transpose(x, [2,0,1]) # e.g. (3,32,32) do the transpose here!
+    x = x.reshape(h*w*3,)	# uncomment for 64x64 gan!
+    return x

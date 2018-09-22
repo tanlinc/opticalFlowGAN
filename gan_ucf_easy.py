@@ -177,13 +177,13 @@ saver = tf.train.Saver()			# ops to save and restore all the variables.
 
 # Train loop
 with tf.Session() as session:
-   if(CONTINUE):
-         # Restore variables from disk.
-         saver.restore(session, restore_path)
-         print("Model restored.")
-         lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
+    if(CONTINUE):
+        # Restore variables from disk.
+        saver.restore(session, restore_path)
+        print("Model restored.")
+        lib.plot.restore(START_ITER)  # does not fully work, but makes plots start from newly started iteration
     else:
-         session.run(init_op)	
+        session.run(init_op)	
 
     gen = UCFdata.load_train_gen(BATCH_SIZE, 1, 3, (IM_DIM,IM_DIM,3)) # batch size, seq len, #classes, im size
     dev_gen = UCFdata.load_test_gen(BATCH_SIZE, 1, 3, (IM_DIM,IM_DIM,3))

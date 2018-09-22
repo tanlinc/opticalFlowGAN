@@ -73,7 +73,8 @@ def _init_inception():
       MODEL_DIR, 'classify_image_graph_def.pb'), 'rb') as f:
     graph_def = tf.GraphDef()
     graph_def.ParseFromString(f.read())
-    _ = tf.import_graph_def(graph_def, name='')
+    _ = tf.import_graph_def(graph_def, name='', input_map = {'ExpandDims:0': tf.placeholder(tf.float32, shape=(100, 32, 32, 3))} )
+
   # Works with an arbitrary minibatch size.
   with tf.Session() as sess:
     pool3 = sess.graph.get_tensor_by_name('pool_3:0')
@@ -88,10 +89,10 @@ def _init_inception():
                     new_shape.append(None)
                 else:
                     new_shape.append(s)
-            o.set_shape(new_shape)
+            o.set_shape(tf.TensorShape(new_shape))
 
     w = sess.graph.get_operation_by_name("softmax/logits/MatMul").inputs[1]
-    logits = tf.matmul(tf.squeeze(pool3), w)
+    logits = tf.matmul(tf.squeeze(pool3, [1, 2]), w)
     softmax = tf.nn.softmax(logits)
 
 if softmax is None:
