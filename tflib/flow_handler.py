@@ -148,7 +148,7 @@ def computeFlowImg(flow, max_flow=-1,min_max_flow=-1):
     u[np.where(nanIdx)] = 0
     v[np.where(nanIdx)] = 0
 
-    cw = makeColorWheel().T
+    cw = makeColorwheel().T
 
     M, N = u.shape
     img = np.zeros((M, N, 3)).astype('uint8')

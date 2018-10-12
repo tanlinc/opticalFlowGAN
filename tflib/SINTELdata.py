@@ -14,7 +14,7 @@ class DataSet():
         """
         self.data = self.get_data()
         self.image_shape = image_shape
-	self.image_shape_flow = image_shape_flow
+        self.image_shape_flow = image_shape_flow
 
     @staticmethod
     def get_data():

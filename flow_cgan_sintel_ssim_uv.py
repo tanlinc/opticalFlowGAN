@@ -24,7 +24,7 @@ ITERS = 100000 # How many generator iterations to train for # 200000 takes too l
 IM_DIM = 32 # number of pixels along x and y (square assumed)
 SQUARE_IM_DIM = IM_DIM*IM_DIM # 32*32 = 1024
 OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels (3*32*32) - rgb color
-# OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
+OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
 CONTINUE = False  # Default False, set True if restoring from checkpoint
 START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
 CURRENT_PATH = "sintel/flowcganuv"
@@ -193,10 +193,11 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
     
     for i in range(0, BATCH_SIZE):
+        flowimage, flowimg = [],[] # reset to be sure
         flowimg = fh.computeFlowImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (32, 32, 3) # now color img!! :)
         flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
         flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
-	samples_255[i] = flowimage # put flow color image as display image
+        samples_255[i] = flowimage # put flow color image as display image
         samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[:,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
         lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
 # also save as .flo?
@@ -247,7 +248,7 @@ with tf.Session() as session:
         for i in range(disc_iters):
             _data, _flow = next(gen)  # shape: (batchsize, 6144), double output_dim now   # flow as second argument
             _cond_data = _data[:, 0:2*OUTPUT_DIM]	# earlier 2 frames as conditional data,
-            _real_data = _flow[:,OUTPUT_DIM:] 	# later flow as real data for discriminator
+            _real_data = _flow[:,OUTPUT_DIM_FLOW:] 	# later flow as real data for discriminator
 
             _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})
             if MODE == 'wgan':
@@ -261,7 +262,7 @@ with tf.Session() as session:
             dev_disc_costs = []
             _data, _flow = next(gen)  # shape: (batchsize, 6144), double output_dim now    # flow as second argument
             _cond_data = _data[:, 0:2*OUTPUT_DIM] # earlier 2 frames as conditional data
-            _real_data = _flow[:,OUTPUT_DIM:] 	# later flow as real data for discriminator
+            _real_data = _flow[:,OUTPUT_DIM_FLOW:] 	# later flow as real data for discriminator
             _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})   
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))

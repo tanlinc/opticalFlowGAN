@@ -50,7 +50,10 @@ def read_and_crop_flow(filename, target_shape): # cropping to desired shape
     h, w, c = target_shape
     flow = read_flo_file(filename)     # load image, already returns np
     flow_cropped = centerCrop(flow, (h,w)) # e.g. to (32,32,2)
-    x[:,:,0],x[:,:,1] = computeNormalizedFlow(flow_cropped[:,:,0], flow_cropped[:,:,1])
+    x = np.zeros((h,w,2))
+    u, v = computeNormalizedFlow(flow_cropped[:,:,0], flow_cropped[:,:,1])
+    x[:,:,0] = u
+    x[:,:,1] = v
     # computeNormalizedFlow(u, v, max_flow=-1, min_max_flow = -1)  to range -1,1 ??
     x = ((x+1.0)*(255./2.0)).astype(np.uint8) # convert to 0-255
     x = x.reshape(h,w,2)  # is already in that shape.. just to be sure
