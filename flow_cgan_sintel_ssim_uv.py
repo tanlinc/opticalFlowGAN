@@ -178,7 +178,7 @@ dev_gen = sintel.load_test_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3), (IM_DIM,IM_DIM,2))
 fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072) 
 fixed_cond_data_int = fixed_cond_samples[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
 fixed_real_data_int = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
-fixed_real_data_norm01 = tf.cast(fixed_cond_data_int, tf.float32)/255. # [0,1]
+fixed_real_data_norm01 = tf.cast(fixed_real_data_int, tf.float32)/255. # [0,1]
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
 if(CONTINUE):
     fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
@@ -189,21 +189,21 @@ fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fi
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     print("Iteration %d : \n" % frame)
     samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
-    samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] fo displaying
+    #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] fo displaying
     samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
-    
+    samples_255 = np.zeros((BATCH_SIZE, OUTPUT_DIM))
     for i in range(0, BATCH_SIZE):
         flowimage, flowimg = [],[] # reset to be sure
         flowimg = fh.computeFlowImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (32, 32, 3) # now color img!! :)
         flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
         flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
-        samples_255[i] = flowimage # put flow color image as display image
+        samples_255[i,:] = flowimage # put flow color image as display image
         samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[:,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
         lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
 # also save as .flo?
 
         # compare generated flow to real one 		# is it float..?
-        real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf.reshape! Tensor! batch!
+        real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
         real_gray = tf.image.rgb_to_grayscale(real) # tensor batch to gray; returns original dtype = float [0,1]
         pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! and not samples2show!
         pred_gray = tf.image.rgb_to_grayscale(pred)
