@@ -177,7 +177,6 @@ dev_gen = sintel.load_test_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3), (IM_DIM,IM_DIM,2))
 # For generating samples: define fixed noise and conditional input
 fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072) 
 fixed_cond_data_int = fixed_cond_samples[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
-print(fixed_cond_data_int.shape)
 fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
 fixed_real_data_norm01 = tf.cast(fixed_real_data+1.0, tf.float32)/2.0 # [0,1]
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
@@ -204,10 +203,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
         real_flowimages.append(real_flowimage)
-        samples_255[2*i,:] = flowimage # put sample flow color image as display image
-        print(samples_255.shape)        
-        samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[:,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
-        print(samples_255.shape)
+        samples_255[2*i,:] = flowimage # put sample flow color image as display image        
+        samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
     lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
     # sample_flowims = np.array(sample_flowimages)
     # real_flowims = np.array(real_flowimages)
