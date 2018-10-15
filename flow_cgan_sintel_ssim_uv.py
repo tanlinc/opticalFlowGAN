@@ -110,8 +110,8 @@ def Discriminator(inputs, conditions):	# input conds as well
 cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, 2*OUTPUT_DIM]) # cond input for G and D, 2 frames!
 cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]!
 
-real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) # real data is flow, dim 2!
-real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #normalized [-1,1]!
+#real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) # real data is flow, dim 2!
+real_data =  tf.placeholder(tf.float32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) #already float, normalized [-1,1]!
 fake_data = Generator(BATCH_SIZE, cond_data)
 
 disc_real = Discriminator(real_data, cond_data)
@@ -177,9 +177,9 @@ dev_gen = sintel.load_test_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3), (IM_DIM,IM_DIM,2))
 # For generating samples: define fixed noise and conditional input
 fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072) 
 fixed_cond_data_int = fixed_cond_samples[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
-fixed_real_data_int = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
-fixed_real_data_norm01 = tf.cast(fixed_real_data_int, tf.float32)/255. # [0,1]
-fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [0,1]! 
+fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
+fixed_real_data_norm01 = tf.cast(fixed_real_data+1.0, tf.float32)/2.0 # [0,1]
+fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
 if(CONTINUE):
     fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
 else:
@@ -188,36 +188,68 @@ fixed_noise_samples = Generator(BATCH_SIZE, fixed_cond_data_normalized, noise=fi
 
 def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next to each other in one image!
     print("Iteration %d : \n" % frame)
-    samples = session.run(fixed_noise_samples, feed_dict={real_data_int: fixed_real_data_int, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
-    #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] fo displaying
+    samples = session.run(fixed_noise_samples, feed_dict={real_data: fixed_real_data, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
+    #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] for displaying
     samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
     samples_255 = np.zeros((BATCH_SIZE, OUTPUT_DIM))
+    sample_flowimages, real_flowimages = [], []
     for i in range(0, BATCH_SIZE):
         flowimage, flowimg = [],[] # reset to be sure
         flowimg = fh.computeFlowImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (32, 32, 3) # now color img!! :)
         flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
         flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
-        samples_255[i,:] = flowimage # put flow color image as display image
+        sample_flowimages.append(flowimage)
+        real_flowimg = fh.computeFlowImg(fixed_real_data[i].reshape((IM_DIM,IM_DIM,2))) 
+        real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
+        real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
+        real_flowimages.append(real_flowimage)
+        samples_255[i,:] = flowimage # put sample flow color image as display image
         samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[:,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
-        lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame))
-# also save as .flo?
+        lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
+    sample_flowims = np.array(sample_flowimages)
+    real_flowims = np.array(real_flowimages)
 
-        # compare generated flow to real one 		# is it float..?
-        real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
-        real_gray = tf.image.rgb_to_grayscale(real) # tensor batch to gray; returns original dtype = float [0,1]
-        pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf reshape! and not samples2show!
-        pred_gray = tf.image.rgb_to_grayscale(pred)
-        mseval_per_entry = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
-        mseval = tf.reduce_mean(mseval_per_entry, [1,2])
-        ssimval = tf.image.ssim(real_gray, pred_gray, max_val=1.0)  # input tensor 64-batch, output tensor of ssimvals (64,)
-        ssimval_list = ssimval.eval()  # to numpy array # (64,)
-        mseval_list = mseval.eval() # (64,)
-        # print(ssimval_list)
-        # print(mseval_list)
-        for i in range (0,3):
-            lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list[i])
-            lib.plot.plot('MSE for sample %d' % (i+1), mseval_list[i])
-            print("sample %d \t MSE: %.5f \t SSIM: %.5f \r\n" % (i, mseval_list[i], ssimval_list[i]))
+    # compare generated flow to real one 	# float..?
+    # u-v-component wise
+    real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
+    real_u, real_v = real[:,:,:,0], real[:,:,:,1]
+    pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf reshape! and not samples2show!
+    pred_u, pred_v = real[:,:,:,0], real[:,:,:,1]
+
+    # mse & ssim on components
+    mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1]..
+    mseval_u = tf.reduce_mean(mseval_per_entry_u, [1,2])
+    mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
+    mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2])
+    ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    # avg: add and divide by 2    
+    mseval_uv = (mseval_u + mseval_v)/2.0  # tf.cast neccessary?
+    ssimval_uv = (ssimval_u + ssimval_v)/2.0
+    ssimval_list_uv = ssimval_uv.eval()  # to numpy array # (64,)
+    mseval_list_uv = mseval_uv.eval() # (64,)
+
+    # flow color ims to gray
+    real_color = tf.reshape(real_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3]) 
+    real_gray = tf.image.rgb_to_grayscale(real_color) # tensor batch to gray; returns original dtype = float [0,1]
+    pred_color = tf.reshape(sample_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf.reshape! Tensor! batch!
+    pred_gray = tf.image.rgb_to_grayscale(pred_color)
+
+    # mse & ssim on grayscale (rgb)
+    mseval_per_entry_rgb = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
+    mseval_rgb = tf.reduce_mean(mseval_per_entry_rgb, [1,2])
+    ssimval_rgb = tf.image.ssim(real_gray, pred_gray, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    ssimval_list_rgb = ssimval_rgb.eval()  # to numpy array # (64,)
+    mseval_list_rgb = mseval_rgb.eval() # (64,)
+
+    # print(ssimval_list)
+    # print(mseval_list)
+    for i in range (0,3):
+        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list_uv[i])
+        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list_rgb[i])
+        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list_uv[i])
+        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list_rgb[i])
+        print("sample %d \t MSE: %.5f  %.5f \t SSIM: %.5f  %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i] ssimval_list_uv[i], ssimval_list_rgb[i]))
     
 
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
@@ -250,7 +282,7 @@ with tf.Session() as session:
             _cond_data = _data[:, 0:2*OUTPUT_DIM]	# earlier 2 frames as conditional data,
             _real_data = _flow[:,OUTPUT_DIM_FLOW:] 	# later flow as real data for discriminator
 
-            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})
+            _disc_cost, _ = session.run([disc_cost, disc_train_op], feed_dict={real_data: _real_data, cond_data_int: _cond_data})
             if MODE == 'wgan':
                 _ = session.run(clip_disc_weights)
 
@@ -263,7 +295,7 @@ with tf.Session() as session:
             _data, _flow = next(gen)  # shape: (batchsize, 6144), double output_dim now    # flow as second argument
             _cond_data = _data[:, 0:2*OUTPUT_DIM] # earlier 2 frames as conditional data
             _real_data = _flow[:,OUTPUT_DIM_FLOW:] 	# later flow as real data for discriminator
-            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data_int: _real_data, cond_data_int: _cond_data})   
+            _dev_disc_cost = session.run(disc_cost, feed_dict={real_data: _real_data, cond_data_int: _cond_data})   
             dev_disc_costs.append(_dev_disc_cost)
             lib.plot.plot('dev disc cost', np.mean(dev_disc_costs))
             generate_image(iteration, _data)
