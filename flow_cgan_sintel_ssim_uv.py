@@ -206,8 +206,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         samples_255[2*i,:] = flowimage # put sample flow color image as display image        
         samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
     lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
-    # sample_flowims = np.array(sample_flowimages)
-    # real_flowims = np.array(real_flowimages)
+    sample_flowims_np = np.asarray(sample_flowimages, np.int32)
+    real_flowims_np = np.asarray(real_flowimages, np.int32)
+    sample_flowims = tf.convert_to_tensor(sample_flowims_np, np.int32)
+    real_flowims = tf.convert_to_tensor(real_flowims_np, np.int32)
 
     # compare generated flow to real one 	# float..?
     # u-v-component wise
@@ -230,9 +232,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     mseval_list_uv = mseval_uv.eval() # (64,)
 
     # flow color ims to gray
-    real_color = tf.reshape(real_flowimages, [BATCH_SIZE,IM_DIM,IM_DIM,3]) 
+    real_color = tf.reshape(real_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3]) 
     real_gray = tf.image.rgb_to_grayscale(real_color) # tensor batch to gray; returns original dtype = float [0,1]
-    pred_color = tf.reshape(sample_flowimages, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf.reshape! Tensor! batch!
+    pred_color = tf.reshape(sample_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf.reshape! Tensor! batch!
     pred_gray = tf.image.rgb_to_grayscale(pred_color)
 
     # mse & ssim on grayscale (rgb)
