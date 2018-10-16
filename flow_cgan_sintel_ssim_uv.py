@@ -218,9 +218,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
 
     # mse & ssim on components
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1]..
-    mseval_u = tf.reduce_mean(mseval_per_entry_u, [1,2])
+    mseval_u = tf.reduce_mean(mseval_per_entry_u)
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
-    mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2])
+    mseval_v = tf.reduce_mean(mseval_per_entry_v)
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     # avg: add and divide by 2    
