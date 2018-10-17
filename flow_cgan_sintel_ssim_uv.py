@@ -191,10 +191,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     samples = session.run(fixed_noise_samples, feed_dict={real_data: fixed_real_data, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
     #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] for displaying
     samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
-    samples_255 = np.zeros((BATCH_SIZE, OUTPUT_DIM))
+    samples_255 = np.zeros((2*BATCH_SIZE, OUTPUT_DIM))
     sample_flowimages, real_flowimages = [], []
     for i in range(0, BATCH_SIZE):
-        flowimage, flowimg = [],[] # reset to be sure
+        real_flowimg, flowimg = [],[] # reset to be sure
         flowimg = fh.computeFlowImg(samples[i].reshape((IM_DIM,IM_DIM,2)))    # (32, 32, 3) # now color img!! :)
         flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
         flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
@@ -203,8 +203,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
         real_flowimages.append(real_flowimage)
-        samples_255[2*i,:] = flowimage.astype('int32') # put sample flow color image as display image        
-        samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32'),axis=0) # show last frame next to generated sample
+        samples_255[2*i+1,:] = flowimage.astype('int32') # sample flow color image        
+        samples_255[2*i,:] = fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32')# last frame left of generated sample
 
     lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
     sample_flowims_np = np.asarray(sample_flowimages, np.int32)
@@ -227,17 +227,13 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     mseval_v = tf.reduce_mean(mseval_per_entry_v)
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
-    print(ssimval_u.eval().shape)
-    print(ssimval_v.eval().shape)
     # avg: add and divide by 2    
     mseval_uv = tf.add(mseval_u, mseval_v)  # tf.cast neccessary?
     tensor2 = tf.constant(2.0, shape=[64, 1])
-    # ssimval_uv = (ssimval_u + ssimval_v)/2.0
     ssimval_uv = tf.add(ssimval_u, ssimval_v)
     mseval_uv = tf.div(mseval_uv, tensor2)
     ssimval_uv = tf.div(ssimval_uv, tensor2)
     ssimval_list_uv = ssimval_uv.eval()  # to numpy array # (64,)
-    print(ssimval_list_uv.shape)
     mseval_list_uv = mseval_uv.eval() # (64,)
 
     # flow color ims to gray
@@ -258,11 +254,11 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     # print(ssimval_list)
     # print(mseval_list)
     for i in range (0,3):
-        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list_uv[i])
-        lib.plot.plot('SSIM for sample %d' % (i+1), ssimval_list_rgb[i])
-        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list_uv[i])
-        lib.plot.plot('MSE for sample %d' % (i+1), mseval_list_rgb[i])
-        print("sample %d \t MSE: %.5f  %.5f \t SSIM: %.5f  %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i], ssimval_list_uv[i], ssimval_list_rgb[i]))
+        lib.plot.plot('SSIM uv for sample %d' % (i+1), ssimval_list_uv[i])
+        lib.plot.plot('SSIM rgb for sample %d' % (i+1), ssimval_list_rgb[i])
+        lib.plot.plot('MSE uv for sample %d' % (i+1), mseval_list_uv[i])
+        lib.plot.plot('MSE rgb for sample %d' % (i+1), mseval_list_rgb[i])
+        print("sample %d \t MSE: %.5f \t %.5f \t SSIM: %.5f \t %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i], ssimval_list_uv[i], ssimval_list_rgb[i]))
     
 
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
