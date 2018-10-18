@@ -203,8 +203,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
         real_flowimages.append(real_flowimage)
-        samples_255[2*i+1,:] = flowimage.astype('int32') # sample flow color image        
-        samples_255[2*i,:] = fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32')# last frame left of generated sample
+        samples_255[2*i+1,:] = flowimage.astype('int32') # sample flow color image   
+        last_frame = fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32')   # need to transpose??
+        samples_255[2*i,:] = last_frame # last frame left of generated sample
+        # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
     lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
     sample_flowims_np = np.asarray(sample_flowimages, np.int32)
@@ -222,9 +224,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
 
     # mse & ssim on components
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1]..
-    mseval_u = tf.reduce_mean(mseval_per_entry_u)
+    mseval_u = tf.reduce_mean(mseval_per_entry_u, [1,2]) # mseval = tf.reduce_mean(mseval_per_entry, [1,2])
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
-    mseval_v = tf.reduce_mean(mseval_per_entry_v)
+    mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2])
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     # avg: add and divide by 2    
