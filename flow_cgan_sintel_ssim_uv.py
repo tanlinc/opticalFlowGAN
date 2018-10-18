@@ -224,15 +224,18 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
 
     # mse & ssim on components
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1]..
-    mseval_u = tf.reduce_mean(mseval_per_entry_u, [1,2]) # mseval = tf.reduce_mean(mseval_per_entry, [1,2])
+    mseval_u = tf.reduce_mean(mseval_per_entry_u, [1]) 
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
-    mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2])
+    mseval_v = tf.reduce_mean(mseval_per_entry_v, [1])
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     # avg: add and divide by 2    
+    print(ssimval_u.eval())
+    print(ssimval_v.eval())
     mseval_uv = tf.add(mseval_u, mseval_v)  # tf.cast neccessary?
     tensor2 = tf.constant(2.0, shape=[64, 1])
     ssimval_uv = tf.add(ssimval_u, ssimval_v)
+    print(ssimval_uv.eval())
     mseval_uv = tf.div(mseval_uv, tensor2)
     ssimval_uv = tf.div(ssimval_uv, tensor2)
     ssimval_list_uv = ssimval_uv.eval()  # to numpy array # (64,)
