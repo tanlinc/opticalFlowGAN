@@ -27,7 +27,7 @@ OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels (3*32*32) - rgb color
 OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
 CONTINUE = False  # Default False, set True if restoring from checkpoint
 START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
-CURRENT_PATH = "sintel/flowcganuv"
+CURRENT_PATH = "sintel/flowcganuv3"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
@@ -213,35 +213,26 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     real_flowims_np = np.asarray(real_flowimages, np.int32)
     sample_flowims = tf.convert_to_tensor(sample_flowims_np, np.int32)
     real_flowims = tf.convert_to_tensor(real_flowims_np, np.int32) # turn into tensor to reshape later
-    # tensor = tf.constant(np_array)
+    # tensor = tf.constant(np_array) # another way to create a tensor
 
     # compare generated flow to real one 	# float..?
     # u-v-component wise
     real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
     real_u, real_v = real[:,:,:,0], real[:,:,:,1] # use some tf funct here?
     pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf reshape! and not samples2show!
-    pred_u, pred_v = pred[:,:,:,0], pred[:,:,:,1] # shape (64, 32, 32)
-    print((real_u.eval()).shape)
-    print(real_u.eval())
-    print((real_v.eval()).shape) 
-    print(real_v.eval())
-    print((pred_u.eval()).shape)
-    print(pred_u.eval())
-    print((pred_v.eval()).shape)
-    print(pred_v.eval())
+    pred_u, pred_v = pred[:,:,:,0], pred[:,:,:,1] # shape (64, 32, 32) all of them
     # print((real_u.flatten()).shape)
     real_u_flat = tf.reshape(real_u, [64, -1])
     pred_u_flat = tf.reshape(pred_u, [64, -1])
 
     # mse & ssim on components
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1].. # shape (64,32) # flatten??
-    print((mseval_per_entry_u.eval()).shape)
+    print(mseval_per_entry_u.eval())
     mseval_per_entry_u_flat = tf.keras.metrics.mse(real_u_flat, pred_u_flat)  #  on grayscale, on [0,1].. # shape (64,32) # flatten??
-    print((mseval_per_entry_u_flat.eval()).shape)
-    mseval_u_flat = tf.reduce_mean(mseval_per_entry_u_flat, 1)
-    print((mseval_u_flat.eval()).shape)
-    print(mseval_u_flat.eval())
-    mseval_u = tf.reduce_mean(mseval_per_entry_u, 1) 
+    print(mseval_per_entry_u_flat.eval()) # shape (64,)
+    mseval_u = tf.reduce_mean(mseval_per_entry_u, 0) # not sure about the number here
+    print((mseval_u.eval()).shape) 
+    print(mseval_u.eval())
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
     mseval_v = tf.reduce_mean(mseval_per_entry_v, 1)
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
