@@ -226,12 +226,12 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     pred_u_flat = tf.reshape(pred_u, [64, -1])
 
     # mse & ssim on components
-    mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1].. # shape (64,32) # flatten??
-    print(mseval_per_entry_u.eval())
-    mseval_per_entry_u_flat = tf.keras.metrics.mse(real_u_flat, pred_u_flat)  #  on grayscale, on [0,1].. # shape (64,32) # flatten??
-    print(mseval_per_entry_u_flat.eval()) # shape (64,)
-    mseval_u = tf.reduce_mean(mseval_per_entry_u, 0) # not sure about the number here
-    print((mseval_u.eval()).shape) 
+    mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1].. # shape (64,32)
+    # print(mseval_per_entry_u.eval())
+    mseval_per_entry_u_flat = tf.keras.metrics.mse(real_u_flat, pred_u_flat)  #  on grayscale, on [0,1], flattened # shape (64,)
+    # print(mseval_per_entry_u_flat.eval()) # shape (64,), all diff numbers
+    mseval_u = tf.reduce_mean(mseval_per_entry_u, 1) # shape # similar but diff numbers
+    print((mseval_u.eval()).shape)    
     print(mseval_u.eval())
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
     mseval_v = tf.reduce_mean(mseval_per_entry_v, 1)
