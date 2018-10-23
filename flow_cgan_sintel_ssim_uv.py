@@ -218,9 +218,12 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     # compare generated flow to real one 	# float..?
     # u-v-component wise
     real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
-    real_u, real_v = real[:,:,:,0], real[:,:,:,1] # use some tf funct here?
+  # foo[3:7, :-2] = tf.slice(foo, [3, 0], [4, foo.get_shape()[1]-2])
+    real_u = tf.slice(real, [0,0,0,0], [real.get_shape()[0],real.get_shape()[1],real.get_shape()[2], 0])
+    real_v = tf.slice(real, [0,0,0,1], [real.get_shape()[0],real.get_shape()[1],real.get_shape()[2], 1])
     pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf reshape! and not samples2show!
-    pred_u, pred_v = pred[:,:,:,0], pred[:,:,:,1] # shape (64, 32, 32) all of them
+    pred_u = tf.slice(pred, [0,0,0,0], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 0])
+    pred_v = tf.slice(pred, [0,0,0,1], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 1]) # shape (64, 32, 32) all of them
     # print((real_u.flatten()).shape)
     real_u_flat = tf.reshape(real_u, [64, -1])
     pred_u_flat = tf.reshape(pred_u, [64, -1])
@@ -229,9 +232,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on grayscale, on [0,1].. # shape (64,32)
     # print(mseval_per_entry_u.eval())
     mseval_per_entry_u_flat = tf.keras.metrics.mse(real_u_flat, pred_u_flat)  #  on grayscale, on [0,1], flattened # shape (64,)
-    # print(mseval_per_entry_u_flat.eval()) # shape (64,), all diff numbers
+    print(mseval_per_entry_u_flat.eval()) # shape (64,), all diff numbers
     mseval_u = tf.reduce_mean(mseval_per_entry_u, 1) # shape # similar but diff numbers
-    print((mseval_u.eval()).shape)    
+    #print((mseval_u.eval()).shape)   # (64,) 
     print(mseval_u.eval())
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
     mseval_v = tf.reduce_mean(mseval_per_entry_v, 1)
