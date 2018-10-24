@@ -179,9 +179,6 @@ fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072)
 fixed_cond_data_int = fixed_cond_samples[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
 fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
 fixed_real_data_norm01 = tf.cast(fixed_real_data+1.0, tf.float32)/2.0 # [0,1]
-print("fixed real data norm01")
-print(fixed_real_data_norm01.eval().shape)
-print(fixed_real_data_norm01.eval())
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
 if(CONTINUE):
     fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
@@ -197,6 +194,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print("samples 01")
     print(samples_01.eval().shape)
     print(samples_01.eval())
+    print("fixed real data norm01")
+    print(fixed_real_data_norm01.eval().shape)
+    print(fixed_real_data_norm01.eval())
     samples_255 = np.zeros((2*BATCH_SIZE, OUTPUT_DIM))
     sample_flowimages, real_flowimages = [], []
     for i in range(0, BATCH_SIZE):
