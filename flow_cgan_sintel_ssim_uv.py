@@ -190,10 +190,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print("Iteration %d : \n" % frame)
     samples = session.run(fixed_noise_samples, feed_dict={real_data: fixed_real_data, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
     #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] for displaying
-    samples_01 = ((samples+1.)/2.).astype('float32') # [0,1]
+    samples_01 = ((samples+1.)/2.).astype('float32') # [0,1] is a np.ndarray
     print("samples 01")
-    print(samples_01.eval().shape)
-    print(samples_01.eval())
+    print(samples_01.shape)
+    print(samples_01)
     print("fixed real data norm01")
     print(fixed_real_data_norm01.eval().shape)
     print(fixed_real_data_norm01.eval())
