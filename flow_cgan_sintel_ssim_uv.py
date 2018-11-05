@@ -190,13 +190,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print("Iteration %d : \n" % frame)
     samples = session.run(fixed_noise_samples, feed_dict={real_data: fixed_real_data, cond_data_int: fixed_cond_data_int}) # output range (-1.0,1.0), size=(BATCH_SIZE, OUT_DIM)
     #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] for displaying
-    samples_01 = ((samples+1.)/2.).astype('float32') # [0,1] is a np.ndarray
-    print("samples 01")
-    print(samples_01.shape)
-    print(samples_01)
-    print("fixed real data norm01")
-    print(fixed_real_data_norm01.eval().shape)
-    print(fixed_real_data_norm01.eval())
+    samples_01 = ((samples+1.)/2.).astype('float32') # [0,1] is a np.ndarray shape (64, 2048)
+    # print(fixed_real_data_norm01.eval()) # shape (64, 2048) # bigger areas with (almost) same flow
     samples_255 = np.zeros((2*BATCH_SIZE, OUTPUT_DIM))
     sample_flowimages, real_flowimages = [], []
     for i in range(0, BATCH_SIZE):
@@ -224,10 +219,10 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     # compare generated flow to real one 	# float..?
     # u-v-component wise
     real = tf.reshape(fixed_real_data_norm01, [BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf.reshape! Tensor! batch!
-    real_u = tf.slice(real, [0,0,0,0], [real.get_shape()[0],real.get_shape()[1],real.get_shape()[2], 0])
+    real_u = tf.slice(real, [0,0,0,0], [real.get_shape()[0],real.get_shape()[1],real.get_shape()[2], 1])
     real_v = tf.slice(real, [0,0,0,1], [real.get_shape()[0],real.get_shape()[1],real.get_shape()[2], 1])
     pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf reshape!
-    pred_u = tf.slice(pred, [0,0,0,0], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 0])
+    pred_u = tf.slice(pred, [0,0,0,0], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 1])
     pred_v = tf.slice(pred, [0,0,0,1], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 1]) # shape (64, 32, 32) all of them
     # print((real_u.flatten()).shape)
     #real_u_flat = tf.reshape(real_u, [64, -1])
@@ -257,26 +252,28 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     print(mseval_u.eval().shape)  # (64,) 
     print(mseval_u.eval())
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on grayscale, on [0,1]..
-    print("mseval per entry v")
+    print("mseval per entry v") # shape (64,32,32) # very small vals (e-1,-2,-3)
     print(mseval_per_entry_v.eval().shape)
     print(mseval_per_entry_v.eval())
     mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2])
-    print("mseval v ")
+    print("mseval v ") # shape (64,)
     print(mseval_v.eval().shape)
     print(mseval_v.eval())
     ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
-    ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,) # also minus vals, around 0
     # avg: add and divide by 2   
     print("ssimval u") 
-    print(ssimval_u.eval().shape)  # 64 numbers :)
-    print(ssimval_u.eval())  # 64 numbers :)
+    print(ssimval_u.eval().shape)  # 64 nans???
+    print(ssimval_u.eval()) 
     print("ssimval v")
-    print(ssimval_v.eval().shape)  # 64 nans? 
-    print(ssimval_v.eval())  # nan *64
+    print(ssimval_v.eval().shape)  # 64 numbers? 
+    print(ssimval_v.eval()) 
     mseval_uv = tf.add(mseval_u, mseval_v)  # tf.cast neccessary?
-    tensor2 = tf.constant(2.0, shape=[64, 1])
+    tensor2 = tf.constant(2.0, shape=[64])
+    print(tensor2.eval().shape)
+    print(tensor2.eval())
     ssimval_uv = tf.add(ssimval_u, ssimval_v)
-    print("ssimval uv")
+    print("ssimval uv") # (64,)
     print(ssimval_uv.eval().shape) # 
     print(ssimval_uv.eval()) # 
     mseval_uv = tf.div(mseval_uv, tensor2)
@@ -291,11 +288,12 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     real_flowims = tf.cast(real_flowims, tf.float32)/255. # to [0,1]
     real_color = tf.reshape(real_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3]) 
     real_gray = tf.image.rgb_to_grayscale(real_color) # tensor batch to gray; returns original dtype = float [0,1]
-    print("real gray")
-    print((real_gray.eval()).shape)
+    # print("real gray") # (64, 32, 32, 1)
     sample_flowims = tf.cast(sample_flowims, tf.float32)/255. # to [0,1]
     pred_color = tf.reshape(sample_flowims, [BATCH_SIZE,IM_DIM,IM_DIM,3])  # use tf.reshape! Tensor! batch!
     pred_gray = tf.image.rgb_to_grayscale(pred_color)
+    print("pred gray")
+    print(pred_gray.eval().shape) 
 
     # mse & ssim on grayscale
     mseval_per_entry_rgb = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
@@ -303,6 +301,12 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     ssimval_rgb = tf.image.ssim(real_gray, pred_gray, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
     ssimval_list_rgb = ssimval_rgb.eval()  # to numpy array # (64,)
     mseval_list_rgb = mseval_rgb.eval() # (64,)
+    print("mseval rgb")
+    print(mseval_list_rgb.shape)
+    print(mseval_list_rgb)
+    print("ssimval rgb")
+    print(ssimval_list_rgb.shape)
+    print(ssimval_list_rgb)
 
     # print(ssimval_list)
     # print(mseval_list)
