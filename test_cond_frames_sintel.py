@@ -38,7 +38,7 @@ with tf.Session() as session:
     lib.save_images.save_images(images, 'cond_frames_batch.jpg')    		
 
 flows = _flow[0] # first from batch
-flow1 = flows[0:OUT_DIM_FLOW] # (2048,) for 32
+flow1 = flows[0:OUTPUT_DIM_FLOW] # (2048,) for 32
 flow1 = flow1.reshape(IM_DIM,IM_DIM,2)
 flowimg1 = fh.computeFlowImg(flow1)    # (200, 200, 3) # now color img!! :)
 flowimg1_T = np.transpose(flowimg1, [2,0,1])  #  (3, 200, 200)
