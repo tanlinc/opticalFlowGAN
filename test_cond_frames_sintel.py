@@ -11,7 +11,7 @@ BATCH_SIZE = 64 # Batch size
 IM_DIM = 32 # number of pixels along x and y (square assumed)
 OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels (3*32*32) - rgb color
 OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
-save_path = "/home/linkermann/opticalFlow/opticalFlowGAN/data/tests"
+save_path = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/"
 lib.print_model_settings(locals().copy())
 
 cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, 2*OUTPUT_DIM]) # cond input for G and D, 2 frames!
@@ -43,7 +43,7 @@ with tf.Session() as session:
         real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
         real_flowimages.append(real_flowimage)
         print("real flowimages")
-        print(real_flowimages.shape)
+        print(np.asarray(real_flowimages).shape)
         
 
         real_flow = real_flowimage[i].astype('int32')
@@ -60,7 +60,7 @@ with tf.Session() as session:
         print(samples_255)
 # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
-    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_{}.jpg'.format(frame)) # also save as .flo?
+    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_cond_frame1.jpg') # also save as .flo?
     real_flowims_np = np.asarray(real_flowimages, np.int32)
     print("real flowims")
     print(real_flowims_np.shape) 
