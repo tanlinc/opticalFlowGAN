@@ -42,19 +42,13 @@ with tf.Session() as session:
         real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimage = real_flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten? 
         real_flowimages.append(real_flowimage) # np.asarray...      
-        real_flow = real_flowimage.astype('int32') # empty shape!!
-        print("real flow rgb now")
-        print(real_flow.shape) # ()
-        print(real_flow)
-        samples_255[2*i+1,:] = real_flow # real flow color image - why are vals all the same???????????????  
+        real_flow = real_flowimage.astype('int32') # (3072,) # diff numbers 0..255
+        samples_255[2*i+1,:] = real_flow 
 
         last_frame = fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32')  # (3072,)
-        #cv.imshow(last_frame)
         last_frame = last_frame.reshape((IM_DIM,IM_DIM,3))
         last_frame_T = np.transpose(last_frame, [2,0,1])  #  (3, 32, 32) need to T?
-        last_frame_transposed = last_frame_T.reshape((OUTPUT_DIM,))
-        print("last frame")
-        print(last_frame_transposed.shape) 
+        last_frame_transposed = last_frame_T.reshape((OUTPUT_DIM,)) # (3072,)
         samples_255[2*i,:] = last_frame_transposed # last frame left of generated sample
 # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
