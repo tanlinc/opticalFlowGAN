@@ -34,20 +34,21 @@ init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 with tf.Session() as session:
     session.run(init_op)
 
-    samples_255 = np.zeros((2*BATCH_SIZE, IM_DIM, IM_DIM, 3))
+    # samples_255 = np.zeros((2*BATCH_SIZE, IM_DIM, IM_DIM, 3))
     real_flowimages = []
     for i in range(0, BATCH_SIZE):
         real_flowimg = [] # reset to be sure
         real_flowimg = fh.computeFlowImg(fixed_real_data[i,:].reshape((IM_DIM,IM_DIM,2)))  # (32, 32, 3) # now color img!! :)
         # real_flowimage_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
-        real_flowimages.append(real_flowimage) # np.asarray...      
+        # real_flowimages.append(real_flowimage) # np.asarray...      
         real_flow = real_flowimg.astype('int32') # diff numbers 0..255
-        samples_255[2*i+1,:,:,:] = real_flow 
+        # samples_255[2*i+1,:,:,:] = real_flow 
+        images = np.insert(images, i*2+1, real_flow, axis=0)
 
-        last_frame = images[i,:,:,:].astype('int32')  
+        # last_frame = images[i,:,:,:].astype('int32')  
         #last_frame = last_frame.reshape(IM_DIM,IM_DIM,3)
         #last_frame_transposed = last_frame.reshape(3,IM_DIM,IM_DIM) # (3072,)
-        samples_255[2*i,:,:,:] = last_frame # last frame left of generated sample
+        # samples_255[2*i,:,:,:] = last_frame # last frame left of generated sample
 # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
     lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'cond_frames_batch.jpg')    		
