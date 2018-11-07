@@ -23,11 +23,11 @@ fixed_cond_data_int = _data[:,0:2*OUTPUT_DIM] # earlier frames as condition, con
 fixed_viz_data_int = _data[:,OUTPUT_DIM:2*OUTPUT_DIM]
 
 # viz cond data
-images = fixed_viz_data_int.reshape(BATCH_SIZE, TARGET_SIZE,TARGET_SIZE,3)
+images = fixed_viz_data_int.reshape(BATCH_SIZE, IM_DIM,IM_DIM,3)
 outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/"
-tflib.save_images.save_images(images.reshape((BATCH_SIZE,3,TARGET_SIZE,TARGET_SIZE)), outpath+"condvizbatch.jpg")
+tflib.save_images.save_images(images.reshape((BATCH_SIZE,3,IM_DIM,IM_DIM)), outpath+"condvizbatch.jpg")
 
-fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
+fixed_real_data =_flow[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
 
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 
