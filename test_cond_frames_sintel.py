@@ -42,4 +42,4 @@ flow1 = flows[0:OUTPUT_DIM_FLOW] # (2048,) for 32
 flow1 = flow1.reshape(IM_DIM,IM_DIM,2)
 flowimg1 = fh.computeFlowImg(flow1)    # (200, 200, 3) # now color img!! :)
 flowimg1_T = np.transpose(flowimg1, [2,0,1])  #  (3, 200, 200)
-save_images(flowimg1_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel1.jpg")
+lib.save_images.save_images(flowimg1_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel1.jpg")
