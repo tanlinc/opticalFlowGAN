@@ -21,7 +21,6 @@ _data, _flow  = next(gen) # fixed_cond_samples, fixed_flow_samples # (batchsize,
 fixed_cond_data_int = _data[:,0:2*OUTPUT_DIM] # earlier frames as cond, _data: (64,3*3072)
 fixed_viz_data_int = _data[:,OUTPUT_DIM:2*OUTPUT_DIM] # each later frame for viz
 fixed_real_data =_flow[:,OUTPUT_DIM_FLOW:] # later flow for discr, _flow: (64,2*2048)
-print(fixed_real_data.shape)
 images = fixed_viz_data_int.reshape(BATCH_SIZE,3,IM_DIM,IM_DIM)
 # tflib.save_images.save_images(images, outpath+"condvizbatch.jpg") # viz cond data
 
@@ -51,4 +50,4 @@ flow2 = flow2.reshape(IM_DIM,IM_DIM,2)
 flowimg2 = fh.computeFlowImg(flow2)    # (200, 200, 3) # now color img!! :)
 flowimg2 = flowimg2.reshape(IM_DIM,IM_DIM,3)
 # flowimg2_T = np.transpose(flowimg2, [2,0,1])  #  (3, 200, 200)
-lib.save_images.save_images(flowimg2_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel2.jpg")
+lib.save_images.save_images(flowimg2.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel2.jpg")
