@@ -14,19 +14,20 @@ OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
 save_path = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/"
 lib.print_model_settings(locals().copy())
 
-cond_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, 2*OUTPUT_DIM]) # cond input for G and D, 2 frames!
-cond_data = 2*((tf.cast(cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]!
-real_data =  tf.placeholder(tf.float32, shape=[BATCH_SIZE, OUTPUT_DIM_FLOW]) #already float, normalized [-1,1]!
-
 # Dataset iterators
 gen = sintel.load_train_gen(BATCH_SIZE, (IM_DIM,IM_DIM,3), (IM_DIM,IM_DIM,2)) # batch size, im size, im size flow
 
-# For generating samples: define fixed noise and conditional input
-fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072) 
-fixed_cond_data_int = fixed_cond_samples[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
+# For generating samples: define conditional input
+_data, _flow  = next(gen) # fixed_cond_samples, fixed_flow_samples = next(gen)  # shape: (batchsize, 3072) 
+fixed_cond_data_int = _data[:,0:2*OUTPUT_DIM] # earlier frames as condition, cond samples shape (64,3*3072)
+fixed_viz_data_int = _data[:,OUTPUT_DIM:2*OUTPUT_DIM]
+
+# viz cond data
+images = fixed_viz_data_int.reshape(BATCH_SIZE, TARGET_SIZE,TARGET_SIZE,3)
+outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/"
+tflib.save_images.save_images(images.reshape((BATCH_SIZE,3,TARGET_SIZE,TARGET_SIZE)), outpath+"condvizbatch.jpg")
+
 fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr, flow samples shape (64,2048)
-fixed_real_data_norm01 = tf.cast(fixed_real_data+1.0, tf.float32)/2.0 # [0,1]
-fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
 
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 
@@ -45,12 +46,11 @@ with tf.Session() as session:
         real_flow = real_flowimage.astype('int32') # (3072,) # diff numbers 0..255
         samples_255[2*i+1,:] = real_flow 
 
-        last_frame = fixed_cond_data_int[i,OUTPUT_DIM:].astype('int32')  # (3072,)
-        last_frame = last_frame.reshape((IM_DIM,IM_DIM,3))
-        last_frame_T = np.transpose(last_frame, [2,0,1])  #  (3, 32, 32) need to T?
-        last_frame_transposed = last_frame_T.reshape((OUTPUT_DIM,)) # (3072,)
+        last_frame = fixed_viz_data_int[i,:].astype('int32')  # (3072,)
+        last_frame = last_frame.reshape(IM_DIM,IM_DIM,3)
+        last_frame_transposed = last_frame.reshape(3,IM_DIM,IM_DIM) # (3072,)
         samples_255[2*i,:] = last_frame_transposed # last frame left of generated sample
 # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
-    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_cond_frame1.jpg') # also save as .flo?    		
+    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'samples_cond_frame1.jpg')    		
 

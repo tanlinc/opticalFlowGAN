@@ -21,9 +21,6 @@ images = _data[0,:]  # np ndarray, uint8
 image1= images[0:OUT_DIM]  # (outdim,) # (3072,) for 32
 image2= images[OUT_DIM:2*OUT_DIM]
 image3= images[2*OUT_DIM:]
-print(image1.shape)
-print(image2.shape)
-print(image3.shape)
 image1 = image1.reshape(TARGET_SIZE,TARGET_SIZE,3)
 image2 = image2.reshape(TARGET_SIZE,TARGET_SIZE,3)
 image3 = image3.reshape(TARGET_SIZE,TARGET_SIZE,3)
