@@ -51,5 +51,5 @@ with tf.Session() as session:
         # samples_255[2*i,:,:,:] = last_frame # last frame left of generated sample
 # samples_255= np.insert(samples_255, i*2, fixed_cond_data_int[i],axis=0)
 
-    lib.save_images.save_images(samples_255.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'cond_frames_batch.jpg')    		
+    lib.save_images.save_images(images.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM)), 'cond_frames_batch.jpg')    		
 
