@@ -181,7 +181,6 @@ fixed_real_data = fixed_flow_samples[:,OUTPUT_DIM_FLOW:]	 # later flow for discr
 fixed_real_data_norm01 = tf.cast(fixed_real_data+1.0, tf.float32)/2.0 # [0,1]
 fixed_cond_data_normalized = 2*((tf.cast(fixed_cond_data_int, tf.float32)/255.)-.5) #normalized [-1,1]! 
 fixed_viz_data_int = fixed_cond_samples[:,OUTPUT_DIM:2*OUTPUT_DIM] # each later frame for viz
-images = fixed_viz_data_int.reshape(BATCH_SIZE,3,IM_DIM,IM_DIM)
 if(CONTINUE):
     fixed_noise = tf.get_variable("noise", shape=[BATCH_SIZE, SQUARE_IM_DIM]) # take same noise like saved model
 else:
@@ -194,7 +193,7 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     #samples_255 = ((samples+1.)*(255./2)).astype('int32') #(-1,1) to [0,255] for displaying
     samples_01 = ((samples+1.)/2.).astype('float32') # [0,1] is a np.ndarray shape (64, 2048)
     # print(fixed_real_data_norm01.eval()) # shape (64, 2048) # bigger areas with (almost) same flow 
-    
+    images2show = fixed_viz_data_int.reshape(BATCH_SIZE,3,IM_DIM,IM_DIM)
     sample_flowimages, real_flowimages = [], []
     for i in range(0, BATCH_SIZE):
         real_flowimg, flowimg = [],[] # reset to be sure
@@ -209,11 +208,11 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         real_flowimg = real_flowimg.reshape(IM_DIM,IM_DIM,3).astype('int32') # (32, 32, 3) 
         real_flowimg_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimages.append(real_flowimg_T) # or which one? # also save as .flo?
-        images = np.insert(images, i*2+1, real_flowimg_T, axis=0)
-        #samples_255[2*i+1,:] = flowimage.astype('int32') # sample flow color image   
-    # images.shape: (128, 3, 32, 32) = (2*BATCH_SIZE, 3, IM_DIM, IM_DIM) 
+        images2show = np.insert(images2show, i*2+1, real_flowimg_T, axis=0)
+        #samples_255[2*i+1,:] = flowimage # sample flow color image   
+    # images2show.shape: (128, 3, 32, 32) = (2*BATCH_SIZE, 3, IM_DIM, IM_DIM) 
     # images.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM))
-    lib.save_images.save_images(images, 'samples_{}.jpg'.format(frame)) 
+    lib.save_images.save_images(images2show, 'samples_{}.jpg'.format(frame)) 
     sample_flowims_np = np.asarray(sample_flowimages, np.int32)
     real_flowims_np = np.asarray(real_flowimages, np.int32)
     sample_flowims = tf.convert_to_tensor(sample_flowims_np, np.int32)
