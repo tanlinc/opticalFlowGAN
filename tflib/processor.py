@@ -57,8 +57,8 @@ def read_and_crop_flow(filename, target_shape): # cropping to desired shape
     # computeNormalizedFlow(u, v, max_flow=-1, min_max_flow = -1)  to range -1,1 ??
     # x = ((x+1.0)*(255./2.0)).astype(np.uint8) # convert to 0-255 #  no conversion
     x = x.astype(np.float32)
-    x = x.reshape(h,w,2)  # is already in that shape.. just to be sure
-    x = np.transpose(x, [2,0,1]) # e.g. (2,32,32) do the transpose here!
+    # x = x.reshape(h,w,2)  # is already in that shape.. just to be sure
+    # x = np.transpose(x, [2,0,1]) # e.g. (2,32,32) do the transpose here! # this is a try
     x = x.reshape(h*w*2,)	# uncomment for 64x64 gan!
     return x
 

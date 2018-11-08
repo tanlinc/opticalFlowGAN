@@ -40,16 +40,14 @@ with tf.Session() as session:
 flows = _flow[0] # first from batch
 flow1 = flows[0:OUTPUT_DIM_FLOW] # (2048,) for 32
 flow1 = flow1.reshape(IM_DIM,IM_DIM,2)
-flow1_T = np.transpose(flow1, [2,0,1])
-flowimg1 = fh.computeFlowImg(flow1_T)    # (200, 200, 3) # now color img!! :)
+flowimg1 = fh.computeFlowImg(flow1)    # (200, 200, 3) # now color img!! :)
 flowimg1 = flowimg1.reshape(IM_DIM,IM_DIM,3)
 flowimg1_T = np.transpose(flowimg1, [2,0,1])  #  (3, 200, 200)
-lib.save_images.save_images(flowimg1_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel1.jpg")
+lib.save_images.save_images(flowimg1_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsintel1.jpg")
 
 flow2 = flows[OUTPUT_DIM_FLOW:] # (2048,) for 32
 flow2 = flow2.reshape(IM_DIM,IM_DIM,2)
-flow2_T = np.transpose(flow2, [2,0,1])
-flowimg2 = fh.computeFlowImg(flow2_T)    # (200, 200, 3) # now color img!! :)
+flowimg2 = fh.computeFlowImg(flow2)    # (200, 200, 3) # now color img!! :)
 flowimg2 = flowimg2.reshape(IM_DIM,IM_DIM,3)
-# flowimg2_T = np.transpose(flowimg2, [2,0,1])  #  (3, 200, 200)
-lib.save_images.save_images(flowimg2.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsamplesintel2.jpg")
+flowimg2_T = np.transpose(flowimg2, [2,0,1])  #  (3, 200, 200)
+lib.save_images.save_images(flowimg2_T.reshape((1,3,IM_DIM,IM_DIM)), outpath+"realflowsintel2.jpg")
