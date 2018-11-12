@@ -59,6 +59,7 @@ def Generator(n_samples, conditions, noise=None):	# input conds additional to no
     output = tf.reshape(output, [n_samples, SQUARE_IM_DIM*4]) # 32x32x4 = 4096; to: (BATCH_SIZE, 4096)
 
     output = lib.ops.linear.Linear('Generator.Input', SQUARE_IM_DIM*4, 4*4*4*DIM, output) # 4*4*4*DIM = 64*64 = 4096
+    # @linear: inputdim= outputdim, orth initialization
     output = lib.ops.batchnorm.Batchnorm('Generator.BN1', [0], output)
     output = tf.nn.relu(output)
     output = tf.reshape(output, [-1, 4*DIM, 4, 4])
@@ -102,7 +103,7 @@ def Discriminator(inputs, conditions):	# input conds as well
    # output = LeakyReLU(output)
 
     output = tf.reshape(output, [-1, 4*4*8*DIM]) # adjusted outcome
-    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*8*DIM, 1, output)
+    output = lib.ops.linear.Linear('Discriminator.Output', 4*4*8*DIM, 1, output) # 4 inst of 8??
 
     return tf.reshape(output, [-1])
 

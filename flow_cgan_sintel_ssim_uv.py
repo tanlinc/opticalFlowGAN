@@ -27,7 +27,7 @@ OUTPUT_DIM = IM_DIM*IM_DIM*3 # Number of pixels (3*32*32) - rgb color
 OUTPUT_DIM_FLOW = IM_DIM*IM_DIM*2 # Number of pixels (2*32*32) - uv direction
 CONTINUE = False  # Default False, set True if restoring from checkpoint
 START_ITER = 0  # Default 0, set accordingly if restoring from checkpoint (100, 200, ...)
-CURRENT_PATH = "sintel/flowcganuv3"
+CURRENT_PATH = "sintel/flowcganuv5"
 
 restore_path = "/home/linkermann/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"
 
@@ -198,9 +198,9 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     for i in range(0, BATCH_SIZE):
         real_flowimg, flowimg = [],[] # reset to be sure
         flowimg = fh.computeFlowImg(samples[i,:].reshape((IM_DIM,IM_DIM,2)))    # (32, 32, 3) # now color img!! :)
-        flowimage_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
-        flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
-        sample_flowimages.append(flowimage)
+        flowimg_T = np.transpose(flowimg, [2,0,1])  #  (3, 32, 32)
+        # flowimage = flowimage_T.reshape((OUTPUT_DIM,))  # instead of flatten?
+        sample_flowimages.append(flowimg_T)
         
         real_uvflow = fixed_real_data[i,:]
         real_uvflow = real_uvflow.reshape((IM_DIM,IM_DIM,2))
@@ -208,7 +208,8 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
         real_flowimg = real_flowimg.reshape(IM_DIM,IM_DIM,3).astype('int32') # (32, 32, 3) 
         real_flowimg_T = np.transpose(real_flowimg, [2,0,1])  #  (3, 32, 32)
         real_flowimages.append(real_flowimg_T) # or which one? # also save as .flo?
-        images2show = np.insert(images2show, i*2+1, real_flowimg_T, axis=0)
+
+        images2show = np.insert(images2show, i*2+1, flowimg_T, axis=0)
         #samples_255[2*i+1,:] = flowimage # sample flow color image   
     # images2show.shape: (128, 3, 32, 32) = (2*BATCH_SIZE, 3, IM_DIM, IM_DIM) 
     # images.reshape((2*BATCH_SIZE, 3, IM_DIM, IM_DIM))
@@ -227,22 +228,6 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     pred = tf.reshape(samples_01,[BATCH_SIZE,IM_DIM,IM_DIM,2])  # use tf reshape!
     pred_u = tf.slice(pred, [0,0,0,0], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 1])
     pred_v = tf.slice(pred, [0,0,0,1], [pred.get_shape()[0],pred.get_shape()[1],pred.get_shape()[2], 1]) # shape (64, 32, 32) all of them
-    # print((real_u.flatten()).shape)
-    #real_u_flat = tf.reshape(real_u, [64, -1])
-    #pred_u_flat = tf.reshape(pred_u, [64, -1])
-    #print("real u") # shape (64, 32,32, 1)
-    #print(real_u.eval().shape)
-    #print(real_u.eval())
-    #print("real v") # shape (64, 32,32, 1)
-    #print(real_v.eval().shape)
-    #print(real_v.eval())
-    #print("pred u") # shape (64, 32,32, 1)
-    #print(pred_u.eval().shape)
-    #print(pred_u.eval())
-    #print("pred v") # shape (64, 32,32, 1)
-    #print(pred_v.eval().shape)
-    #print(pred_v.eval())
-    # same real_u and real_v ?? but diff pred_u and pred_v
 
     # mse & ssim on components
     mseval_per_entry_u = tf.keras.metrics.mse(real_u, pred_u)  #  on gray, on [0,1], (64,32,32), small vals (^-1,-2,-3)
@@ -250,20 +235,20 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     mseval_per_entry_v = tf.keras.metrics.mse(real_v, pred_v)  #  on gray, on [0,1], (64,32,32), small vals (^-1,-2,-3)
     mseval_v = tf.reduce_mean(mseval_per_entry_v, [1,2]) # shape (64,)  # diff than per u entry
 
-    ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
-    ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,) # also minus vals, around 0, u and v differ 
+    #ssimval_u = tf.image.ssim(real_u, pred_u, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    #ssimval_v = tf.image.ssim(real_v, pred_v, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,) # also minus vals, around 0, u and v differ 
     # avg: add and divide by 2   
     mseval_uv = tf.add(mseval_u, mseval_v)  # tf.cast neccessary?
     tensor2 = tf.constant(2.0, shape=[64])
-    ssimval_uv = tf.add(ssimval_u, ssimval_v) # (64,)
+    #ssimval_uv = tf.add(ssimval_u, ssimval_v) # (64,)
     mseval_uv = tf.div(mseval_uv, tensor2)
-    ssimval_uv = tf.div(ssimval_uv, tensor2) # (64,), small around 0, up to 0.3 after first 100 iter
-    ssimval_list_uv = ssimval_uv.eval()  # to numpy array # (64,)
+    #ssimval_uv = tf.div(ssimval_uv, tensor2) # (64,), small around 0, up to 0.3 after first 100 iter
+    #ssimval_list_uv = ssimval_uv.eval()  # to numpy array # (64,)
     mseval_list_uv = mseval_uv.eval() # (64,)
     print("mseval uv")
     print(mseval_list_uv)
-    print("ssimval uv")
-    print(ssimval_list_uv)
+    #print("ssimval uv")
+    #print(ssimval_list_uv)
 
     # flow color ims to gray
     real_flowims = tf.cast(real_flowims, tf.float32)/255. # to [0,1]
@@ -277,24 +262,24 @@ def generate_image(frame, true_dist):   # generates 64 (batch-size) samples next
     # mse & ssim on grayscale
     mseval_per_entry_rgb = tf.keras.metrics.mse(real_gray, pred_gray)  #  on grayscale, on [0,1]..
     mseval_rgb = tf.reduce_mean(mseval_per_entry_rgb, [1,2])
-    ssimval_rgb = tf.image.ssim(real_gray, pred_gray, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
-    ssimval_list_rgb = ssimval_rgb.eval()  # to numpy array # (64,)
+    #ssimval_rgb = tf.image.ssim(real_gray, pred_gray, max_val=1.0)  # in: tensor 64-batch, out: tensor ssimvals (64,)
+    #ssimval_list_rgb = ssimval_rgb.eval()  # to numpy array # (64,)
     mseval_list_rgb = mseval_rgb.eval() # (64,)
     print("mseval rgb")
     print(mseval_list_rgb)
-    print("ssimval rgb")
-    print(ssimval_list_rgb)
+    #print("ssimval rgb")
+    #print(ssimval_list_rgb)
 
     # print(ssimval_list)
     # print(mseval_list)
     for i in range (0,3):
-        lib.plot.plot('SSIM uv for sample %d' % (i+1), ssimval_list_uv[i])
-        lib.plot.plot('SSIM rgb for sample %d' % (i+1), ssimval_list_rgb[i])
+        #lib.plot.plot('SSIM uv for sample %d' % (i+1), ssimval_list_uv[i])
+        #lib.plot.plot('SSIM rgb for sample %d' % (i+1), ssimval_list_rgb[i])
         lib.plot.plot('MSE uv for sample %d' % (i+1), mseval_list_uv[i])
         lib.plot.plot('MSE rgb for sample %d' % (i+1), mseval_list_rgb[i])
-        print("sample %d \t MSE: %.5f \t %.5f \t SSIM: %.5f \t %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i], ssimval_list_uv[i], ssimval_list_rgb[i]))
+        print("sample %d \t MSE: %.5f \t %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i]))
+      #SSIM: %.5f \t %.5f\r\n" % (i, mseval_list_uv[i], mseval_list_rgb[i], ssimval_list_uv[i], ssimval_list_rgb[i]))
     
-
 init_op = tf.global_variables_initializer()  	# op to initialize the variables.
 saver = tf.train.Saver()			# ops to save and restore all the variables.
 
