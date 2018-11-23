@@ -7,7 +7,7 @@ import tflib.SINTELdata as sintel
 import matplotlib.pyplot as plt
 
 BATCH_SIZE = 10 # Batch size
-TARGET_SIZE = 64
+TARGET_SIZE = 200
 OUT_DIM = TARGET_SIZE*TARGET_SIZE*3
 OUT_DIM_FLOW = TARGET_SIZE*TARGET_SIZE*2
 
@@ -24,7 +24,7 @@ image3= images[2*OUT_DIM:]
 image1 = image1.reshape(TARGET_SIZE,TARGET_SIZE,3)
 image2 = image2.reshape(TARGET_SIZE,TARGET_SIZE,3)
 image3 = image3.reshape(TARGET_SIZE,TARGET_SIZE,3)
-outpath = "/home/linkermann/opticalFlow/opticalFlowGAN/data/gentest/"
+outpath = "/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/data/gentest/"
 tflib.save_images.save_images(image1.reshape((1,3,TARGET_SIZE,TARGET_SIZE)), outpath+"condviz1.jpg")
 tflib.save_images.save_images(image2.reshape((1,3,TARGET_SIZE,TARGET_SIZE)), outpath+"condviz2.jpg")
 tflib.save_images.save_images(image3.reshape((1,3,TARGET_SIZE,TARGET_SIZE)), outpath+"condviz3.jpg")

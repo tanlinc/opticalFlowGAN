@@ -5,7 +5,6 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 import collections
-import time
 import pickle as pickle
 
 _since_beginning = collections.defaultdict(lambda: {})
@@ -19,9 +18,13 @@ def plot(name, value):
 	_since_last_flush[name][_iter[0]] = value
 
 def restore(iteration):
-        with open('log.pkl', 'rb') as f:
-                _since_beginning = pickle.load(f)  # does not work??
-        _iter[0] = iteration
+    # read python dict back from the pickled file
+    f = open('log.pkl', 'rb')
+    _data = pickle.load(f)
+    f.close()
+    for name, vals in _data.items():
+        _since_beginning[name].update(vals)
+    _iter[0] = iteration
 
 def flush():
 	prints = []

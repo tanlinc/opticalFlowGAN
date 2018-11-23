@@ -20,11 +20,11 @@ class DataSet():
     def get_data():
         """Load our data."""
         # (IS_SERVER):
-        root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
-        save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
+        #root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/training/'
+        #save_root = '/home/linkermann/opticalFlow/opticalFlowGAN/data/SINTEL/saved'
         # Desktop
-        # root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
-        # save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
+        root = '/home/linkermann/Desktop/MA/data/SINTEL/training/'
+        save_root = '/home/linkermann/Desktop/MA/data/SINTEL/saved'
 
         if isfile(join(save_root, 'train.npy')) and isfile(join(save_root, 'flow.npy')) and isfile(join(save_root, 'validation.npy')):
             print("load lists from files")

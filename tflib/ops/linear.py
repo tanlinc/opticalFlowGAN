@@ -47,27 +47,28 @@ def Linear(
 
         if initialization == 'lecun':# and input_dim != output_dim):
             # disabling orth. init for now because it's too slow
+            print("lecun")
             weight_values = uniform(
                 np.sqrt(1./input_dim),
                 (input_dim, output_dim)
             )
 
         elif initialization == 'glorot' or (initialization == None):
-
+            print("glorot")
             weight_values = uniform(
                 np.sqrt(2./(input_dim+output_dim)),
                 (input_dim, output_dim)
             )
 
         elif initialization == 'he':
-
+            print("he")
             weight_values = uniform(
                 np.sqrt(2./input_dim),
                 (input_dim, output_dim)
             )
 
         elif initialization == 'glorot_he':
-
+            print("glorot-he")
             weight_values = uniform(
                 np.sqrt(4./(input_dim+output_dim)),
                 (input_dim, output_dim)
@@ -75,6 +76,7 @@ def Linear(
 
         elif initialization == 'orthogonal' or \
             (initialization == None and input_dim == output_dim):
+            print("orthogonal")
             
             # From lasagne
             def sample(shape):
@@ -92,7 +94,7 @@ def Linear(
             weight_values = sample((input_dim, output_dim))
         
         elif initialization[0] == 'uniform':
-        
+            print("uniform")
             weight_values = np.random.uniform(
                 low=-initialization[1],
                 high=initialization[1],
