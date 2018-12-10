@@ -9,20 +9,16 @@ Wasserstein GAN simplified
 """
 import os, sys
 sys.path.append(os.getcwd())
-import tflib as lib
-import tflib.save_images as imsaver
 import tflib.plot as plotter
+import tflib.save_images as imsaver
+import tflib.mnist as mnistloader
 import time
 import numpy as np
 import tensorflow as tf
-#import tflib.SINTELdataFrame as sintel
-import tflib.mnist as mnistloader
-#import matplotlib
-#matplotlib.use('Agg')
-#import matplotlib.pyplot as plt
+import tensorflow.contrib.layers as lays
 
 BATCH_SIZE = 50 # Batch size  ### for MNIST
-HIDDEN_DIM = 64 # This overfits substantially; probably better 64; was 128
+DIM = 64 # This overfits substantially; probably better 64; was 128
 LAMBDA = 10 # Gradient penalty lambda hyperparameter
 DISC_ITERS = 5 # How many discriminator iterations per generator iteration
 ITERS = 100000 # #gen iters to train for; 200000 takes too long
@@ -30,20 +26,23 @@ IM_DIM = 28 # number of pixels along x and y (square assumed) ### for MNIST
 OUTPUT_DIM = IM_DIM*IM_DIM # Number of pixels (3*32*32) ### for MNIST
 CONTINUE = False  # Default False, set True if restoring from checkpoint
 START_ITER = 0  # Default 0, set if restoring from checkpoint (100, 200,...)
-CURRENT_PATH = "simpleGAN_MNIST"
+CURRENT_PATH = "simpleGAN_MNIST_refactored"
 restore_path = "/home/linkermann/Desktop/MA/opticalFlow/opticalFlowGAN/results/" + CURRENT_PATH + "/model.ckpt"  # change to Desktop
 
-lib.print_model_settings(locals().copy())
 
-if(CONTINUE):
-    tf.reset_default_graph()
+def get_shape(tensor):
+  static_shape = tensor.shape.as_list()
+  dynamic_shape = tf.unstack(tf.shape(tensor))
+  dims = [s[1] if s[0] is None else s[0]
+          for s in zip(static_shape, dynamic_shape)]
+  return dims
 
-def LeakyReLU(x, alpha=0.2):
-    return tf.maximum(alpha*x, x)
+def print_current_model_settings(locals_):
+    all_vars = [(k,v) for (k,v) in locals_.items() if k.isupper()] 
+    all_vars = sorted(all_vars, key=lambda x: x[0])
+    for var_name, var_value in all_vars:
+        print("\t{}: {}".format(var_name, var_value))
             
-def uniform(stdev, size):
-    return np.random.uniform(low=-stdev * np.sqrt(3), high=stdev * np.sqrt(3), size=size).astype('float32')
-
 #def batchnorm(axes, inputs):
 #    if axes == [0]:
 #        mean, var = tf.nn.moments(inputs, [0], keep_dims=True)
@@ -58,112 +57,93 @@ def uniform(stdev, size):
 #        offset = np.zeros(mean.get_shape()[-1], dtype='float32')
 #        scale = np.ones(var.get_shape()[-1], dtype='float32')
 #        result = tf.nn.batch_normalization(inputs, mean, var, offset, scale, 1e-4)
-#        return tf.transpose(result, [0,3,1,2])
-
-# initWeights
-def linearStep(name, input_dim, output_dim, inputs):
-    with tf.name_scope(name) as scope: 
-        # initialization glorot
-        weight_values = uniform(np.sqrt(2./(input_dim+output_dim)),(input_dim, output_dim))
-        weight_values *= 1.0 # gain
-        weight = lib.param(name + '.W', weight_values)   
-        result = tf.matmul(inputs, weight) #inputs.get_shape().ndims == 2
-        _biases = lib.param(name + '.b', np.zeros((output_dim,), dtype='float32'))
-        result = tf.nn.bias_add(result, _biases)
-    return result
-    
-def deconv2d(name, inputs, input_dim, output_dim, filter_size = 5, stride = 2):
-    '''
-    # inputs: tensor of shape (batch size, height, width, input_dim)
-    # returns: tensor of shape (batch size, stride*height, stride*width, output_dim)
-    '''
-    with tf.name_scope(name) as scope:
-        fan_in = input_dim * filter_size**2 / (stride**2) 
-        fan_out = output_dim * filter_size**2             
-        filters_stdev = np.sqrt(4./(fan_in+fan_out)) # he-init
-        filter_values = uniform(filters_stdev, (filter_size, filter_size, output_dim, input_dim))
-        filter_values *= 1.0 # * gain
-        filters = lib.param(name+'.Filters', filter_values)
-        inputs = tf.transpose(inputs, [0,2,3,1], name='NCHW_to_NHWC')
-        input_shape = tf.shape(inputs)
-        output_shape = tf.stack([input_shape[0], stride*input_shape[1], stride*input_shape[2], output_dim])
-        result = tf.nn.conv2d_transpose(value=inputs, filter=filters, output_shape=output_shape, strides=[1, stride, stride, 1], padding='SAME')
-        _biases = lib.param(name+'.Biases', np.zeros(output_dim, dtype='float32'))
-        result = tf.nn.bias_add(result, _biases)
-    return tf.transpose(result, [0,3,1,2], name='NHWC_to_NCHW')
-
-def conv2d(name, inputs, input_dim, output_dim, filter_size = 5, stride = 2):
-    with tf.name_scope(name) as scope:
-        fan_in = input_dim * filter_size**2
-        fan_out = output_dim * filter_size**2 / (stride**2)
-        filters_stdev = np.sqrt(4./(fan_in+fan_out))
-        filter_values = uniform(filters_stdev, (filter_size, filter_size, input_dim, output_dim))
-        filter_values *= 1.0 # * gain
-        filters = lib.param(name+'.Filters', filter_values)
-        result = tf.nn.conv2d(input=inputs, filter=filters, strides=[1, 1, stride, stride], padding='SAME', data_format='NCHW')
-        _biases = lib.param(name+'.Biases', np.zeros(output_dim, dtype='float32'))
-        result = tf.nn.bias_add(result, _biases, data_format='NCHW')
-    return result
+#        return tf.transpose(result, [0,3,1,2])    
     
 def Generator(n_samples, noise=None):    
     if noise is None:
         noise = tf.random_normal([n_samples, 128])
     else:
-        noise = tf.reshape(noise, [n_samples,128]) 
-
-    output = linearStep('Generator.Input', 128, 4*4*4*HIDDEN_DIM, noise)
-
-    #output = batchnorm([0], noise)    
-    output = tf.nn.relu(output)
-    output = tf.reshape(output, [-1, 4*HIDDEN_DIM, 4, 4])
-
-    output = deconv2d('Generator.1', output, 4*HIDDEN_DIM, 2*HIDDEN_DIM, filter_size = 5)
-    #output = batchnorm([0,2,3], output)
-    output = tf.nn.relu(output)
+        noise = tf.reshape(noise, [n_samples, 128]) 
     
-    output = output[:,:,:7,:7]   ### for MNIST
-
-    output = deconv2d('Generator.2', output, 2*HIDDEN_DIM, HIDDEN_DIM, filter_size = 5)
-    #output = batchnorm([0,2,3], output)
-    output = tf.nn.relu(output)
+    # expand noise input
+    output = lays.fully_connected(noise, 4*4*4*DIM, 
+                     weights_initializer=tf.initializers.glorot_uniform(), 
+                     reuse = tf.AUTO_REUSE, scope = 'Gen.Input')
     
-    output = deconv2d('Generator.3', output, HIDDEN_DIM, 1, filter_size = 5) ### for MNIST
-    # output = tf.tanh(output)
-    output = tf.nn.sigmoid(output)
+    #output = batchnorm([0], noise)     # output = batchnorm('Generator.BN1', [0], output)
+    output = tf.reshape(output, [-1, 4*DIM, 4, 4])
 
-    return tf.reshape(output, [-1, OUTPUT_DIM])
+    output = tf.transpose(output, [0,2,3,1], name='NCHW_to_NHWC')
+    
+    output = lays.conv2d_transpose(output, 2*DIM, 
+            kernel_size= 5, stride = 2, data_format='NHWC',
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Gen.1')
+    #output = batchnorm([0,2,3], output)
+        
+    output = output[:,:7,:7,:]  # because output needs to be 28x28
+    
+    output = lays.conv2d_transpose(output, DIM, kernel_size = 5, stride = 2, 
+            data_format='NHWC',
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Gen.2')
+    #output = batchnorm([0,2,3], output)
+    
+    output = lays.conv2d_transpose(output, 1, kernel_size = 5, stride = 2, 
+            data_format='NHWC',
+            activation_fn=tf.nn.sigmoid, #tf.tanh,  #tf.nn.sigmoid
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Gen.3')
+    
+    output = tf.transpose(output, [0,3,1,2], name='NHWC_to_NCHW')
+    
+    return tf.layers.Flatten()(output) #tf.reshape(output, [-1, OUTPUT_DIM])
+
 
 def Discriminator(inputs):
-    inputs = tf.reshape(inputs, [-1, 1, IM_DIM, IM_DIM]) ### for MNIST
-
-    output = conv2d('Discriminator.1', inputs, 1, HIDDEN_DIM, filter_size = 5) ### for MNIST
-    output = LeakyReLU(output)
-
-    output = conv2d('Discriminator.2', output, HIDDEN_DIM, 2*HIDDEN_DIM, filter_size = 5)
-    output = LeakyReLU(output)
-
-    output = conv2d('Discriminator.3', output, 2*HIDDEN_DIM, 4*HIDDEN_DIM, filter_size = 5)
-    output = LeakyReLU(output)
-
-    output = tf.reshape(output, [-1, 4*4*4*HIDDEN_DIM]) # adjust
+    inputs = tf.reshape(inputs, [-1, 1, IM_DIM, IM_DIM]) 
     
-    # last step to get single value
-    output = linearStep('Discriminator.Output', 4*4*4*HIDDEN_DIM, 1, output)
+    output = lays.conv2d(inputs, DIM, kernel_size = 5, stride = 2, 
+            data_format='NCHW',
+            activation_fn=tf.nn.leaky_relu, 
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Disc.1')
+    
+    output = lays.conv2d(output, 2*DIM, kernel_size = 5, stride = 2, 
+            data_format='NCHW',
+            activation_fn=tf.nn.leaky_relu, 
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Disc.2')
+    
+    output = lays.conv2d(output, 4*DIM, kernel_size = 5, stride = 2,
+            data_format='NCHW',
+            activation_fn=tf.nn.leaky_relu, 
+            weights_initializer=tf.initializers.he_uniform(),
+            reuse=tf.AUTO_REUSE, scope='Disc.3')
+    
+    output = tf.reshape(output, [-1, 4*4*4*DIM]) # adjust
+    
+     # to single value
+    output = lays.fully_connected(output, 1, activation_fn=None, 
+                     weights_initializer=tf.initializers.glorot_uniform(), 
+                     reuse = tf.AUTO_REUSE, scope = 'Disc.Output')
 
     return tf.reshape(output, [-1])
 
-#real_data_int = tf.placeholder(tf.int32, shape=[BATCH_SIZE, OUTPUT_DIM]) ### for MNIST
-#real_data = 2*((tf.cast(real_data_int, tf.float32)/255.)-.5) #[-1,1] ### for MNIST
+print_current_model_settings(locals().copy())
 
-real_data = tf.placeholder(tf.float32, shape=[BATCH_SIZE, OUTPUT_DIM]) ### for MNIST
+#if(CONTINUE):
+tf.reset_default_graph()
+
+real_data = tf.placeholder(tf.float32, shape=[BATCH_SIZE, OUTPUT_DIM]) 
 
 fake_data = Generator(BATCH_SIZE)
 
 disc_real = Discriminator(real_data)
 disc_fake = Discriminator(fake_data)
 
-gen_params = lib.params_with_name('Generator')
-disc_params = lib.params_with_name('Discriminator')
+gen_params = [var for var in tf.get_collection("variables") if "Gen" in var.name ]
+disc_params = [var for var in tf.get_collection("variables") if "Disc" in var.name ]
 
 # WGAN-GP ---------------------------------------------------------------
 # Standard WGAN loss

@@ -141,8 +141,8 @@ tf.summary.scalar("discriminator cost before penalty",disc_cost)
 alpha = tf.random_uniform(shape=[BATCH_SIZE,1], minval=0., maxval=1.)
 interpolates = real_data + (alpha*(fake_data - real_data))
 gradients = tf.gradients(Discriminator(interpolates, condition_data), [interpolates])[0] #added cond here
-for _,grad in gradients: # add a histogram for the gradient
-    tf.summary.histogram("{}-grad".format(grad.name.replace(":","_")), grad)
+#for _,grad in gradients: # add a histogram for the gradient
+tf.summary.histogram("gradients", gradients)
 slopes = tf.sqrt(tf.reduce_sum(tf.square(gradients), reduction_indices=[1]))
 gradient_penalty = tf.reduce_mean((slopes-1.)**2)
 disc_cost += LAMBDA*gradient_penalty
