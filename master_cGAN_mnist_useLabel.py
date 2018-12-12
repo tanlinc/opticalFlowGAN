@@ -62,26 +62,21 @@ def Generator(n_samples,conditions, noise=None):
     # with tf.variable_scope('generator') as scope:   
     if noise is None:
         noise = tf.random_normal([n_samples, 128])
-    # conditional input: label of digit in image
-    labels = tf.one_hot(tf.cast(conditions, tf.uint8), 10) #[n_samples, 10]
-    yb = tf.reshape(labels, shape=[BATCH_SIZE, 1, 1, COND_DIM])
-    # for now just concat the inputs: label appended to noise
+    yb = tf.reshape(conditions, shape=[BATCH_SIZE, 1, 1, COND_DIM])
     z = tf.concat([noise, labels], 1)  # to: (BATCH_SIZE,128+10)
     output = lays.fully_connected(z, 4*4*4*DIM, # expand noise input  # to 1024
                      weights_initializer=tf.initializers.glorot_uniform(), 
                      reuse = tf.AUTO_REUSE, scope = 'Gen.Input')  #  batch_normal in there as well..
-   
-    c1, c2 = int( IM_DIM / 4 ), int(IM_DIM / 2 )
     d1 = tf.concat([output, labels], 1)
     output = lays.fully_connected(d1, 7*7*2*64, # expand noise input  # to 1024
                      weights_initializer=tf.initializers.glorot_uniform(), 
                      reuse = tf.AUTO_REUSE, scope = 'Gen.fully') #  batch_normal in there as well..
-    d2 = tf.reshape(output, [BATCH_SIZE, c1, c1, 64 * 2])
+    d2 = tf.reshape(output, [BATCH_SIZE, 7, 7, 64 * 2])
     d2 = conv_cond_concat(d2, yb)
     # output = tf.reshape(output, [-1, 4*DIM, 4, 4])
 
     output = tf.transpose(d2, [0,2,3,1], name='NCHW_to_NHWC')
-    output = lays.conv2d_transpose(output, 2*DIM, kernel_size= 5, stride = 2,  # to 128: [batch_size, c2, c2, 128]
+    output = lays.conv2d_transpose(output, 2*DIM, kernel_size= 5, stride = 2,  # to 128: [batch_size, 14, 14, 128]
             weights_initializer=tf.initializers.he_uniform(),
             reuse=tf.AUTO_REUSE, scope='Gen.deconv1')  # include batch_norm
 
@@ -91,49 +86,38 @@ def Generator(n_samples,conditions, noise=None):
             activation_fn=tf.nn.sigmoid,
             weights_initializer=tf.initializers.he_uniform(), # xavier_initializer()
             reuse=tf.AUTO_REUSE, scope='Gen.deconv2')
-    #output = lays.conv2d_transpose(output, 1, kernel_size = 5, stride = 2, 
-    #        activation_fn=tf.nn.sigmoid, #tf.tanh,  
-    #        weights_initializer=tf.initializers.he_uniform(),
-    #        reuse=tf.AUTO_REUSE, scope='Gen.deconv3')
-    # tf.summary.image("Generator-after-third-deconv-layer-image", output)
     output = tf.transpose(output, [0,3,1,2], name='NHWC_to_NCHW')
     return tf.layers.Flatten()(output) #tf.reshape(output, [-1, OUTPUT_DIM])
 
 def Discriminator(inputs, conditions): # reuse=False
     # with tf.variable_scope("discriminator") as scope:  ## if reuse == True: scope.reuse_variables()
-    inputs = tf.reshape(inputs, [-1, 1, IM_DIM, IM_DIM]) 
-    yb = tf.reshape(conditions, shape=[BATCH_SIZE, COND_DIM, 1, 1])
+    inputs = tf.reshape(inputs, [-1, IM_DIM, IM_DIM, 1]) 
+    yb = tf.reshape(conditions, shape=[BATCH_SIZE, 1, 1, COND_DIM])
     concat_data = conv_cond_concat(inputs, yb)
-
-    output = tf.transpose(inputs, [0,2,3,1], name='NCHW_to_NHWC')
-    output = lays.conv2d(output, DIM, kernel_size = 5, stride = 2, 
+    # output = tf.transpose(inputs, [0,2,3,1], name='NCHW_to_NHWC')
+    conv1 = lays.conv2d(concat_data, 10, kernel_size = 5, stride = 2, # 10 = DIM
             #data_format='NCHW', 
             activation_fn=tf.nn.leaky_relu, 
             weights_initializer=tf.initializers.he_uniform(),
-            reuse=tf.AUTO_REUSE, scope='Disc.1')
-    tf.summary.image("Discriminator-after-first-conv-layer-image", output)
-    output = lays.conv2d(output, 2*DIM, kernel_size = 5, stride = 2, 
+            reuse=tf.AUTO_REUSE, scope='Disc.conv1')
+    conv1 = conv_cond_concat(conv1, yb)
+    conv2 = lays.conv2d(conv1, 64, kernel_size = 5, stride = 2, # 64 = 2*DIM
             #data_format='NCHW', 
             activation_fn=tf.nn.leaky_relu, 
             weights_initializer=tf.initializers.he_uniform(),
-            reuse=tf.AUTO_REUSE, scope='Disc.2')
-    tf.summary.image("Discriminator-after-second-conv-layer-image", output)
-    output = lays.conv2d(output, 4*DIM, kernel_size = 5, stride = 2,
-            #data_format='NCHW', 
-            activation_fn=tf.nn.leaky_relu, 
-            weights_initializer=tf.initializers.he_uniform(),
-            reuse=tf.AUTO_REUSE, scope='Disc.3')
-    tf.summary.image("Discriminator-after-third-conv-layer-image", output)
-    output = tf.transpose(output, [0,3,1,2], name='NHWC_to_NCHW')
-    output = tf.reshape(output, [-1, 4*4*4*DIM]) # adjust
-    # give conds to disc only after conv. concat label here
-    # conditional input: one-hot of label of digit on image
-    labels = tf.one_hot(tf.cast(conditions, tf.uint8), 10) #[BATCH_SIZE, 10]
-    output = tf.concat([output, labels], 1)  # to: (BATCH_SIZE,4*4*4*DIM+10)
-    output = lays.fully_connected(output, 1, activation_fn=None, # to single value
+            reuse=tf.AUTO_REUSE, scope='Disc.conv2') # batch norm
+    # output = tf.transpose(output, [0,3,1,2], name='NHWC_to_NCHW')
+    output = tf.reshape(conv2, [BATCH_SIZE, -1]) # adjust  ##  [-1, 4*4*4*DIM]
+    output = tf.concat([output, conditions], 1)
+    output = lays.fully_connected(output, 1024, activation_fn=tf.nn.leaky_relu, 
                      weights_initializer=tf.initializers.glorot_uniform(), 
+                     reuse = tf.AUTO_REUSE, scope = 'Disc.fully') # batch norm
+    f1 = tf.concat([output, conditions], 1)
+    output = lays.fully_connected(f1, 1, activation_fn=None, # to single value
+                     weights_initializer=tf.initializers.glorot_uniform(),  # xavier_initializer()
                      reuse = tf.AUTO_REUSE, scope = 'Disc.Output')
-    return tf.reshape(output, [-1])
+    out = tf.reshape(output, [-1])
+    return tf.nn.sigmoid(out), out
 
 #-----------------------------------------------------------------------------
 
